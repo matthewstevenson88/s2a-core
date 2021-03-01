@@ -17,6 +17,8 @@
 
 licenses(["notice"])
 
+exports_files(["LICENSE"])
+
 cc_library(
     name = "s2a_constants",
     hdrs = ["s2a_constants.h"],
