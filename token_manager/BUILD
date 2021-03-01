@@ -16,6 +16,8 @@
 #   This BUILD file contains targets for the S2A client libraries's
 #   access token manager and its environment-specific implementations.
 
+licenses(["notice"])
+
 # TODO(matthewstevenson88) Use a registry to build access token managers.
 cc_library(
     name = "access_token_manager",

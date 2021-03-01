@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains targets for the S2A client's handshaker modules.
 
+licenses(["notice"])
+
 cc_library(
     name = "s2a_proxy",
     srcs = [
