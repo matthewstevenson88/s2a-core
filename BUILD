@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains libraries used by all of the S2A's C++ client libraries.
 
+licenses(["notice"])
+
 cc_library(
     name = "s2a_constants",
     hdrs = ["s2a_constants.h"],

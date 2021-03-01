@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains test utilities for the S2A's client libraries.
 
+licenses(["notice"])
+
 cc_library(
     name = "s2a_test_data",
     hdrs = [

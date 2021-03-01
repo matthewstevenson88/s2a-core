@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains an abstraction for a channel to the S2A.
 
+licenses(["notice"])
+
 cc_library(
     name = "s2a_channel",
     hdrs = [

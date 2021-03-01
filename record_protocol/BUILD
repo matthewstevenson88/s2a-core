@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains targets for the S2A client's record protocol.
 
+licenses(["notice"])
+
 cc_library(
     name = "handshake_message_handler",
     srcs = [

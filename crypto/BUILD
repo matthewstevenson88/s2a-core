@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains the libraries and tests for the AEAD crypter used by the S2A client libraries.
 
+licenses(["notice"])
+
 default_visibility = [
     "//record_protocol:__pkg__",
 ]
