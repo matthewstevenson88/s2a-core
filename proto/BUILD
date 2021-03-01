@@ -15,9 +15,9 @@
 # Description:
 #   This BUILD file contains proto targets for the S2A client libraries.
 
-licenses(["notice"])
+load("//third_party/upb/bazel:upb_proto_library.bzl", "upb_proto_library")
 
-load("@upb//bazel:upb_proto_library.bzl", "upb_proto_library")
+licenses(["notice"])
 
 proto_library(
     name = "common_proto",
