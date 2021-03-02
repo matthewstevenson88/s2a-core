@@ -40,6 +40,7 @@ cc_library(
     name = "single_token_access_token_manager",
     srcs = ["single_token_access_token_manager.cc"],
     hdrs = ["single_token_access_token_manager.h"],
+    visibility = approved_s2a_core_users,
     deps = [
         ":access_token_manager",
         "@com_google_absl//absl/flags:flag",
@@ -55,9 +56,7 @@ cc_library(
     testonly = 1,
     srcs = ["fake_access_token_manager.cc"],
     hdrs = ["fake_access_token_manager.h"],
-    visibility = [
-        "//handshaker:__pkg__",
-    ],
+    visibility = approved_s2a_core_users,
     deps = [
         ":access_token_manager",
         "@com_google_absl//absl/status:statusor",

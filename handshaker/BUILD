@@ -75,6 +75,7 @@ cc_library(
     hdrs = [
         "s2a_proxy_test_util.h",
     ],
+    visibility = approved_s2a_core_users,
     deps = [
         ":s2a_context",
         ":s2a_proxy",
