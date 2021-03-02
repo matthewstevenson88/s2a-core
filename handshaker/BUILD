@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains targets for the S2A client's handshaker modules.
 
+load("//:acl.bzl", "approved_s2a_core_users")
+
 licenses(["notice"])
 
 cc_library(
@@ -25,7 +27,7 @@ cc_library(
     hdrs = [
         "s2a_proxy.h",
     ],
-    visibility = ["//visibility:public"],
+    visibility = approved_s2a_core_users,
     deps = [
         ":s2a_context",
         ":s2a_util",
@@ -90,7 +92,7 @@ cc_library(
     name = "s2a_context",
     srcs = ["s2a_context.cc"],
     hdrs = ["s2a_context.h"],
-    visibility = ["//visibility:public"],
+    visibility = approved_s2a_core_users,
     deps = [
         ":s2a_util",
         "//options:s2a_options",

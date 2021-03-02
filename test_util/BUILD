@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains test utilities for the S2A's client libraries.
 
+load("//:acl.bzl", "approved_s2a_core_users")
+
 licenses(["notice"])
 
 cc_library(
@@ -22,7 +24,7 @@ cc_library(
     hdrs = [
         "s2a_test_data.h",
     ],
-    visibility = ["//:__subpackages__"],
+    visibility = approved_s2a_core_users,
 )
 
 cc_library(

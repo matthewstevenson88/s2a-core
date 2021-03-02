@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains targets for the S2A client's frame protector.
 
+load("//:acl.bzl", "approved_s2a_core_users")
+
 licenses(["notice"])
 
 cc_library(
@@ -25,7 +27,7 @@ cc_library(
     hdrs = [
         "s2a_frame_protector.h",
     ],
-    visibility = ["//visibility:public"],
+    visibility = approved_s2a_core_users,
     deps = [
         "//:s2a_constants",
         "//channel:s2a_channel",

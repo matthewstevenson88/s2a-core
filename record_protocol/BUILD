@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains targets for the S2A client's record protocol.
 
+load("//:acl.bzl", "approved_s2a_core_users")
+
 licenses(["notice"])
 
 cc_library(
@@ -57,7 +59,7 @@ cc_library(
         "s2a_crypter_util.h",
         "s2a_half_connection.h",
     ],
-    visibility = ["//frame_protector:__pkg__"],
+    visibility = approved_s2a_core_users,
     deps = [
         "//channel:s2a_channel",
         ":handshake_message_handler",
@@ -133,7 +135,7 @@ cc_library(
     hdrs = [
         "s2a_ticket_sender.h",
     ],
-    visibility = ["//frame_protector:__pkg__"],
+    visibility = approved_s2a_core_users,
     deps = [
         "//channel:s2a_channel",
         "//options:s2a_options",
