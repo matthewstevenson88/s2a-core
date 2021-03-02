@@ -16,6 +16,8 @@
 #   This BUILD file contains targets for the S2A client libraries's
 #   access token manager and its environment-specific implementations.
 
+load("//:acl.bzl", "approved_s2a_core_users")
+
 licenses(["notice"])
 
 # TODO(matthewstevenson88) Use a registry to build access token managers.
@@ -25,7 +27,7 @@ cc_library(
         "access_token_manager.h",
         "access_token_manager_factory.h",
     ],
-    visibility = ["//handshaker:__pkg__"],
+    visibility = approved_s2a_core_users,
     deps = [
         "//options:s2a_options",
         "@com_google_absl//absl/status",

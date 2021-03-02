@@ -15,13 +15,15 @@
 # Description:
 #   This BUILD file contains targets and tests for the S2A client's options.
 
+load("//:acl.bzl", "approved_s2a_core_users")
+
 licenses(["notice"])
 
 cc_library(
     name = "s2a_options",
     srcs = ["s2a_options.cc"],
     hdrs = ["s2a_options.h"],
-    visibility = ["//visibility:public"],
+    visibility = approved_s2a_core_users,
     deps = [
         "@com_google_absl//absl/container:flat_hash_set",
         "@com_google_absl//absl/hash",

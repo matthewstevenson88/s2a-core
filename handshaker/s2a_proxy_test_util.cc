@@ -46,10 +46,8 @@ constexpr char kHostname[] = "hostname";
 constexpr bool kIsHandshakeResumed = false;
 constexpr char kLocalCertFingerprint[] = "local_cert_fingerprint";
 constexpr char kLocalIdentityString[] = "local_identity";
-constexpr IdentityType kLocalIdentityType = IdentityType::HOSTNAME;
 constexpr char kPeerCertFingerprint[] = "peer_cert_fingerprint";
 constexpr char kPeerIdentityString[] = "peer_identity";
-constexpr IdentityType kPeerIdentityType = IdentityType::SPIFFE_ID;
 constexpr TlsVersion kTlsVersion = TlsVersion::TLS1_3;
 
 void NoOpLogger(const std::string& message) {}

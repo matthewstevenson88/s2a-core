@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains libraries used by all of the S2A's C++ client libraries.
 
+load(":acl.bzl", "approved_s2a_core_users")
+
 licenses(["notice"])
 
 exports_files(["LICENSE"])
@@ -22,7 +24,7 @@ exports_files(["LICENSE"])
 cc_library(
     name = "s2a_constants",
     hdrs = ["s2a_constants.h"],
-    visibility = ["//visibility:public"],
+    visibility = approved_s2a_core_users,
     deps = [
         "//proto:common_upb_proto",
         "//proto:s2a_context_upb_proto",

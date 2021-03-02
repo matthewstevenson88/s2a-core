@@ -15,6 +15,8 @@
 # Description:
 #   This BUILD file contains an abstraction for a channel to the S2A.
 
+load("//:acl.bzl", "approved_s2a_core_users")
+
 licenses(["notice"])
 
 cc_library(
@@ -23,7 +25,7 @@ cc_library(
         "s2a_channel_factory_interface.h",
         "s2a_channel_interface.h",
     ],
-    visibility = ["//visibility:public"],
+    visibility = approved_s2a_core_users,
     deps = [
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/status:statusor",
