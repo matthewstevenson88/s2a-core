@@ -4,4 +4,4 @@
 set -e
 
 cd "${KOKORO_ARTIFACTS_DIR}/github/s2a-core"
-./run_tests.sh
+./tools/internal_ci/run_tests.sh
