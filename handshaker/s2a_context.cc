@@ -18,9 +18,9 @@
 
 #include "handshaker/s2a_context.h"
 
+#include "absl/status/statusor.h"
 #include "handshaker/s2a_util.h"
 #include "proto/s2a_context.upb.h"
-#include "absl/status/statusor.h"
 
 namespace s2a {
 namespace s2a_context {
@@ -152,9 +152,10 @@ S2AContext::GetSerializedContext() const {
   }
 
   // Copy the serialized message to a buffer not tied to the arena.
-  auto buffer = absl::make_unique<std::vector<char>>(buffer_len);
+  std::unique_ptr<std::vector<char>> buffer =
+      absl::make_unique<std::vector<char>>(buffer_len);
   memcpy(buffer->data(), arena_buffer, buffer_len);
-  return buffer;
+  return std::move(buffer);
 }
 
 absl::StatusOr<std::unique_ptr<S2AContext>> GetS2AContextFromSerializedContext(

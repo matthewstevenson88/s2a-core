@@ -2,8 +2,11 @@
 
 # Fail on any error.
 set -e
+
 # Display commands being run.
 set -x
+
+readonly PLATFORM="$(uname | tr '[:upper:]' '[:lower:]')"
 
 fail_with_debug_output() {
   ls -l
@@ -20,9 +23,22 @@ run_tests() {
   )
 }
 
-install_protoc_for_macos() {
+install_protoc() {
   local protoc_version='3.14.0'
-  local protoc_zip="protoc-${protoc_version}-osx-x86_64.zip"
+  local protoc_platform
+  case "${PLATFORM}" in
+    'linux')
+      protoc_platform='linux-x86_64'
+      ;;
+    'darwin')
+      protoc_platform='osx-x86_64'
+      ;;
+    *)
+      echo "Unsupported platform, unable to install protoc."
+      exit 1
+      ;;
+  esac
+  local protoc_zip="protoc-${protoc_version}-${protoc_platform}.zip"
   local protoc_url="https://github.com/protocolbuffers/protobuf/releases/download/v${protoc_version}/${protoc_zip}"
   local -r protoc_tmpdir=$(mktemp -dt s2a-core-protoc.XXXXXX)
   (
@@ -36,7 +52,7 @@ install_protoc_for_macos() {
 main() {
   if [[ -n "${KOKORO_ROOT}" ]]; then
     use_bazel.sh latest
-    install_protoc_for_macos
+    install_protoc
   fi
 
   echo "using bazel binary: $(which bazel)"
