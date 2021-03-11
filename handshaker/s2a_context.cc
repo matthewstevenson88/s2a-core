@@ -152,7 +152,7 @@ S2AContext::GetSerializedContext() const {
   }
 
   // Copy the serialized message to a buffer not tied to the arena.
-  auto buffer = absl::make_unique<std::vector<char>>(buffer_len);
+  std::unique_ptr<std::vector<char>> buffer = absl::make_unique<std::vector<char>>(buffer_len);
   memcpy(buffer->data(), arena_buffer, buffer_len);
   return buffer;
 }
