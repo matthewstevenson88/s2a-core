@@ -22,7 +22,7 @@ run_tests() {
 
 main() {
   if [[ -n "${KOKORO_ROOT}" ]]; then
-    use_bazel.sh $(cat .bazelversion)
+    use_bazel.sh latest
   fi
 
   echo "using bazel binary: $(which bazel)"
