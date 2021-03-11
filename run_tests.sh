@@ -15,8 +15,8 @@ run_tests() {
   local -a TEST_FLAGS=( --strategy=TestRunner=standalone --test_output=all )
   readonly TEST_FLAGS
   (
-    time bazel build -- ... || fail_with_debug_output
-    time bazel test "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
+    time bazel build --features=-debug_prefix_map_pwd_is_dot -- ... || fail_with_debug_output
+    time bazel test --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
   )
 }
 
