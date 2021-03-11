@@ -40,7 +40,7 @@ install_protoc() {
   esac
   local protoc_zip="protoc-${protoc_version}-${protoc_platform}.zip"
   local protoc_url="https://github.com/protocolbuffers/protobuf/releases/download/v${protoc_version}/${protoc_zip}"
-  local -r protoc_tmpdir=$(mktemp -dt tink-protoc.XXXXXX)
+  local -r protoc_tmpdir=$(mktemp -dt s2a-core-protoc.XXXXXX)
   (
     cd "${protoc_tmpdir}"
     curl -OL "${protoc_url}"
