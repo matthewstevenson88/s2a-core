@@ -23,8 +23,6 @@ run_tests() {
 main() {
   if [[ -n "${KOKORO_ROOT}" ]]; then
     use_bazel.sh $(cat .bazelversion)
-    # Install protoc into a temporary directory.
-    install_temp_protoc
   fi
 
   echo "using bazel binary: $(which bazel)"
