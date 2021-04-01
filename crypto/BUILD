@@ -203,10 +203,12 @@ cc_library(
     srcs = [
         "chacha_poly_crypter_openssl.cc",
         "s2a_aead_crypter.cc",
+        "s2a_aead_crypter_util.cc",
     ],
     hdrs = [
         "s2a_aead_constants.h",
         "s2a_aead_crypter.h",
+        "s2a_aead_crypter_util.h",
     ],
     tags = ["openssl"],
     deps = [
@@ -215,6 +217,33 @@ cc_library(
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/types:variant",
+    ],
+)
+
+cc_library(
+    name = "hkdf_openssl",
+    testonly = 1,
+    srcs = [
+        "hkdf.cc",
+    ],
+    hdrs = ["hkdf.h"],
+    tags = ["openssl"],
+    deps = [
+        ":openssl",
+        "@com_google_absl//absl/status",
+    ],
+)
+
+cc_library(
+    name = "s2a_aead_crypter_util_openssl",
+    testonly = 1,
+    srcs = [
+        "s2a_aead_crypter_util.cc",
+    ],
+    hdrs = ["s2a_aead_crypter_util.h"],
+    tags = ["openssl"],
+    deps = [
+        ":openssl",
     ],
 )
 
@@ -242,3 +271,26 @@ cc_test(
     ],
 )
 
+cc_test(
+    name = "hkdf_openssl_test",
+    srcs = ["hkdf_test.cc"],
+    tags = ["openssl"],
+    deps = [
+        ":hkdf_openssl",
+        "//test_util:s2a_test_util",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "s2a_aead_crypter_util_openssl_test",
+    srcs = [
+        "s2a_aead_crypter_util_test.cc",
+    ],
+    tags = ["openssl"],
+    deps = [
+        ":s2a_aead_crypter_util_openssl",
+        ":openssl",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
