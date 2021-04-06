@@ -33,27 +33,31 @@ using IdentityType = S2AOptions::IdentityType;
 using TlsVersion = S2AOptions::TlsVersion;
 
 constexpr char kHandshakerServiceUrl[] = "handshaker_service_url";
-constexpr char kLocalSpiffeId[] = "local spiffe id";
-constexpr char kLocalHostname[] = "local hostname";
-constexpr char kTargetSpiffeId[] = "target spiffe id";
-constexpr char kTargetHostname[] = "target hostname";
+constexpr char kLocalSpiffeId[] = "local_spiffe_id";
+constexpr char kLocalHostname[] = "local_hostname";
+constexpr char kLocalUid[] = "local_uid";
+constexpr char kTargetSpiffeId[] = "target_spiffe_id";
+constexpr char kTargetHostname[] = "target_hostname";
+constexpr char kTargetUid[] = "target_uid";
 
-static std::vector<Ciphersuite> GetCiphersuites() {
+std::vector<Ciphersuite> GetCiphersuites() {
   return {Ciphersuite::AES_128_GCM_SHA256, Ciphersuite::AES_256_GCM_SHA384,
           Ciphersuite::CHACHA20_POLY1305_SHA256};
 }
 
-static absl::flat_hash_set<Identity> GetLocalIdentities() {
+absl::flat_hash_set<Identity> GetLocalIdentities() {
   absl::flat_hash_set<Identity> local_identities;
   local_identities.insert(Identity::FromSpiffeId(kLocalSpiffeId));
   local_identities.insert(Identity::FromHostname(kLocalHostname));
+  local_identities.insert(Identity::FromUid(kLocalUid));
   return local_identities;
 }
 
-static absl::flat_hash_set<Identity> GetTargetIdentities() {
+absl::flat_hash_set<Identity> GetTargetIdentities() {
   absl::flat_hash_set<Identity> target_identities;
   target_identities.insert(Identity::FromSpiffeId(kTargetSpiffeId));
   target_identities.insert(Identity::FromHostname(kTargetHostname));
+  target_identities.insert(Identity::FromUid(kTargetUid));
   return target_identities;
 }
 
@@ -77,6 +81,13 @@ TEST(S2AOptionsIdentityTest, FromSpiffeId) {
   EXPECT_EQ(spiffe_id.GetIdentityType(), IdentityType::SPIFFE_ID);
 }
 
+TEST(S2AOptionsIdentityTest, FromUid) {
+  Identity uid = Identity::FromUid(kLocalUid);
+  EXPECT_EQ(uid.GetIdentityString(), kLocalUid);
+  EXPECT_STREQ(uid.GetIdentityCString(), kLocalUid);
+  EXPECT_EQ(uid.GetIdentityType(), IdentityType::UID);
+}
+
 TEST(S2AOptionsIdentityTest, CopyConstructor) {
   Identity spiffe_id = Identity::FromSpiffeId(kLocalSpiffeId);
   EXPECT_EQ(spiffe_id.GetIdentityString(), kLocalSpiffeId);
@@ -93,8 +104,10 @@ TEST(S2ACredentialsOptionsTest, Create) {
   }
   options->add_local_spiffe_id(kLocalSpiffeId);
   options->add_local_hostname(kLocalHostname);
+  options->add_local_uid(kLocalUid);
   options->add_target_spiffe_id(kTargetSpiffeId);
   options->add_target_hostname(kTargetHostname);
+  options->add_target_uid(kTargetUid);
 
   EXPECT_EQ(options->min_tls_version(), TlsVersion::TLS1_2);
   EXPECT_EQ(options->max_tls_version(), TlsVersion::TLS1_3);
@@ -114,8 +127,10 @@ TEST(S2ACredentialsOptionsTest, CreateAndCopy) {
   }
   options->add_local_spiffe_id(kLocalSpiffeId);
   options->add_local_hostname(kLocalHostname);
+  options->add_local_uid(kLocalUid);
   options->add_target_spiffe_id(kTargetSpiffeId);
   options->add_target_hostname(kTargetHostname);
+  options->add_target_uid(kTargetUid);
 
   auto copy_options = options->Copy();
 

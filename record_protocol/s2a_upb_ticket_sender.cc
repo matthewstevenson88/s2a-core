@@ -62,6 +62,10 @@ bool PrepareResumptionTicketReq(
       s2a_proto_Identity_set_hostname(
           identity, upb_strview_makez(local_identity.GetIdentityCString()));
       break;
+    case s2a_options::S2AOptions::IdentityType::UID:
+      s2a_proto_Identity_set_uid(
+          identity, upb_strview_makez(local_identity.GetIdentityCString()));
+      break;
     default:
       return false;
   }

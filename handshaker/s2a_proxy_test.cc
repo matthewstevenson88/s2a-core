@@ -51,8 +51,10 @@ constexpr size_t kAes128GcmTrafficSecretSize = 32;
 constexpr char kApplicationProtocol[] = "application_protocol";
 constexpr char kClientLocalSpiffeId[] = "client_local_spiffe_id";
 constexpr char kClientLocalHostname[] = "client_local_hostname";
+constexpr char kClientLocalUid[] = "client_local_uid";
 constexpr char kClientTargetHostname[] = "target_hostname";
 constexpr char kClientTargetSpiffeId[] = "target_spiffe_id";
+constexpr char kClientTargetUid[] = "target_uid";
 constexpr size_t kConnectionId = 1234;
 constexpr char kHandshakerServiceAddress[] = "handshaker_service_address";
 constexpr char kHostname[] = "hostname";
@@ -66,6 +68,7 @@ constexpr char kPeerCertFingerprint[] = "peer_cert_fingerprint";
 constexpr char kResponseErrorMessage[] = "response_error_message";
 constexpr char kServerLocalSpiffeId[] = "server_local_spiffe_id";
 constexpr char kServerLocalHostname[] = "server_local_hostname";
+constexpr char kServerLocalUid[] = "server_local_uid";
 
 bool was_message_logged = false;
 void FakeLogger(const std::string& message) {
@@ -87,15 +90,18 @@ std::unique_ptr<S2AOptions> CreateTestOptions(
   if (is_client) {
     options->add_target_spiffe_id(kClientTargetSpiffeId);
     options->add_target_hostname(kClientTargetHostname);
+    options->add_target_uid(kClientTargetUid);
     if (with_local_identities) {
       options->add_local_spiffe_id(kClientLocalSpiffeId);
       if (client_multiple_local_identities) {
         options->add_local_hostname(kClientLocalHostname);
+        options->add_local_uid(kClientLocalUid);
       }
     }
   } else if (with_local_identities) {
     options->add_local_spiffe_id(kServerLocalSpiffeId);
     options->add_local_hostname(kServerLocalHostname);
+    options->add_local_uid(kServerLocalUid);
   }
   return options;
 }
@@ -166,6 +172,9 @@ void CheckClientStart(const Buffer& buffer, bool check_local_identity) {
       EXPECT_TRUE(
           upb_strview_eql(s2a_proto_Identity_hostname(target_identities[i]),
                           upb_strview_makez(kClientTargetHostname)));
+    } else if (s2a_proto_Identity_has_uid(target_identities[i])) {
+      EXPECT_TRUE(upb_strview_eql(s2a_proto_Identity_uid(target_identities[i]),
+                                  upb_strview_makez(kClientTargetUid)));
     } else {
       ASSERT_TRUE(0) << "Unexpected identity type.";
     }
@@ -194,6 +203,10 @@ void CheckClientStart(const Buffer& buffer, bool check_local_identity) {
       EXPECT_TRUE(
           upb_strview_eql(s2a_proto_Identity_hostname(auth_mechanism_identity),
                           upb_strview_makez(kClientLocalHostname)));
+    } else if (s2a_proto_Identity_has_uid(auth_mechanism_identity)) {
+      EXPECT_TRUE(
+          upb_strview_eql(s2a_proto_Identity_uid(auth_mechanism_identity),
+                          upb_strview_makez(kClientLocalUid)));
     } else {
       ASSERT_TRUE(0) << "Unexpected identity type.";
     }
@@ -262,6 +275,9 @@ void CheckServerStart(const Buffer& buffer, bool is_input_buffer_empty,
         EXPECT_TRUE(
             upb_strview_eql(s2a_proto_Identity_hostname(local_identities[i]),
                             upb_strview_makez(kServerLocalHostname)));
+      } else if (s2a_proto_Identity_has_uid(local_identities[i])) {
+        EXPECT_TRUE(upb_strview_eql(s2a_proto_Identity_uid(local_identities[i]),
+                                    upb_strview_makez(kServerLocalUid)));
       } else {
         ASSERT_TRUE(0) << "Unexpected identity type.";
       }
@@ -285,9 +301,9 @@ void CheckServerStart(const Buffer& buffer, bool is_input_buffer_empty,
   const s2a_proto_AuthenticationMechanism* const* auth_mechanisms =
       s2a_proto_SessionReq_auth_mechanisms(request, &auth_mechanisms_size);
   if (check_local_identities) {
-    // In this case, the user has specified 2 local identities for the server
+    // In this case, the user has specified 3 local identities for the server
     // and we check that there is a token for each identity.
-    EXPECT_EQ(auth_mechanisms_size, 2);
+    EXPECT_EQ(auth_mechanisms_size, 3);
     EXPECT_NE(auth_mechanisms, nullptr);
     for (size_t i = 0; i < auth_mechanisms_size; i++) {
       EXPECT_TRUE(
@@ -305,6 +321,10 @@ void CheckServerStart(const Buffer& buffer, bool is_input_buffer_empty,
         EXPECT_TRUE(upb_strview_eql(
             s2a_proto_Identity_hostname(auth_mechanism_identity),
             upb_strview_makez(kServerLocalHostname)));
+      } else if (s2a_proto_Identity_has_uid(auth_mechanism_identity)) {
+        EXPECT_TRUE(
+            upb_strview_eql(s2a_proto_Identity_uid(auth_mechanism_identity),
+                            upb_strview_makez(kServerLocalUid)));
       } else {
         ASSERT_TRUE(0) << "Unexpected identity type.";
       }

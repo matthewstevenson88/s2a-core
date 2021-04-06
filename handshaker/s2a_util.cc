@@ -73,6 +73,11 @@ absl::variant<Status, s2a_proto_Identity*> ConvertIdentityToProto(
       s2a_proto_Identity_set_hostname(
           proto_identity, upb_strview_makez(identity.GetIdentityCString()));
       return proto_identity;
+    case IdentityType::UID:
+      proto_identity = s2a_proto_Identity_new(arena);
+      s2a_proto_Identity_set_uid(
+          proto_identity, upb_strview_makez(identity.GetIdentityCString()));
+      return proto_identity;
     default:
       return nullptr;
   }
@@ -113,6 +118,8 @@ Identity ConvertFromProtoToIdentity(const s2a_proto_Identity* identity) {
   } else if (identity != nullptr && s2a_proto_Identity_has_hostname(identity)) {
     return Identity::FromHostname(
         ParseUpbStrview(s2a_proto_Identity_hostname(identity)));
+  } else if (identity != nullptr && s2a_proto_Identity_has_uid(identity)) {
+    return Identity::FromUid(ParseUpbStrview(s2a_proto_Identity_uid(identity)));
   }
   return Identity::GetEmptyIdentity();
 }
