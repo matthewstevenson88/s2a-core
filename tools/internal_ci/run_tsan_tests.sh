@@ -17,6 +17,7 @@ fail_with_debug_output() {
 run_tests_on_linux() {
   local -a TEST_FLAGS=( --strategy=TestRunner=standalone --test_output=all )
   readonly TEST_FLAGS
+  (
     echo "Running TSAN tests..."
     time bazel test --config=tsan --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
   )
