@@ -41,7 +41,7 @@ class S2AOptions {
     CHACHA20_POLY1305_SHA256
   };
 
-  enum class IdentityType { NONE, SPIFFE_ID, HOSTNAME };
+  enum class IdentityType { NONE, SPIFFE_ID, HOSTNAME, UID };
 
   class Identity {
    public:
@@ -54,6 +54,9 @@ class S2AOptions {
 
     // Creates an |Identity| instance of |SPIFFE_ID| type.
     static Identity FromSpiffeId(const std::string& spiffe_id);
+
+    // Creates an |Identity| instance of |UID| type.
+    static Identity FromUid(const std::string& uid);
 
     // Copy constructor of |Identity|.
     Identity(const Identity& other);
@@ -107,6 +110,9 @@ class S2AOptions {
   // Adds a hostname to the set of local identities.
   void add_local_hostname(const std::string& local_hostname);
 
+  // Adds a UID to the set of local identities.
+  void add_local_uid(const std::string& local_uid);
+
   // Adds a SPIFFE ID to the set of target identities. This API should only be
   // called at the client-side, and any target identities that are added on the
   // server-side will be ignored.
@@ -116,6 +122,11 @@ class S2AOptions {
   // called at the client-side, and any target identities that are added on the
   // server-side will be ignored.
   void add_target_hostname(const std::string& target_hostname);
+
+  // Adds a UID to the set of target identities. This API should only be
+  // called at the client-side, and any target identities that are added on the
+  // server-side will be ignored.
+  void add_target_uid(const std::string& target_uid);
 
   // Create a deep copy of this |S2AOptions| instance.
   std::unique_ptr<S2AOptions> Copy() const;

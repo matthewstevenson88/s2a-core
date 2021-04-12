@@ -18,9 +18,9 @@
 
 #include "handshaker/s2a_util.h"
 
-#include "proto/common.upb.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "proto/common.upb.h"
 #include "upb/upb.hpp"
 
 namespace s2a {
@@ -34,8 +34,9 @@ using Identity = ::s2a::s2a_options::S2AOptions::Identity;
 using IdentityType = ::s2a::s2a_options::S2AOptions::IdentityType;
 using TlsVersion = ::s2a::s2a_options::S2AOptions::TlsVersion;
 
-constexpr char kHostname[] = "hostname";
-constexpr char kSpiffeId[] = "spiffe_id";
+constexpr char kHostname[] = "test_hostname";
+constexpr char kSpiffeId[] = "test_spiffe_id";
+constexpr char kUid[] = "test_uid";
 
 TEST(S2AUtilTest, ConvertTlsVersionToProto) {
   const struct {
@@ -129,6 +130,17 @@ TEST(S2AUtilTest, ConvertIdentityToProtoHostname) {
   EXPECT_EQ(ParseUpbStrview(s2a_proto_Identity_hostname(identity)), kHostname);
 }
 
+TEST(S2AUtilTest, ConvertIdentityToProtoUid) {
+  upb::Arena arena;
+  Identity uid = Identity::FromUid(kUid);
+  absl::variant<Status, s2a_proto_Identity*> identity_status =
+      ConvertIdentityToProto(arena.ptr(), uid);
+  ASSERT_EQ(identity_status.index(), 1);
+  s2a_proto_Identity* identity = absl::get<1>(identity_status);
+  EXPECT_TRUE(s2a_proto_Identity_has_uid(identity));
+  EXPECT_EQ(ParseUpbStrview(s2a_proto_Identity_uid(identity)), kUid);
+}
+
 TEST(S2AUtilTest, ConvertIdentityToProtoUnknownType) {
   upb::Arena arena;
   absl::variant<Status, s2a_proto_Identity*> identity_status =
@@ -197,7 +209,7 @@ TEST(S2AUtilTest, ConvertFromProtoToCiphersuite) {
 }
 
 TEST(S2AUtilTest, ConvertFromProtoToIdentityWithSpiffeId) {
-  std::string spiffe_id = "spiffe_id";
+  std::string spiffe_id = "test_spiffe_id";
   upb::Arena arena;
   s2a_proto_Identity* proto_identity = s2a_proto_Identity_new(arena.ptr());
   s2a_proto_Identity_set_spiffe_id(proto_identity,
@@ -206,8 +218,8 @@ TEST(S2AUtilTest, ConvertFromProtoToIdentityWithSpiffeId) {
             Identity::FromSpiffeId(spiffe_id));
 }
 
-TEST(S2AUtilTest, ConvertFromProtoToIdentityWithHostnae) {
-  std::string hostname = "hostname";
+TEST(S2AUtilTest, ConvertFromProtoToIdentityWithHostname) {
+  std::string hostname = "test_hostname";
   upb::Arena arena;
   s2a_proto_Identity* proto_identity = s2a_proto_Identity_new(arena.ptr());
   s2a_proto_Identity_set_hostname(proto_identity,
@@ -215,6 +227,15 @@ TEST(S2AUtilTest, ConvertFromProtoToIdentityWithHostnae) {
 
   EXPECT_EQ(ConvertFromProtoToIdentity(proto_identity),
             Identity::FromHostname(hostname));
+}
+
+TEST(S2AUtilTest, ConvertFromProtoToIdentityWithUid) {
+  std::string uid = "test_uid";
+  upb::Arena arena;
+  s2a_proto_Identity* proto_identity = s2a_proto_Identity_new(arena.ptr());
+  s2a_proto_Identity_set_uid(proto_identity, upb_strview_makez(uid.c_str()));
+
+  EXPECT_EQ(ConvertFromProtoToIdentity(proto_identity), Identity::FromUid(uid));
 }
 
 TEST(S2AUtilTest, ConvertFromProtoToIdentityWithNone) {

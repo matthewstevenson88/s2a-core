@@ -16,11 +16,11 @@
  *
  */
 
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
 #include "proto/common.upb.h"
 #include "proto/s2a.upb.h"
 #include "record_protocol/s2a_ticket_sender.h"
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
 #include "upb/upb.hpp"
 
 namespace s2a {
@@ -137,6 +137,46 @@ TEST(S2AUpbTicketSenderTest,
       s2a_proto_ResumptionTicketReq_local_identity(ticket_req);
   EXPECT_TRUE(s2a_proto_Identity_has_spiffe_id(local_identity));
   EXPECT_TRUE(upb_strview_eql(s2a_proto_Identity_spiffe_id(local_identity),
+                              upb_strview_makez(kTestLocalIdentity)));
+
+  size_t ticket_list_size = 0;
+  const upb_strview* ticket_list =
+      s2a_proto_ResumptionTicketReq_in_bytes(ticket_req, &ticket_list_size);
+  ASSERT_NE(ticket_list, nullptr);
+  EXPECT_EQ(ticket_list_size, 2);
+  CompareWithByteVector(ticket_list[0], kResumptionTicketOne,
+                        sizeof(kResumptionTicketOne));
+  CompareWithByteVector(ticket_list[1], kResumptionTicketTwo,
+                        sizeof(kResumptionTicketTwo));
+}
+
+TEST(S2AUpbTicketSenderTest,
+     PrepareTicketSessionReqSuccessWithTwoTicketsAndUid) {
+  auto tickets = absl::make_unique<std::vector<std::unique_ptr<std::string>>>();
+  std::string ticket_one(reinterpret_cast<const char*>(kResumptionTicketOne),
+                         sizeof(kResumptionTicketOne));
+  std::string ticket_two(reinterpret_cast<const char*>(kResumptionTicketTwo),
+                         sizeof(kResumptionTicketTwo));
+  tickets->push_back(absl::make_unique<std::string>(ticket_one));
+  tickets->push_back(absl::make_unique<std::string>(ticket_two));
+
+  // Prepare |ResumptionTicketReq| message with a single ticket.
+  upb::Arena arena;
+  s2a_proto_SessionReq* request = s2a_proto_SessionReq_new(arena.ptr());
+  Identity test_local_identity = Identity::FromUid(kTestLocalIdentity);
+  ASSERT_TRUE(PrepareResumptionTicketReq(kConnectionId, test_local_identity,
+                                         tickets, arena.ptr(), request));
+
+  // Check the contents of the |SessionReq| message.
+  ASSERT_TRUE(s2a_proto_SessionReq_has_resumption_ticket(request));
+  const s2a_proto_ResumptionTicketReq* ticket_req =
+      s2a_proto_SessionReq_resumption_ticket(request);
+  EXPECT_EQ(s2a_proto_ResumptionTicketReq_connection_id(ticket_req),
+            kConnectionId);
+  const s2a_proto_Identity* local_identity =
+      s2a_proto_ResumptionTicketReq_local_identity(ticket_req);
+  EXPECT_TRUE(s2a_proto_Identity_has_uid(local_identity));
+  EXPECT_TRUE(upb_strview_eql(s2a_proto_Identity_uid(local_identity),
                               upb_strview_makez(kTestLocalIdentity)));
 
   size_t ticket_list_size = 0;

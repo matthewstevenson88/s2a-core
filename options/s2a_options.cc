@@ -42,6 +42,10 @@ Identity Identity::FromSpiffeId(const std::string& spiffe_id) {
   return Identity(spiffe_id, IdentityType::SPIFFE_ID);
 }
 
+Identity Identity::FromUid(const std::string& uid) {
+  return Identity(uid, IdentityType::UID);
+}
+
 Identity::Identity(const Identity& other)
     : identity_(other.GetIdentityString()), type_(other.GetIdentityType()) {}
 
@@ -97,20 +101,28 @@ void S2AOptions::set_handshaker_service_url(const std::string& url) {
   handshaker_service_url_ = url;
 }
 
-void S2AOptions::add_local_spiffe_id(const std::string& spiffe_id) {
-  local_identities_.insert(Identity::FromSpiffeId(spiffe_id));
+void S2AOptions::add_local_spiffe_id(const std::string& local_spiffe_id) {
+  local_identities_.insert(Identity::FromSpiffeId(local_spiffe_id));
 }
 
-void S2AOptions::add_local_hostname(const std::string& hostname) {
-  local_identities_.insert(Identity::FromHostname(hostname));
+void S2AOptions::add_local_hostname(const std::string& local_hostname) {
+  local_identities_.insert(Identity::FromHostname(local_hostname));
 }
 
-void S2AOptions::add_target_spiffe_id(const std::string& spiffe_id) {
-  target_identities_.insert(Identity::FromSpiffeId(spiffe_id));
+void S2AOptions::add_local_uid(const std::string& local_uid) {
+  local_identities_.insert(Identity::FromUid(local_uid));
 }
 
-void S2AOptions::add_target_hostname(const std::string& hostname) {
-  target_identities_.insert(Identity::FromHostname(hostname));
+void S2AOptions::add_target_spiffe_id(const std::string& target_spiffe_id) {
+  target_identities_.insert(Identity::FromSpiffeId(target_spiffe_id));
+}
+
+void S2AOptions::add_target_hostname(const std::string& target_hostname) {
+  target_identities_.insert(Identity::FromHostname(target_hostname));
+}
+
+void S2AOptions::add_target_uid(const std::string& target_uid) {
+  target_identities_.insert(Identity::FromUid(target_uid));
 }
 
 std::unique_ptr<S2AOptions> S2AOptions::Copy() const {

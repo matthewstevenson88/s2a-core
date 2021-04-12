@@ -441,6 +441,10 @@ ProxyStatus S2AProxy::GetClientStart() {
         s2a_proto_Identity_set_hostname(
             identity, upb_strview_makez(target_identity.GetIdentityCString()));
         break;
+      case IdentityType::UID:
+        s2a_proto_Identity_set_uid(
+            identity, upb_strview_makez(target_identity.GetIdentityCString()));
+        break;
       default:
         std::string error = "Unsupported identity format.";
         logger_(error);
@@ -470,6 +474,10 @@ ProxyStatus S2AProxy::GetClientStart() {
         break;
       case IdentityType::HOSTNAME:
         s2a_proto_Identity_set_hostname(
+            identity, upb_strview_makez(local_identity.GetIdentityCString()));
+        break;
+      case IdentityType::UID:
+        s2a_proto_Identity_set_uid(
             identity, upb_strview_makez(local_identity.GetIdentityCString()));
         break;
       default:
@@ -503,6 +511,12 @@ ProxyStatus S2AProxy::GetClientStart() {
         identity = s2a_proto_AuthenticationMechanism_mutable_identity(
             auth_mechanism, arena.ptr());
         s2a_proto_Identity_set_hostname(
+            identity, upb_strview_makez(pair.first.GetIdentityCString()));
+        break;
+      case s2a_options::S2AOptions::IdentityType::UID:
+        identity = s2a_proto_AuthenticationMechanism_mutable_identity(
+            auth_mechanism, arena.ptr());
+        s2a_proto_Identity_set_uid(
             identity, upb_strview_makez(pair.first.GetIdentityCString()));
         break;
       default:
@@ -610,6 +624,10 @@ ProxyStatus S2AProxy::GetServerStart(std::unique_ptr<Buffer> bytes_from_peer) {
         s2a_proto_Identity_set_hostname(
             identity, upb_strview_makez(local_identity.GetIdentityCString()));
         break;
+      case IdentityType::UID:
+        s2a_proto_Identity_set_uid(
+            identity, upb_strview_makez(local_identity.GetIdentityCString()));
+        break;
       default:
         std::string error = "Unsupported identity format.";
         logger_(error);
@@ -644,6 +662,12 @@ ProxyStatus S2AProxy::GetServerStart(std::unique_ptr<Buffer> bytes_from_peer) {
         identity = s2a_proto_AuthenticationMechanism_mutable_identity(
             auth_mechanism, arena.ptr());
         s2a_proto_Identity_set_hostname(
+            identity, upb_strview_makez(pair.first.GetIdentityCString()));
+        break;
+      case s2a_options::S2AOptions::IdentityType::UID:
+        identity = s2a_proto_AuthenticationMechanism_mutable_identity(
+            auth_mechanism, arena.ptr());
+        s2a_proto_Identity_set_uid(
             identity, upb_strview_makez(pair.first.GetIdentityCString()));
         break;
       default:
@@ -707,6 +731,12 @@ ProxyStatus S2AProxy::GetNext(std::unique_ptr<Buffer> bytes_from_peer) {
         identity = s2a_proto_AuthenticationMechanism_mutable_identity(
             auth_mechanism, arena.ptr());
         s2a_proto_Identity_set_hostname(
+            identity, upb_strview_makez(pair.first.GetIdentityCString()));
+        break;
+      case s2a_options::S2AOptions::IdentityType::UID:
+        identity = s2a_proto_AuthenticationMechanism_mutable_identity(
+            auth_mechanism, arena.ptr());
+        s2a_proto_Identity_set_uid(
             identity, upb_strview_makez(pair.first.GetIdentityCString()));
         break;
       default:
