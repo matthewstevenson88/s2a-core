@@ -8,7 +8,7 @@
 
 #include <stddef.h>
 #include "upb/msg.h"
-#include "proto/common.upb.h"
+#include "proto/upb-generated/proto/common.upb.h"
 
 #include "upb/port_def.inc"
 

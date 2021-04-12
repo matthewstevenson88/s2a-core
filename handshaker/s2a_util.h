@@ -20,7 +20,7 @@
 #define HANDSHAKER_S2A_UTIL_H_
 
 #include "options/s2a_options.h"
-#include "proto/common.upb.h"
+#include "proto/upb-generated/proto/common.upb.h"
 #include "absl/status/status.h"
 #include "absl/types/variant.h"
 #include "upb/upb.hpp"

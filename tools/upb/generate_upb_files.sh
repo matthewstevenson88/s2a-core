@@ -15,6 +15,9 @@
 # This script generates the .upb.{h,c} files used by the S2A Core for the CMake
 # build. It should be called from the top-level directory only. Don't forget to
 # ensure this file is executable.
+#
+# Note that you need to manually change the includes of the generated .upb.{h,c}
+# files to have the correct "proto/upb-generated/proto/..." path.
 
 set -ex
 

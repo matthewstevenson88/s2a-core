@@ -151,8 +151,8 @@ cc_library(
     deps = [
         ":s2a_ticket_sender",
         "//options:s2a_options",
-        "//proto:common_upb_proto",
-        "//proto:s2a_upb_proto",
+        "//proto/upb-generated/proto:common_upb_proto",
+        "//proto/upb-generated/proto:s2a_upb_proto",
         "@com_google_absl//absl/strings",
         "@upb",
     ],
@@ -166,8 +166,8 @@ cc_test(
     deps = [
         ":s2a_ticket_sender",
         ":s2a_upb_ticket_sender",
-        "//proto:common_upb_proto",
-        "//proto:s2a_upb_proto",
+        "//proto/upb-generated/proto:common_upb_proto",
+        "//proto/upb-generated/proto:s2a_upb_proto",
         "@com_google_googletest//:gtest_main",
         "@upb",
     ],

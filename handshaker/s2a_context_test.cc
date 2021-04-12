@@ -19,7 +19,7 @@
 #include "handshaker/s2a_context.h"
 
 #include "handshaker/s2a_util.h"
-#include "proto/s2a_context.upb.h"
+#include "proto/upb-generated/proto/s2a_context.upb.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "absl/status/statusor.h"

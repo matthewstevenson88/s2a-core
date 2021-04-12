@@ -8,8 +8,8 @@
 
 #include <stddef.h>
 #include "upb/msg.h"
-#include "proto/s2a_context.upb.h"
-#include "proto/common.upb.h"
+#include "proto/upb-generated/proto/s2a_context.upb.h"
+#include "proto/upb-generated/proto/common.upb.h"
 
 #include "upb/port_def.inc"
 
