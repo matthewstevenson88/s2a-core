@@ -26,8 +26,8 @@ cc_library(
     hdrs = ["s2a_constants.h"],
     visibility = approved_s2a_core_users,
     deps = [
-        "//proto:common_upb_proto",
-        "//proto:s2a_context_upb_proto",
-        "//proto:s2a_upb_proto",
+        "//proto/upb-generated/proto:common_upb_proto",
+        "//proto/upb-generated/proto:s2a_context_upb_proto",
+        "//proto/upb-generated/proto:s2a_upb_proto",
     ],
 )

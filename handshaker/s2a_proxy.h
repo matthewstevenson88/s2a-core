@@ -25,7 +25,6 @@
 #include "frame_protector/s2a_frame_protector.h"
 #include "handshaker/s2a_context.h"
 #include "options/s2a_options.h"
-#include "proto/s2a.upb.h"
 #include "token_manager/access_token_manager.h"
 #include "absl/container/flat_hash_map.h"
 #include "absl/status/status.h"

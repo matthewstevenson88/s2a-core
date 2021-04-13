@@ -18,8 +18,8 @@
 
 #include "handshaker/s2a_proxy_test_util.h"
 
-#include "proto/common.upb.h"
-#include "proto/s2a.upb.h"
+#include "proto/upb-generated/proto/common.upb.h"
+#include "proto/upb-generated/proto/s2a.upb.h"
 #include "absl/memory/memory.h"
 #include "upb/upb.hpp"
 

@@ -20,7 +20,7 @@
 
 #include "absl/status/statusor.h"
 #include "handshaker/s2a_util.h"
-#include "proto/s2a_context.upb.h"
+#include "proto/upb-generated/proto/s2a_context.upb.h"
 
 namespace s2a {
 namespace s2a_context {

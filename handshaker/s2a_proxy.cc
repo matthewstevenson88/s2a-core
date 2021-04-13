@@ -24,8 +24,8 @@
 #include "absl/status/statusor.h"
 #include "absl/strings/str_format.h"
 #include "handshaker/s2a_util.h"
-#include "proto/common.upb.h"
-#include "proto/s2a.upb.h"
+#include "proto/upb-generated/proto/common.upb.h"
+#include "proto/upb-generated/proto/s2a.upb.h"
 #include "s2a_constants.h"
 #include "upb/upb.hpp"
 

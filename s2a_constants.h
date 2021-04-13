@@ -22,7 +22,7 @@
 #include <cstddef>
 #include <cstdint>
 
-#include "proto/common.upb.h"
+#include "proto/upb-generated/proto/common.upb.h"
 
 /** The supported TLS 1.3 ciphersuites, with values from the TLS 1.3 RFC:
  *  https://tools.ietf.org/html/rfc8446#appendix-B.4. **/
