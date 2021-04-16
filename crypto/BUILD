@@ -15,7 +15,7 @@
 # Description:
 #   This BUILD file contains the libraries and tests for the AEAD crypter used by the S2A client libraries.
 
-load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
+load("@rules_foreign_cc//foreign_cc:configure.bzl", "configure_make")
 
 licenses(["notice"])
 
@@ -162,7 +162,8 @@ configure_make(
         },
         "//conditions:default" : {}
     }),
-    shared_libraries = select({
+    out_shared_libs = select({
+    #shared_libraries = select({
         ":darwin_build" : [
             "libssl.dylib",
             "libcrypto.dylib",

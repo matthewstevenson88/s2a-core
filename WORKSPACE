@@ -10,9 +10,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Abseil
 http_archive(
   name = "com_google_absl",
-strip_prefix = "abseil-cpp-64461421222f8be8663c50e8e82c91c3f95a0d3c",
-            url = "https://github.com/abseil/abseil-cpp/archive/64461421222f8be8663c50e8e82c91c3f95a0d3c.zip",
-            sha256 = "41d725950d0d3ed4d00020881db84fdc79ac349d9b325ab010686c5a794a822e",
+  strip_prefix = "abseil-cpp-64461421222f8be8663c50e8e82c91c3f95a0d3c",
+  url = "https://github.com/abseil/abseil-cpp/archive/64461421222f8be8663c50e8e82c91c3f95a0d3c.zip",
+  sha256 = "41d725950d0d3ed4d00020881db84fdc79ac349d9b325ab010686c5a794a822e",
 )
 
 # Googletest
@@ -47,11 +47,12 @@ http_archive(
 # Rules foreign, needed to convert OpenSSL CMake to Bazel.
 http_archive(
     name = "rules_foreign_cc",
-    strip_prefix = "rules_foreign_cc-master",
-    url = "https://github.com/bazelbuild/rules_foreign_cc/archive/master.zip",
+    sha256 = "d54742ffbdc6924f222d2179f0e10e911c5c659c4ae74158e9fe827aad862ac6",
+    strip_prefix = "rules_foreign_cc-0.2.0",
+    url = "https://github.com/bazelbuild/rules_foreign_cc/archive/0.2.0.tar.gz",
 )
 
-load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
 rules_foreign_cc_dependencies()
 
 _ALL_CONTENT = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])"""
