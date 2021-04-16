@@ -163,7 +163,6 @@ configure_make(
         "//conditions:default" : {}
     }),
     out_shared_libs = select({
-    #shared_libraries = select({
         ":darwin_build" : [
             "libssl.dylib",
             "libcrypto.dylib",
