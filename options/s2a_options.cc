@@ -69,8 +69,8 @@ TlsVersion S2AOptions::min_tls_version() const { return min_tls_version_; }
 
 TlsVersion S2AOptions::max_tls_version() const { return max_tls_version_; }
 
-const std::string S2AOptions::handshaker_service_url() const {
-  return handshaker_service_url_;
+const std::string S2AOptions::s2a_address() const {
+  return s2a_address_;
 }
 
 const std::vector<Ciphersuite>& S2AOptions::supported_ciphersuites() const {
@@ -97,8 +97,8 @@ void S2AOptions::add_supported_ciphersuite(Ciphersuite ciphersuite) {
   supported_ciphersuites_.push_back(ciphersuite);
 }
 
-void S2AOptions::set_handshaker_service_url(const std::string& url) {
-  handshaker_service_url_ = url;
+void S2AOptions::set_s2a_address(const std::string& s2a_address) {
+  s2a_address_ = s2a_address;
 }
 
 void S2AOptions::add_local_spiffe_id(const std::string& local_spiffe_id) {
@@ -129,7 +129,7 @@ std::unique_ptr<S2AOptions> S2AOptions::Copy() const {
   auto new_options = absl::make_unique<S2AOptions>();
   new_options->set_min_tls_version(min_tls_version_);
   new_options->set_max_tls_version(max_tls_version_);
-  new_options->set_handshaker_service_url(handshaker_service_url_);
+  new_options->set_s2a_address(s2a_address_);
   new_options->local_identities_ = local_identities_;
   new_options->target_identities_ = target_identities_;
   for (auto ciphersuite : supported_ciphersuites_) {
