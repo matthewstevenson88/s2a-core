@@ -57,7 +57,7 @@ TEST(S2AUpbTicketSenderTest, PrepareTicketSessionReqFailure) {
        /*nullptr_tickets=*/true},
   };
 
-  for (int i = 0; i < ABSL_ARRAYSIZE(tests); i++) {
+  for (std::size_t i = 0; i < ABSL_ARRAYSIZE(tests); i++) {
     upb::Arena arena;
     s2a_proto_SessionReq* request = s2a_proto_SessionReq_new(arena.ptr());
 
