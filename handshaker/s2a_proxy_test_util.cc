@@ -54,7 +54,7 @@ void NoOpLogger(const std::string& message) {}
 
 std::unique_ptr<S2AOptions> CreateTestOptions() {
   auto options = absl::make_unique<S2AOptions>();
-  options->set_handshaker_service_url(kHandshakerServiceAddress);
+  options->set_s2a_address(kHandshakerServiceAddress);
   options->add_supported_ciphersuite(Ciphersuite::AES_128_GCM_SHA256);
   options->add_supported_ciphersuite(Ciphersuite::AES_256_GCM_SHA384);
   options->add_supported_ciphersuite(Ciphersuite::CHACHA20_POLY1305_SHA256);

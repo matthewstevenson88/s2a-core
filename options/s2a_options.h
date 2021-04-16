@@ -88,7 +88,7 @@ class S2AOptions {
   // Getters for member fields.
   TlsVersion min_tls_version() const;
   TlsVersion max_tls_version() const;
-  const std::string handshaker_service_url() const;
+  const std::string s2a_address() const;
   const std::vector<Ciphersuite>& supported_ciphersuites() const;
   const absl::flat_hash_set<Identity>& local_identities() const;
   const absl::flat_hash_set<Identity>& target_identities() const;
@@ -97,8 +97,8 @@ class S2AOptions {
   void set_min_tls_version(TlsVersion min_tls_version);
   void set_max_tls_version(TlsVersion max_tls_version);
 
-  /// The setter for the |handshaker_service_url_|.
-  void set_handshaker_service_url(const std::string& url);
+  /// The setter for the |s2a_address_|.
+  void set_s2a_address(const std::string& s2a_address);
 
   // Adds |ciphersuite| to the vector |supported_ciphersuites_|; it does not
   // remove duplicates from the vector, if they exist.
@@ -134,7 +134,7 @@ class S2AOptions {
  private:
   TlsVersion min_tls_version_ = TlsVersion::TLS1_3;
   TlsVersion max_tls_version_ = TlsVersion::TLS1_3;
-  std::string handshaker_service_url_;
+  std::string s2a_address_;
   std::vector<Ciphersuite> supported_ciphersuites_;
   absl::flat_hash_set<Identity> target_identities_;
   absl::flat_hash_set<Identity> local_identities_;

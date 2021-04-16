@@ -32,7 +32,7 @@ using Identity = S2AOptions::Identity;
 using IdentityType = S2AOptions::IdentityType;
 using TlsVersion = S2AOptions::TlsVersion;
 
-constexpr char kHandshakerServiceUrl[] = "handshaker_service_url";
+constexpr char kS2AAddress[] = "s2a_address";
 constexpr char kLocalSpiffeId[] = "local_spiffe_id";
 constexpr char kLocalHostname[] = "local_hostname";
 constexpr char kLocalUid[] = "local_uid";
@@ -98,7 +98,7 @@ TEST(S2ACredentialsOptionsTest, Create) {
   auto options = absl::make_unique<S2AOptions>();
   options->set_min_tls_version(TlsVersion::TLS1_2);
   options->set_max_tls_version(TlsVersion::TLS1_3);
-  options->set_handshaker_service_url(kHandshakerServiceUrl);
+  options->set_s2a_address(kS2AAddress);
   for (auto ciphersuite : GetCiphersuites()) {
     options->add_supported_ciphersuite(ciphersuite);
   }
@@ -111,7 +111,7 @@ TEST(S2ACredentialsOptionsTest, Create) {
 
   EXPECT_EQ(options->min_tls_version(), TlsVersion::TLS1_2);
   EXPECT_EQ(options->max_tls_version(), TlsVersion::TLS1_3);
-  EXPECT_EQ(options->handshaker_service_url(), kHandshakerServiceUrl);
+  EXPECT_EQ(options->s2a_address(), kS2AAddress);
   EXPECT_EQ(options->supported_ciphersuites(), GetCiphersuites());
   EXPECT_EQ(options->local_identities(), GetLocalIdentities());
   EXPECT_EQ(options->target_identities(), GetTargetIdentities());
@@ -121,7 +121,7 @@ TEST(S2ACredentialsOptionsTest, CreateAndCopy) {
   auto options = absl::make_unique<S2AOptions>();
   options->set_min_tls_version(TlsVersion::TLS1_2);
   options->set_max_tls_version(TlsVersion::TLS1_3);
-  options->set_handshaker_service_url(kHandshakerServiceUrl);
+  options->set_s2a_address(kS2AAddress);
   for (auto ciphersuite : GetCiphersuites()) {
     options->add_supported_ciphersuite(ciphersuite);
   }
@@ -136,7 +136,7 @@ TEST(S2ACredentialsOptionsTest, CreateAndCopy) {
 
   EXPECT_EQ(copy_options->min_tls_version(), TlsVersion::TLS1_2);
   EXPECT_EQ(copy_options->max_tls_version(), TlsVersion::TLS1_3);
-  EXPECT_EQ(copy_options->handshaker_service_url(), kHandshakerServiceUrl);
+  EXPECT_EQ(copy_options->s2a_address(), kS2AAddress);
   EXPECT_EQ(copy_options->supported_ciphersuites(), GetCiphersuites());
   EXPECT_EQ(copy_options->local_identities(), GetLocalIdentities());
   EXPECT_EQ(copy_options->target_identities(), GetTargetIdentities());

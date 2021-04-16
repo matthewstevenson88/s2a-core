@@ -789,7 +789,7 @@ S2AProxy::CreateFrameProtector() {
     return Status(StatusCode::kFailedPrecondition,
                   "Handshake is not finished.");
   }
-  std::string s2a_address = options_->handshaker_service_url();
+  std::string s2a_address = options_->s2a_address();
   S2AFrameProtectorOptions options = {result_->tls_version,
                                       result_->ciphersuite,
                                       result_->in_traffic_secret,
