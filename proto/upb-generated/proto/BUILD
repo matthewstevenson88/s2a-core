@@ -15,6 +15,8 @@
 # Description:
 #  This BUILD file contains targets for pre-generated UPB files.
 
+licenses(["notice"])
+
 cc_library(
     name = "common_upb_proto",
     srcs = ["common.upb.c"],
