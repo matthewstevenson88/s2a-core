@@ -7,7 +7,7 @@
  * regenerated. */
 
 #include <stddef.h>
-#include "upb/msg.h"
+#include "upb/msg_internal.h"
 #include "proto/upb-generated/proto/common.upb.h"
 
 #include "upb/port_def.inc"
