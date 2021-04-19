@@ -212,7 +212,7 @@ uint32_t HandshakeMessageHandler::GetMessageDataSizeFromHeader() {
    *
    * The complexity of the code below is because headers might be framented. */
   uint32_t message_data_size = 0;
-  int at_byte = 1;
+  std::size_t at_byte = 1;
   int shift_by = 16;
   for (const auto& fragment : *message_fragments_) {
     for (const auto& byte : *fragment) {

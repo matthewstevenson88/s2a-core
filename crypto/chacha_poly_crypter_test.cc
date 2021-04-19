@@ -311,7 +311,7 @@ TEST(ChachaPolyS2AAeadCrypterTest, EncryptionDecryptionSuccess) {
   ASSERT_NE(crypter, nullptr);
 
   // Slice the plaintext.
-  for (int num_slices_plaintext = 0;
+  for (std::size_t num_slices_plaintext = 0;
        num_slices_plaintext < RFC7539_test_vec1_plaintext.size();
        num_slices_plaintext++) {
     std::vector<Iovec> plaintext_vec =
@@ -319,8 +319,8 @@ TEST(ChachaPolyS2AAeadCrypterTest, EncryptionDecryptionSuccess) {
     ASSERT_EQ(plaintext_vec.size(), num_slices_plaintext + 1);
 
     // Slice the aad.
-    for (int num_slices_aad = 0; num_slices_aad < RFC7539_test_vec1_aad.size();
-         num_slices_aad++) {
+    for (std::size_t num_slices_aad = 0;
+         num_slices_aad < RFC7539_test_vec1_aad.size(); num_slices_aad++) {
       std::vector<Iovec> aad_vec =
           S2AAeadSliceVector(RFC7539_test_vec1_aad, num_slices_aad);
       ASSERT_EQ(aad_vec.size(), num_slices_aad + 1);
@@ -341,7 +341,7 @@ TEST(ChachaPolyS2AAeadCrypterTest, EncryptionDecryptionSuccess) {
                 0);
 
       // Slice the ciphertext and tag.
-      for (int num_slices_ciphertext = 0;
+      for (std::size_t num_slices_ciphertext = 0;
            num_slices_ciphertext < RFC7539_test_vec1_ciphertext.size();
            num_slices_ciphertext++) {
         std::vector<Iovec> ciphertext_and_tag_vec = S2AAeadSliceVector(
