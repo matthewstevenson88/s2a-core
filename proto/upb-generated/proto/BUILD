@@ -22,7 +22,10 @@ cc_library(
     srcs = ["common.upb.c"],
     hdrs = ["common.upb.h"],
     visibility = ["//:__subpackages__"],
-    deps = ["@upb"],
+    deps = [
+        "@upb",
+        "@upb//:generated_code_support__only_for_generated_code_do_not_use__i_give_permission_to_break_me",
+    ],
 )
 
 cc_library(
@@ -33,6 +36,7 @@ cc_library(
     deps = [
         ":common_upb_proto",
         "@upb",
+        "@upb//:generated_code_support__only_for_generated_code_do_not_use__i_give_permission_to_break_me",
     ],
 )
 
@@ -44,6 +48,7 @@ cc_library(
     deps = [
         ":common_upb_proto",
         "@upb",
+        "@upb//:generated_code_support__only_for_generated_code_do_not_use__i_give_permission_to_break_me",
     ],
 )
 

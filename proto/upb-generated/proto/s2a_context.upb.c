@@ -7,7 +7,7 @@
  * regenerated. */
 
 #include <stddef.h>
-#include "upb/msg.h"
+#include "upb/msg_internal.h"
 #include "proto/upb-generated/proto/s2a_context.upb.h"
 #include "proto/upb-generated/proto/common.upb.h"
 
