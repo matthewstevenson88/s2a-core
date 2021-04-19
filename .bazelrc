@@ -11,7 +11,6 @@ build:asan --copt=-fno-omit-frame-pointer
 build:asan --linkopt=-fsanitize=address
 build:asan --action_env=ASAN_OPTIONS=detect_leaks=1:color=always
 
-build:asan_macos --compiler clang
 build:asan_macos --strip=never
 build:asan_macos --copt=-fsanitize=address
 build:asan_macos --copt -Wno-macro-redefined
