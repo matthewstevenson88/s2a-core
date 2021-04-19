@@ -26,11 +26,9 @@ http_archive(
 # UPB
 http_archive(
     name = "upb",
-    sha256 = "487d84ce85065ff89ccde1c1ac2ea1515d2be411306e4adf1be6861dc4a4a86b",
-    strip_prefix = "upb-de76b31f9c56b28120580d53a6f8d7941fdb79eb",
-    urls = [
-      "https://github.com/protocolbuffers/upb/archive/de76b31f9c56b28120580d53a6f8d7941fdb79eb.tar.gz",
-    ],
+    sha256 = "0d240a335f61e8acc22849280668b9203d25e6616df18bcc96d13bee65bbfebc",
+    strip_prefix = "upb-0723bfa700a044b1062d3db688b810455b19322e",
+    urls = ["https://github.com/protocolbuffers/upb/archive/0723bfa700a044b1062d3db688b810455b19322e.tar.gz"],
 )
 
 load("@upb//bazel:workspace_deps.bzl", "upb_deps")
