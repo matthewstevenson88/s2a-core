@@ -280,8 +280,8 @@ cc_library(
         "src/record_protocol/s2a_upb_ticket_sender.cc",
     ],
     deps = [
-        ":s2a_ticket_sender",
         ":s2a_options",
+        ":s2a_ticket_sender",
         "//src/proto/upb-generated/proto:common_upb_proto",
         "//src/proto/upb-generated/proto:s2a_upb_proto",
         "@com_google_absl//absl/strings",
