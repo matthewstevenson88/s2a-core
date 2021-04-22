@@ -27,7 +27,8 @@ run_tests_on_linux() {
 }
 
 run_tests_on_macos() {
-  pip install --no-binary :all: psutil
+  # Was necessary to avoid a temporary Kokoro error.
+  # pip install --no-binary :all: psutil
 
   # The OpenSSL library used in OpenSSL-specific tests is only configured to run
   # on Linux, so omit targets with the "openssl" tag.
