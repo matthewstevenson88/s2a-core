@@ -88,8 +88,8 @@ cc_library(
     deps = [
         ":s2a_channel",
         ":s2a_constants",
-        ":s2a_options",
         ":s2a_crypter",
+        ":s2a_options",
         ":s2a_ticket_sender",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
