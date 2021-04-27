@@ -27,6 +27,9 @@ run_tests_on_linux() {
 }
 
 run_tests_on_macos() {
+  # Was necessary to avoid a temporary Kokoro error.
+  #  pip install --no-binary :all: psutil
+
   # The OpenSSL library used in OpenSSL-specific tests is only configured to run
   # on Linux, so omit targets with the "openssl" tag.
   local -a TEST_FLAGS=( --strategy=TestRunner=standalone --test_output=all --test_tag_filters=-openssl --build_tag_filters=-openssl)
