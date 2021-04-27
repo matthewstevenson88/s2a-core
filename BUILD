@@ -13,7 +13,8 @@
 # limitations under the License.
 
 # Description:
-#   Public APIs for the S2A's C++ client libraries.
+#   Bazel targets for the S2A's C++ client libraries. Users MUST only use the
+#   targets marked as public APIs; otherwise, users risk being broken.
 
 load(":acl.bzl", "approved_s2a_core_users")
 load("@rules_foreign_cc//foreign_cc:configure.bzl", "configure_make")
