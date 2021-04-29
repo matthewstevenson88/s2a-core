@@ -841,8 +841,8 @@ TEST_P(S2ACrypterTest, SendTicketsToS2ALimitReached) {
         std::move(absl::get<1>(crypter_status));
 
     // Decrypt |kMaxNumTicketsToProcess| tickets.
-    for (int i = 0; i < handshake_message_handler::kMaxNumTicketsToProcess;
-         i++) {
+    for (std::size_t i = 0;
+         i < handshake_message_handler::kMaxNumTicketsToProcess; i++) {
       TestDecryptSingleSessionTicketSuccess(*crypter, /*partial=*/false);
       // Tickets should not have been sent to the S2A up until the last ticket
       // is decrypted.

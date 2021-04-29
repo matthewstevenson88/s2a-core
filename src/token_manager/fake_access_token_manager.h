@@ -39,6 +39,9 @@ class FakeAccessTokenManager : public AccessTokenManagerInterface {
   FakeAccessTokenManager& operator=(const FakeAccessTokenManager& other) =
       delete;
 
+  // |GetDefaultToken| always returns |kFakeS2AAccessToken|.
+  absl::StatusOr<std::string> GetDefaultToken() override;
+
   // |GetToken| always returns |kFakeS2AAccessToken|.
   absl::StatusOr<std::string> GetToken(
       const s2a_options::S2AOptions::Identity& identity) override;

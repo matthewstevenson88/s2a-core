@@ -27,7 +27,17 @@ namespace s2a {
 namespace token_manager {
 namespace {
 
-TEST(SingleTokenAccessTokenManagerTest, FromEnvironmentVariable) {
+TEST(SingleTokenAccessTokenManagerTest, GetDefaultToken) {
+  // The |S2A_ACCESS_TOKEN| environment variable should be set to
+  // "s2a_access_token_from_env_variable" in `env` attribute of this `cc_test`
+  // rule.
+  SingleTokenAccessTokenManager manager;
+  absl::StatusOr<std::string> token = manager.GetDefaultToken();
+  EXPECT_TRUE(token.ok());
+  EXPECT_EQ(*token, "s2a_access_token_from_env_variable");
+}
+
+TEST(SingleTokenAccessTokenManagerTest, GetToken) {
   // The |S2A_ACCESS_TOKEN| environment variable should be set to
   // "s2a_access_token_from_env_variable" in `env` attribute of this `cc_test`
   // rule.
