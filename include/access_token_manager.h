@@ -36,6 +36,11 @@ class AccessTokenManagerInterface {
  public:
   virtual ~AccessTokenManagerInterface() = default;
 
+  // |GetDefaultToken| fetches an access token for an application to
+  // authenticate to the S2A when no identity is specified, or returns an error
+  // status if a token can not be retrieved.
+  virtual absl::StatusOr<std::string> GetDefaultToken() = 0;
+
   // |GetToken| fetches an access token for an application with identity
   // |identity| to authenticate to the S2A, or returns an error status if a
   // token can not be retrieved.

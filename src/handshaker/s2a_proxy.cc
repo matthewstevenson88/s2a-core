@@ -157,13 +157,12 @@ void S2AProxy::PopulateTokenCache() {
   // If the application did not provide any local identities, attempt to fetch a
   // token for the empty identity.
   if (options_->local_identities().empty()) {
-    Identity empty_identity = Identity::GetEmptyIdentity();
-    StatusOr<std::string> token = token_manager_->GetToken(empty_identity);
+    StatusOr<std::string> token = token_manager_->GetDefaultToken();
     if (!token.ok()) {
-      logger_(absl::StrCat("Unable to retrieve access token: ",
+      logger_(absl::StrCat("Unable to retrieve default access token: ",
                            token.status().message()));
     } else {
-      token_cache_[empty_identity] = *token;
+      token_cache_[Identity::GetEmptyIdentity()] = *token;
     }
   }
 }

@@ -38,6 +38,10 @@ SingleTokenAccessTokenManager::SingleTokenAccessTokenManager() {
   }
 }
 
+absl::StatusOr<std::string> SingleTokenAccessTokenManager::GetDefaultToken() {
+  return token_;
+}
+
 absl::StatusOr<std::string> SingleTokenAccessTokenManager::GetToken(
     const s2a_options::S2AOptions::Identity& identity) {
   return token_;

@@ -24,6 +24,10 @@ namespace testing {
 
 FakeAccessTokenManager::FakeAccessTokenManager() {}
 
+absl::StatusOr<std::string> FakeAccessTokenManager::GetDefaultToken() {
+  return kFakeS2AAccessToken;
+}
+
 absl::StatusOr<std::string> FakeAccessTokenManager::GetToken(
     const s2a_options::S2AOptions::Identity& identity) {
   return kFakeS2AAccessToken;

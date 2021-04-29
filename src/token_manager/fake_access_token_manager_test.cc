@@ -30,6 +30,13 @@ namespace {
 
 using ::absl::StatusOr;
 
+TEST(FakeAccessTokenManagerTest, GetDefaultToken) {
+  FakeAccessTokenManager manager;
+  StatusOr<std::string> token = manager.GetDefaultToken();
+  EXPECT_TRUE(token.ok());
+  EXPECT_EQ(*token, kFakeS2AAccessToken);
+}
+
 TEST(FakeAccessTokenManagerTest, GetToken) {
   s2a_options::S2AOptions::Identity identity =
       s2a_options::S2AOptions::Identity::GetEmptyIdentity();

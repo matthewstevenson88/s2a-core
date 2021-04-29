@@ -43,6 +43,11 @@ class SingleTokenAccessTokenManager : public AccessTokenManagerInterface {
   SingleTokenAccessTokenManager& operator=(
       const SingleTokenAccessTokenManager& other) = delete;
 
+  // |GetDefaultToken| fetches an access token for an application to
+  // authenticate to the S2A when no identity is specified, or returns an error
+  // status if a token can not be retrieved. The |identity| is ignored.
+  absl::StatusOr<std::string> GetDefaultToken() override;
+
   // |GetToken| fetches an access token for an application to authenticate to
   // the S2A, or returns an error status if a token can not be retrieved. The
   // |identity| is ignored.
