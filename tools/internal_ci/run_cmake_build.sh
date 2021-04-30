@@ -20,6 +20,8 @@ set -e
 # Display commands being run.
 set -x
 
+git submodule update --init --recursive
+
 echo "================================= Running cmake"
 cmake --version
 cmake . -DCMAKE_CXX_STANDARD=11
