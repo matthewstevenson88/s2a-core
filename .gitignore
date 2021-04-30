@@ -1,0 +1,24 @@
+# CMake-related files
+CMakeCache.txt
+CMakeFiles/
+CTestTestfile.cmake
+Makefile
+cmake_install.cmake
+libcommon_upb.a
+libfake_access_token_manager.a
+libhandshake_message_handler.a
+libhkdf.a
+libs2a_aead_crypter.a
+libs2a_aead_crypter_test_util.a
+libs2a_aead_crypter_util.a
+libs2a_context.a
+libs2a_context_upb.a
+libs2a_crypter.a
+libs2a_frame_protector.a
+libs2a_options.a
+libs2a_proxy.a
+libs2a_proxy_test_util.a
+libs2a_upb.a
+libs2a_upb_ticket_sender.a
+libs2a_util.a
+libsingle_token_access_token_manager.a
