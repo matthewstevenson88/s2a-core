@@ -22,8 +22,23 @@ set -x
 
 git submodule update --init --recursive
 
-echo "================================= Running cmake"
-cmake --version
-cmake . -DCMAKE_CXX_STANDARD=11
+case "${PLATFORM}" in
+  'linux')
+    echo "================================= Running cmake"
+    cmake --version
+    cmake . -DCMAKE_CXX_STANDARD=11
+  ;;
+  'darwin')
+    brew install openssl
+    echo "================================= Running cmake"
+    cmake --version
+    cmake . -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
+  ;;
+  *)
+    echo "Unsupported platform, unable to install protoc."
+    exit 1
+  ;;
+esac
+
 echo "================================= Building with make"
 make all
