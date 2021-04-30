@@ -13,8 +13,9 @@
 :: limitations under the License.
 
 cd github/s2a-core
+git submodule update --init --recursive
 echo "================================= Running cmake"
 cmake --version
 cmake . -DCMAKE_CXX_STANDARD=11
 echo "================================= Building with make"
-make
+make all

@@ -20,8 +20,28 @@ set -e
 # Display commands being run.
 set -x
 
-echo "================================= Running cmake"
-cmake --version
-cmake . -DCMAKE_CXX_STANDARD=11
+readonly PLATFORM="$(uname | tr '[:upper:]' '[:lower:]')"
+
+git submodule update --init --recursive
+
+case "${PLATFORM}" in
+  'linux')
+    echo "================================= Running cmake"
+    cmake --version
+    cmake . -DCMAKE_CXX_STANDARD=11
+  ;;
+  'darwin')
+    brew install openssl
+    brew link openssl --force
+    echo "================================= Running cmake"
+    cmake --version
+    cmake . -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
+  ;;
+  *)
+    echo "Unsupported platform, unable to run cmake."
+    exit 1
+  ;;
+esac
+
 echo "================================= Building with make"
-make
+make all
