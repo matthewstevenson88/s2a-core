@@ -17,4 +17,4 @@ echo "================================= Running cmake"
 cmake --version
 cmake . -DCMAKE_CXX_STANDARD=11
 echo "================================= Building with make"
-make
+make all
