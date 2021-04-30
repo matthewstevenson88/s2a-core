@@ -20,6 +20,8 @@ set -e
 # Display commands being run.
 set -x
 
+readonly PLATFORM="$(uname | tr '[:upper:]' '[:lower:]')"
+
 git submodule update --init --recursive
 
 case "${PLATFORM}" in
@@ -35,7 +37,7 @@ case "${PLATFORM}" in
     cmake . -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
   ;;
   *)
-    echo "Unsupported platform, unable to install protoc."
+    echo "Unsupported platform, unable to run cmake."
     exit 1
   ;;
 esac
