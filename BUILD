@@ -25,6 +25,48 @@ exports_files(["LICENSE"])
 
 # ---------------- Public APIs. ----------------
 
+# Monolithic target for users that want simpler dependency management.
+cc_library(
+    name = "s2a_core",
+    srcs = [
+        "src/frame_protector/s2a_frame_protector.cc",
+        "src/handshaker/s2a_context.cc",
+        "src/handshaker/s2a_proxy.cc",
+        "src/options/s2a_options.cc",
+    ],
+    hdrs = [
+        "include/access_token_manager.h",
+        "include/access_token_manager_factory.h",
+        "include/s2a_channel_factory_interface.h",
+        "include/s2a_channel_interface.h",
+        "include/s2a_constants.h",
+        "include/s2a_context.h",
+        "include/s2a_frame_protector.h",
+        "include/s2a_options.h",
+        "include/s2a_proxy.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":s2a_crypter",
+        ":s2a_ticket_sender",
+        ":s2a_util",
+        "//src/proto/upb-generated/proto:common_upb_proto",
+        "//src/proto/upb-generated/proto:s2a_context_upb_proto",
+        "//src/proto/upb-generated/proto:s2a_upb_proto",
+        "@com_google_absl//absl/container:flat_hash_set",
+        "@com_google_absl//absl/container:flat_hash_map",
+        "@com_google_absl//absl/hash",
+        "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/status",
+        "@com_google_absl//absl/status:statusor",
+        "@com_google_absl//absl/strings",
+        "@com_google_absl//absl/strings:str_format",
+        "@com_google_absl//absl/synchronization",
+        "@com_google_absl//absl/types:variant",
+        "@upb"
+    ],
+)
+
 cc_library(
     name = "s2a_channel",
     hdrs = [
