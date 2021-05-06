@@ -285,3 +285,37 @@ target_link_libraries(fake_access_token_manager
   access_token_manager
   com_google_absl//absl/status:statusor)
 
+# Monolithic target for users that want simpler dependency management.
+add_library(s2a_core
+  include/access_token_manager.h
+  include/access_token_manager_factory.h
+  include/s2a_channel_factory_interface.h
+  include/s2a_channel_interface.h
+  include/s2a_constants.h
+  src/handshaker/s2a_context.cc
+  include/s2a_context.h
+  src/frame_protector/s2a_frame_protector.cc
+  include/s2a_frame_protector.h
+  src/options/s2a_options.cc
+  include/s2a_options.h
+  src/handshaker/s2a_proxy.cc
+  include/s2a_proxy.h)
+target_link_libraries(
+  s2a_crypter
+  s2a_ticket_sender
+  s2a_util
+  common_upb
+  s2a_upb
+  s2a_context_upb
+  com_google_absl//absl/container:flat_hash_set
+  com_google_absl//absl/container:flat_hash_map
+  com_google_absl//absl/hash
+  com_google_absl//absl/memory
+  com_google_absl//absl/status
+  com_google_absl//absl/status:statusor
+  com_google_absl//absl/strings
+  com_google_absl//absl/strings:str_format
+  com_google_absl//absl/synchronization
+  com_google_absl//absl/types:variant
+  upb
+)
