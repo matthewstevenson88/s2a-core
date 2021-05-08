@@ -71,9 +71,12 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb)
 add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb/cmake)
 
 if(S2A_CORE_USE_BORINGSSL)
+  message(STATUS "Using BoringSSL.")
   include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
 else()
+  message(STATUS "Using local SSL library.")
   find_package(OpenSSL REQUIRED)
+  set(crypto OpenSSL::Crypto)
 endif()
 
 if(APPLE)
