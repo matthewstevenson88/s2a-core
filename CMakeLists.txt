@@ -69,7 +69,12 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb)
 add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb/cmake)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
+
+if(S2A_CORE_USE_BORINGSSL)
+  include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
+else()
+  find_package(OpenSSL REQUIRED)
+endif()
 
 if(APPLE)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup -flat_namespace")
