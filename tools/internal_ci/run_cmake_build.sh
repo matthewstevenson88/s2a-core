@@ -31,11 +31,12 @@ case "${PLATFORM}" in
     cmake . -DCMAKE_CXX_STANDARD=11
   ;;
   'darwin')
-    brew install openssl
-    brew link openssl --force
+    #brew install openssl
+    #brew link openssl --force
     echo "================================= Running cmake"
     cmake --version
-    cmake . -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
+    cmake . -DCMAKE_CXX_STANDARD=11
+    #cmake . -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
   ;;
   *)
     echo "Unsupported platform, unable to run cmake."
