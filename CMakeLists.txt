@@ -64,20 +64,14 @@ if(UPB_ENABLE_UBSAN)
 endif()
 
 include_directories(.)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb)
-add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb/cmake)
 
-if(S2A_CORE_USE_BORINGSSL)
-  message(STATUS "Using BoringSSL.")
+if (NOT S2A_CORE_SSL_LIBRARIES)
   include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
-  set(s2a_core_crypto crypto)
-else()
-  message(STATUS "Using local SSL library.")
-  find_package(OpenSSL REQUIRED)
-  set(s2a_core_crypto OpenSSL::Crypto)
+  set(S2A_CORE_SSL_LIBRARIES crypto)
 endif()
 
 if(APPLE)
