@@ -9,7 +9,12 @@
 #ifndef SRC_PROTO_S2A_PROTO_UPB_H_
 #define SRC_PROTO_S2A_PROTO_UPB_H_
 
+#ifdef S2A_CORE_USE_OLD_UPB_APIS
+#include "upb/msg.h"
+#else
 #include "upb/msg_internal.h"
+#endif
+
 #include "upb/decode.h"
 #include "upb/decode_fast.h"
 #include "upb/encode.h"
