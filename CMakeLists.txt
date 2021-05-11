@@ -64,7 +64,7 @@ if(UPB_ENABLE_UBSAN)
 endif()
 
 include_directories(.)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb)
@@ -175,7 +175,7 @@ add_library(hkdf
   src/crypto/hkdf.cc
   src/crypto/hkdf.h)
 target_link_libraries(hkdf
-  s2a_core_crypto
+  ${S2A_CORE_SSL_LIBRARIES}
   com_google_absl//absl/status)
 add_library(s2a_aead_crypter
   src/crypto/aes_gcm_crypter.cc
@@ -185,7 +185,7 @@ add_library(s2a_aead_crypter
   src/crypto/s2a_aead_crypter.h)
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
-  s2a_core_crypto
+  ${S2A_CORE_SSL_LIBRARIES}
   com_google_absl//absl/memory
   com_google_absl//absl/status
   com_google_absl//absl/strings
@@ -194,7 +194,7 @@ add_library(s2a_aead_crypter_util
   src/crypto/s2a_aead_crypter_util.cc
   src/crypto/s2a_aead_crypter_util.h)
 target_link_libraries(s2a_aead_crypter_util
-  s2a_core_crypto)
+  ${S2A_CORE_SSL_LIBRARIES})
 add_library(s2a_util
   src/handshaker/s2a_util.cc
   src/handshaker/s2a_util.h)
