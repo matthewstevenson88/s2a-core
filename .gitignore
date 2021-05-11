@@ -16,6 +16,7 @@ libs2a_context_upb.a
 libs2a_crypter.a
 libs2a_frame_protector.a
 libs2a_core.a
+libs2a_core_monolith.a
 libs2a_options.a
 libs2a_proxy.a
 libs2a_proxy_test_util.a
