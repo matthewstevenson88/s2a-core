@@ -292,7 +292,7 @@ target_link_libraries(fake_access_token_manager
   com_google_absl//absl/status:statusor)
 
 # Monolithic target for users that want simpler dependency management.
-add_library(s2a_core
+add_library(s2a_core_monolith
   include/access_token_manager.h
   include/access_token_manager_factory.h
   include/s2a_channel_factory_interface.h
