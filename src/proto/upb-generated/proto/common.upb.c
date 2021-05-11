@@ -7,7 +7,13 @@
  * regenerated. */
 
 #include <stddef.h>
+
+#ifdef S2A_CORE_USE_OLD_UPB_APIS
+#include "upb/msg.h"
+#else
 #include "upb/msg_internal.h"
+#endif
+
 #include "src/proto/upb-generated/proto/common.upb.h"
 
 #include "upb/port_def.inc"
