@@ -104,8 +104,8 @@ target_link_libraries(s2a_context_upb
   upb)
 add_library(s2a_channel INTERFACE)
 target_link_libraries(s2a_channel INTERFACE
-  com_google_absl//absl/status
-  com_google_absl//absl/status:statusor)
+  absl_status
+  absl_statusor)
 add_library(s2a_constants INTERFACE)
 target_link_libraries(s2a_constants INTERFACE
   common_upb
@@ -115,16 +115,16 @@ add_library(s2a_options
   src/options/s2a_options.cc
   include/s2a_options.h)
 target_link_libraries(s2a_options
-  com_google_absl//absl/container:flat_hash_set
-  com_google_absl//absl/hash
-  com_google_absl//absl/strings
-  com_google_absl//absl/types:variant)
+  absl_flat_hash_set
+  absl_hash
+  absl_strings
+  absl_variant)
 add_library(access_token_manager INTERFACE)
 target_link_libraries(access_token_manager INTERFACE
   s2a_options
-  com_google_absl//absl/status
-  com_google_absl//absl/status:statusor
-  com_google_absl//absl/strings)
+  absl_status
+  absl_statusor
+  absl_strings)
 add_library(s2a_frame_protector
   src/frame_protector/s2a_frame_protector.cc
   include/s2a_frame_protector.h)
@@ -134,12 +134,12 @@ target_link_libraries(s2a_frame_protector
   s2a_crypter
   s2a_options
   s2a_ticket_sender
-  com_google_absl//absl/memory
-  com_google_absl//absl/status
-  com_google_absl//absl/status:statusor
-  com_google_absl//absl/strings:str_format
-  com_google_absl//absl/synchronization
-  com_google_absl//absl/types:variant)
+  absl_memory
+  absl_status
+  absl_statusor
+  absl_str_format
+  absl_synchronization
+  absl_variant)
 add_library(s2a_context
   src/handshaker/s2a_context.cc
   include/s2a_context.h)
@@ -148,10 +148,10 @@ target_link_libraries(s2a_context
   s2a_util
   common_upb
   s2a_context_upb
-  com_google_absl//absl/memory
-  com_google_absl//absl/status
-  com_google_absl//absl/status:statusor
-  com_google_absl//absl/types:variant
+  absl_memory
+  absl_status
+  absl_statusor
+  absl_variant
   upb)
 add_library(s2a_proxy
   src/handshaker/s2a_proxy.cc
@@ -166,20 +166,20 @@ target_link_libraries(s2a_proxy
   s2a_util
   common_upb
   s2a_upb
-  com_google_absl//absl/container:flat_hash_map
-  com_google_absl//absl/memory
-  com_google_absl//absl/status
-  com_google_absl//absl/status:statusor
-  com_google_absl//absl/strings:str_format
-  com_google_absl//absl/synchronization
-  com_google_absl//absl/types:variant
+  absl_flat_hash_map
+  absl_memory
+  absl_status
+  absl_statusor
+  absl_str_format
+  absl_synchronization
+  absl_variant
   upb)
 add_library(hkdf
   src/crypto/hkdf.cc
   src/crypto/hkdf.h)
 target_link_libraries(hkdf
   ${S2A_CORE_SSL_LIBRARIES}
-  com_google_absl//absl/status)
+  absl_status)
 add_library(s2a_aead_crypter
   src/crypto/aes_gcm_crypter.cc
   src/crypto/chacha_poly_crypter_boringssl.cc
@@ -189,10 +189,10 @@ add_library(s2a_aead_crypter
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES}
-  com_google_absl//absl/memory
-  com_google_absl//absl/status
-  com_google_absl//absl/strings
-  com_google_absl//absl/types:variant)
+  absl_memory
+  absl_status
+  absl_strings
+  absl_variant)
 add_library(s2a_aead_crypter_util
   src/crypto/s2a_aead_crypter_util.cc
   src/crypto/s2a_aead_crypter_util.h)
@@ -204,17 +204,17 @@ add_library(s2a_util
 target_link_libraries(s2a_util
   s2a_options
   common_upb
-  com_google_absl//absl/status
-  com_google_absl//absl/types:variant
+  absl_status
+  absl_variant
   upb)
 add_library(handshake_message_handler
   src/record_protocol/handshake_message_handler.cc
   src/record_protocol/handshake_message_handler.h)
 target_link_libraries(handshake_message_handler
-  com_google_absl//absl/base:core_headers
-  com_google_absl//absl/memory
-  com_google_absl//absl/status
-  com_google_absl//absl/types:variant)
+  absl_core_headers
+  absl_memory
+  absl_status
+  absl_variant)
 add_library(s2a_crypter
   src/record_protocol/s2a_crypter.cc
   src/record_protocol/s2a_crypter_util.cc
@@ -231,17 +231,17 @@ target_link_libraries(s2a_crypter
   s2a_options
   hkdf
   s2a_aead_crypter
-  com_google_absl//absl/base:core_headers
-  com_google_absl//absl/memory
-  com_google_absl//absl/status
-  com_google_absl//absl/strings:str_format
-  com_google_absl//absl/synchronization
-  com_google_absl//absl/types:variant)
+  absl_core_headers
+  absl_memory
+  absl_status
+  absl_str_format
+  absl_synchronization
+  absl_variant)
 add_library(s2a_ticket_sender INTERFACE)
 target_link_libraries(s2a_ticket_sender INTERFACE
   s2a_channel
   s2a_options
-  com_google_absl//absl/strings)
+  absl_strings)
 add_library(s2a_upb_ticket_sender
   src/record_protocol/s2a_upb_ticket_sender.cc)
 target_link_libraries(s2a_upb_ticket_sender
@@ -249,24 +249,24 @@ target_link_libraries(s2a_upb_ticket_sender
   s2a_ticket_sender
   common_upb
   s2a_upb
-  com_google_absl//absl/strings
+  absl_strings
   upb)
 add_library(single_token_access_token_manager
   src/token_manager/single_token_access_token_manager.cc
   src/token_manager/single_token_access_token_manager.h)
 target_link_libraries(single_token_access_token_manager
   access_token_manager
-  com_google_absl//absl/flags:flag
-  com_google_absl//absl/status
-  com_google_absl//absl/status:statusor
-  com_google_absl//absl/strings
-  com_google_absl//absl/strings:str_format)
+  absl_flag
+  absl_status
+  absl_statusor
+  absl_strings
+  absl_str_format)
 add_library(s2a_aead_crypter_test_util
   src/crypto/s2a_aead_crypter_test_util.cc
   src/crypto/s2a_aead_crypter_test_util.h)
 target_link_libraries(s2a_aead_crypter_test_util
   s2a_aead_crypter
-  com_google_absl//absl/base:core_headers)
+  absl_core_headers)
 add_library(s2a_proxy_test_util
   src/handshaker/s2a_proxy_test_util.cc
   src/handshaker/s2a_proxy_test_util.h)
@@ -276,9 +276,9 @@ target_link_libraries(s2a_proxy_test_util
   s2a_options
   common_upb
   s2a_upb
-  com_google_absl//absl/memory
-  com_google_absl//absl/status
-  com_google_absl//absl/types:variant
+  absl_memory
+  absl_status
+  absl_variant
   upb)
 add_library(s2a_test_data INTERFACE)
 add_library(s2a_test_util INTERFACE)
@@ -289,7 +289,7 @@ add_library(fake_access_token_manager
   src/token_manager/fake_access_token_manager.h)
 target_link_libraries(fake_access_token_manager
   access_token_manager
-  com_google_absl//absl/status:statusor)
+  absl_statusor)
 
 # Monolithic target for users that want simpler dependency management.
 add_library(s2a_core_monolith
@@ -313,15 +313,15 @@ target_link_libraries(
   common_upb
   s2a_upb
   s2a_context_upb
-  com_google_absl//absl/container:flat_hash_set
-  com_google_absl//absl/container:flat_hash_map
-  com_google_absl//absl/hash
-  com_google_absl//absl/memory
-  com_google_absl//absl/status
-  com_google_absl//absl/status:statusor
-  com_google_absl//absl/strings
-  com_google_absl//absl/strings:str_format
-  com_google_absl//absl/synchronization
-  com_google_absl//absl/types:variant
+  absl_flat_hash_set
+  absl_flat_hash_map
+  absl_hash
+  absl_memory
+  absl_status
+  absl_statusor
+  absl_strings
+  absl_str_format
+  absl_synchronization
+  absl_variant
   upb
 )
