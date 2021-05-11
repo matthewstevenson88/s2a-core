@@ -68,8 +68,14 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb)
-add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb/cmake)
-find_package(OpenSSL REQUIRED)
+
+if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
+  find_package(OpenSSL REQUIRED)
+  set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
+elseif (NOT S2A_CORE_SSL_LIBRARIES)
+  include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
+  set(S2A_CORE_SSL_LIBRARIES crypto)
+endif()
 
 if(APPLE)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup -flat_namespace")
@@ -172,7 +178,7 @@ add_library(hkdf
   src/crypto/hkdf.cc
   src/crypto/hkdf.h)
 target_link_libraries(hkdf
-  OpenSSL::Crypto
+  ${S2A_CORE_SSL_LIBRARIES}
   com_google_absl//absl/status)
 add_library(s2a_aead_crypter
   src/crypto/aes_gcm_crypter.cc
@@ -182,7 +188,7 @@ add_library(s2a_aead_crypter
   src/crypto/s2a_aead_crypter.h)
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
-  OpenSSL::Crypto
+  ${S2A_CORE_SSL_LIBRARIES}
   com_google_absl//absl/memory
   com_google_absl//absl/status
   com_google_absl//absl/strings
@@ -191,7 +197,7 @@ add_library(s2a_aead_crypter_util
   src/crypto/s2a_aead_crypter_util.cc
   src/crypto/s2a_aead_crypter_util.h)
 target_link_libraries(s2a_aead_crypter_util
-  OpenSSL::Crypto)
+  ${S2A_CORE_SSL_LIBRARIES})
 add_library(s2a_util
   src/handshaker/s2a_util.cc
   src/handshaker/s2a_util.h)
