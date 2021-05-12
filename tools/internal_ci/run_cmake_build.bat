@@ -16,4 +16,4 @@ cd github/s2a-core
 git submodule update --init --recursive
 echo "================================= Running cmake"
 cmake --version
-cmake . -DCMAKE_CXX_STANDARD=11 || goto :error
+cmake . -DS2A_CORE_USE_NEW_UPS_APIS -DCMAKE_CXX_STANDARD=11 || goto :error

@@ -8,10 +8,10 @@
 
 #include <stddef.h>
 
-#ifdef S2A_CORE_USE_OLD_UPB_APIS
-#include "upb/msg.h"
-#else
+#ifdef S2A_CORE_USE_NEW_UPB_APIS
 #include "upb/msg_internal.h"
+#else
+#include "upb/msg.h"
 #endif
 
 #include "src/proto/upb-generated/proto/common.upb.h"
