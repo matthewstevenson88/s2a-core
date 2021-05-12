@@ -19,10 +19,10 @@ run_tests_on_linux() {
   readonly TEST_FLAGS
   (
     echo "Building..."
-    time bazel build --features=-debug_prefix_map_pwd_is_dot -- ... || fail_with_debug_output
+    time bazel build --copt="-DS2A_CORE_USE_NEW_UPB_APIS=true" --features=-debug_prefix_map_pwd_is_dot -- ... || fail_with_debug_output
 
     echo "Running tests..."
-    time bazel test --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
+    time bazel test --copt="-DS2A_CORE_USE_NEW_UPB_APIS=true" --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
   )
 }
 
@@ -36,10 +36,10 @@ run_tests_on_macos() {
   readonly TEST_FLAGS
   (
     echo "Building..."
-    time bazel build --features=-debug_prefix_map_pwd_is_dot -- ... || fail_with_debug_output
+    time bazel build --copt="-DS2A_CORE_USE_NEW_UPB_APIS=true" --features=-debug_prefix_map_pwd_is_dot -- ... || fail_with_debug_output
 
     echo "Running tests..."
-    time bazel test --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
+    time bazel test --copt="-DS2A_CORE_USE_NEW_UPB_APIS=true" --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
   )
 }
 
