@@ -63,6 +63,10 @@ if(UPB_ENABLE_UBSAN)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fsanitize=address")
 endif()
 
+if(DEFINE_S2A_CORE_USE_NEW_UPB_APIS)
+  add_compile_definitions(S2A_CORE_USE_NEW_UPB_APIS="true")
+endif()
+
 include_directories(.)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
