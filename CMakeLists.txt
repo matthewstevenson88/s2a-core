@@ -64,7 +64,7 @@ if(UPB_ENABLE_UBSAN)
 endif()
 
 if(DEFINE_S2A_CORE_USE_NEW_UPB_APIS)
-  add_definitions(S2A_CORE_USE_NEW_UPB_APIS="true")
+  add_definitions(-DS2A_CORE_USE_NEW_UPB_APIS)
 endif()
 
 include_directories(.)
