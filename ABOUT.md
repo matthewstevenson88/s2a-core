@@ -4,7 +4,7 @@ Secure Session Agent (S2A) is a side-car that enables applications to establish
 secure connections with other applications or services using mTLS as a transport
 layer security protocol. S2A offers mTLS handshake offloading so that
 applications do not have to hold the long-term private key material.
-Specifically, the S2A performs the handshake with the peer using the application
+Specifically, S2A performs the handshake with the peer using the application
 as a proxy for all handshake messages. After the handshake is complete, the S2A
 hands off the negotiated session keys to the application where they are used in
 the record protocol implementation to encrypt and decrypt data plane traffic.
