@@ -68,16 +68,22 @@ if(DEFINE_S2A_CORE_USE_NEW_UPB_APIS)
 endif()
 
 include_directories(.)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
+
+if (S2A_CORE_UPB_LIBRARY)
+  include_directories(S2A_CORE_UPB_LIBRARY)
+else()
+  add_definitions(-DS2A_CORE_USE_NEW_UPB_APIS)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/upb)
+endif()
 
 if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
   find_package(OpenSSL REQUIRED)
   set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
-  include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
   set(S2A_CORE_SSL_LIBRARIES crypto)
 endif()
 
