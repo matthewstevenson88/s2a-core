@@ -71,6 +71,7 @@ include_directories(.)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
+# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
 
 if (S2A_CORE_UPB_LIBRARY)
   include_directories(S2A_CORE_UPB_LIBRARY)
@@ -83,7 +84,7 @@ if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
   find_package(OpenSSL REQUIRED)
   set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
   set(S2A_CORE_SSL_LIBRARIES crypto)
 endif()
 
@@ -266,7 +267,7 @@ add_library(single_token_access_token_manager
   src/token_manager/single_token_access_token_manager.h)
 target_link_libraries(single_token_access_token_manager
   access_token_manager
-  absl_flag
+  absl_flags
   absl_status
   absl_statusor
   absl_strings
@@ -302,7 +303,7 @@ target_link_libraries(fake_access_token_manager
   absl_statusor)
 
 # Monolithic target for users that want simpler dependency management.
-add_library(s2a_core_monolith
+add_library(s2a_core
   include/access_token_manager.h
   include/access_token_manager_factory.h
   include/s2a_channel_factory_interface.h
@@ -333,5 +334,4 @@ target_link_libraries(
   absl_str_format
   absl_synchronization
   absl_variant
-  upb
-)
+  upb)
