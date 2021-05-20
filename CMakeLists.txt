@@ -210,8 +210,8 @@ if(S2A_CORE_USE_BORINGSSL)
 else()
   list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_openssl.cc)
 endif()
-add_library(s2a_aead_crypter)
-  _S2A_CORE_AEAD_CRYPTER_SOURCES)
+add_library(s2a_aead_crypter
+  ${_S2A_CORE_AEAD_CRYPTER_SOURCES})
 target_include_directories(s2a_aead_crypter PRIVATE
   ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter
