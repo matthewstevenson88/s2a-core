@@ -84,7 +84,8 @@ if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
   find_package(OpenSSL REQUIRED)
   set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
-  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
+  # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
   set(S2A_CORE_SSL_LIBRARIES crypto)
 endif()
 
@@ -194,6 +195,7 @@ target_link_libraries(hkdf
 add_library(s2a_aead_crypter
   src/crypto/aes_gcm_crypter.cc
   src/crypto/chacha_poly_crypter_boringssl.cc
+  src/crypto/chacha_poly_crypter_openssl.cc
   src/crypto/s2a_aead_crypter.cc
   src/crypto/s2a_aead_constants.h
   src/crypto/s2a_aead_crypter.h)
