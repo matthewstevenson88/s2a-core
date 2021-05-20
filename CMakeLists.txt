@@ -71,7 +71,13 @@ include_directories(.)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb)
+
+if (S2A_CORE_UPB_LIBRARY)
+  include_directories(S2A_CORE_UPB_LIBRARY)
+else()
+  add_definitions(-DS2A_CORE_USE_NEW_UPB_APIS)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/upb)
+endif()
 
 if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
   find_package(OpenSSL REQUIRED)
@@ -187,6 +193,7 @@ target_link_libraries(hkdf
 add_library(s2a_aead_crypter
   src/crypto/aes_gcm_crypter.cc
   src/crypto/chacha_poly_crypter_boringssl.cc
+  src/crypto/chacha_poly_crypter_openssl.cc
   src/crypto/s2a_aead_crypter.cc
   src/crypto/s2a_aead_constants.h
   src/crypto/s2a_aead_crypter.h)
@@ -296,7 +303,7 @@ target_link_libraries(fake_access_token_manager
   absl_statusor)
 
 # Monolithic target for users that want simpler dependency management.
-add_library(s2a_core_monolith
+add_library(s2a_core
   include/access_token_manager.h
   include/access_token_manager_factory.h
   include/s2a_channel_factory_interface.h
