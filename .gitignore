@@ -4,6 +4,7 @@ CMakeFiles/
 CTestTestfile.cmake
 Makefile
 cmake_install.cmake
+lib/
 libcommon_upb.a
 libfake_access_token_manager.a
 libhandshake_message_handler.a
