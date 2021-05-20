@@ -28,7 +28,8 @@ case "${PLATFORM}" in
   'linux')
     echo "================================= Running cmake"
     cmake --version
-    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11
+    # The -Wno-unused-result flag is needed because of BoringSSL.
+    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -CXXFLAGS="-Wno-unused-result"
   ;;
   'darwin')
     brew install openssl

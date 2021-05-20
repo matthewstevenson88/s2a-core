@@ -33,9 +33,6 @@ project(s2a_core)
 SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
 SET(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
 
-# Needed for BoringSSL.
-set(CMAKE_CXX_FLAGS "-Wno-unused-result")
-
 # Set default build type.
 if(NOT CMAKE_BUILD_TYPE)
   message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
@@ -89,7 +86,6 @@ if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
   set(_S2A_CORE_SSL_INCLUDE_DIR ${OPENSSL_INCLUDE_DIR})
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
   message(STATUS "Using BoringSSL")
-  #include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
   set(S2A_CORE_USE_BORINGSSL "s2a_core_using_boringssl")
   set(S2A_CORE_SSL_LIBRARIES crypto)
