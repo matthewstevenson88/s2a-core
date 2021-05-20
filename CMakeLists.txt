@@ -33,6 +33,9 @@ project(s2a_core)
 SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
 SET(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
 
+# Needed for BoringSSL.
+set(CMAKE_CXX_FLAGS "-Wno-unused-variable")
+
 # Set default build type.
 if(NOT CMAKE_BUILD_TYPE)
   message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
