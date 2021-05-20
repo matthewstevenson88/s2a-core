@@ -19,4 +19,4 @@ echo "================================= Running cmake"
 cmake --version
 cmake .. -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 || goto :error
 echo "================================= Building"
-cmake --build . --target ALL_BUID || goto :error
+cmake --build . --target ALL_BUILD || goto :error
