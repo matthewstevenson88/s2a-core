@@ -21,8 +21,6 @@
 
 #include <vector>
 
-#include <openssl/opensslconf.h>
-
 #include "absl/status/status.h"
 #include "absl/types/variant.h"
 #include "src/crypto/s2a_aead_constants.h"

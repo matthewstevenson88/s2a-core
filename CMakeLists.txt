@@ -86,6 +86,7 @@ if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
   #include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
+  add_definitions(-DS2A_CORE_USE_BORINGSSL)
   set(S2A_CORE_SSL_LIBRARIES crypto)
   set(_S2A_CORE_SSL_INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl/src/include)
 endif()
@@ -195,13 +196,22 @@ target_include_directories(hkdf PRIVATE
 target_link_libraries(hkdf
   ${S2A_CORE_SSL_LIBRARIES}
   absl_status)
-add_library(s2a_aead_crypter
+
+set(_S2A_CORE_AEAD_CRYPTER_SOURCES)
+list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES
   src/crypto/aes_gcm_crypter.cc
   src/crypto/chacha_poly_crypter_boringssl.cc
   src/crypto/chacha_poly_crypter_openssl.cc
   src/crypto/s2a_aead_crypter.cc
   src/crypto/s2a_aead_constants.h
   src/crypto/s2a_aead_crypter.h)
+if(S2A_CORE_USE_BORINGSSL)
+  list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_boringssl.cc)
+else()
+  list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_openssl.cc)
+endif()
+add_library(s2a_aead_crypter)
+  _S2A_CORE_AEAD_CRYPTER_SOURCES)
 target_include_directories(s2a_aead_crypter PRIVATE
   ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter
