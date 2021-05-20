@@ -21,7 +21,7 @@
 
 #include <vector>
 
-#include <opensslconf.h>
+#include <openssl/opensslconf.h>
 
 #include "absl/status/status.h"
 #include "absl/types/variant.h"
