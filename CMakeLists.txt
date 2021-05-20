@@ -76,6 +76,7 @@ if (S2A_CORE_UPB_LIBRARY)
   include_directories(S2A_CORE_UPB_LIBRARY)
 else()
   add_definitions(-DS2A_CORE_USE_NEW_UPB_APIS)
+  add_definitions(-DOPENSSL_IS_BORINGSSL)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/upb)
 endif()
 
