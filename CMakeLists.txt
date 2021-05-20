@@ -80,10 +80,12 @@ else()
 endif()
 
 if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
+  message(STATUS "Using OpenSSL")
   find_package(OpenSSL REQUIRED)
   set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
   set(_S2A_CORE_SSL_INCLUDE_DIR ${OPENSSL_INCLUDE_DIR})
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
+  message(STATUS "Using BoringSSL")
   #include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
   add_definitions(-DS2A_CORE_USE_BORINGSSL)
@@ -204,8 +206,10 @@ list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES
   src/crypto/s2a_aead_constants.h
   src/crypto/s2a_aead_crypter.h)
 if(S2A_CORE_USE_BORINGSSL)
+  message("Appending CCP BoringSSL")
   list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_boringssl.cc)
 else()
+  message("Appending CCP OpenSSL")
   list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_openssl.cc)
 endif()
 add_library(s2a_aead_crypter
