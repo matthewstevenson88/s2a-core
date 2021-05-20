@@ -82,9 +82,11 @@ endif()
 if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
   find_package(OpenSSL REQUIRED)
   set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
+  set(_S2A_CORE_SSL_INCLUDE_DIR ${OPENSSL_INCLUDE_DIR})
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
   include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
   set(S2A_CORE_SSL_LIBRARIES crypto)
+  set(_S2A_CORE_SSL_INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl/src/include)
 endif()
 
 if(APPLE)
@@ -187,6 +189,8 @@ target_link_libraries(s2a_proxy
 add_library(hkdf
   src/crypto/hkdf.cc
   src/crypto/hkdf.h)
+target_include_directories(hkdf PRIVATE
+  ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(hkdf
   ${S2A_CORE_SSL_LIBRARIES}
   absl_status)
@@ -197,6 +201,8 @@ add_library(s2a_aead_crypter
   src/crypto/s2a_aead_crypter.cc
   src/crypto/s2a_aead_constants.h
   src/crypto/s2a_aead_crypter.h)
+target_include_directories(s2a_aead_crypter PRIVATE
+  ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES}
@@ -207,6 +213,8 @@ target_link_libraries(s2a_aead_crypter
 add_library(s2a_aead_crypter_util
   src/crypto/s2a_aead_crypter_util.cc
   src/crypto/s2a_aead_crypter_util.h)
+target_include_directories(s2a_aead_crypter_util PRIVATE
+  ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES})
 add_library(s2a_util
@@ -317,6 +325,8 @@ add_library(s2a_core
   include/s2a_options.h
   src/handshaker/s2a_proxy.cc
   include/s2a_proxy.h)
+target_include_directories(s2a_core PRIVATE
+  ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(
   s2a_crypter
   s2a_ticket_sender
