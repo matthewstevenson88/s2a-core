@@ -12,7 +12,7 @@ the record protocol implementation to encrypt and decrypt data plane traffic.
 The following describes a high level flow of client-side mTLS handshake offload
 using the S2A. S2A also supports offloading of server-side mTLS handshakes.
 
-![mTLS Handshake Offload flow using S2A](img/S2A_handshake.jpg)
+![mTLS Handshake Offload flow using S2A](docs/imgs/S2A_handshake.jpg)
 
 1.  Client-server connection: A client application (gRPC or Envoy) establishes a
     connection to the server.
