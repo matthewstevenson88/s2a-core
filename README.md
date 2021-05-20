@@ -1,10 +1,12 @@
-# Secure Session Agent Client Libraries
+#Secure Session Agent Client Libraries
 
-The Secure Session Agent is a service that enables a workload to offload mTLS
+The Secure Session Agent (S2A) is a service that enables a workload to offload mTLS
 handshakes and protects a workload's private key material from exfiltration. The
 Secure Session Agent's client libraries enable applications to communicate with
 the Secure Session Agent during the TLS handshake, and to encrypt traffic to the
-peer after the TLS handshake is complete.
+peer after the TLS handshake is complete. For more details on the Secure Session
+Agent model, see
+[ABOUT.md](https://github.com/google/s2a-core/blob/main/ABOUT.md).
 
 This repository contains the source code for the Secure Session Agent's C++
 client libraries. These libraries are agnostic to the SSL libraries installed on
