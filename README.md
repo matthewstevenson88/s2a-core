@@ -1,4 +1,4 @@
-#Secure Session Agent Client Libraries
+# Secure Session Agent Client Libraries
 
 The Secure Session Agent (S2A) is a service that enables a workload to offload mTLS
 handshakes and protects a workload's private key material from exfiltration. The

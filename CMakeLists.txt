@@ -70,15 +70,27 @@ endif()
 include_directories(.)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/upb)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
+set(_S2A_CORE_ABSL_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
+
+if (S2A_CORE_UPB_LIBRARY)
+  include_directories(S2A_CORE_UPB_LIBRARY)
+else()
+  add_definitions(-DS2A_CORE_USE_NEW_UPB_APIS)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/upb)
+endif()
 
 if (S2A_CORE_FIND_OPENSSL STREQUAL "true")
+  message(STATUS "Using OpenSSL")
   find_package(OpenSSL REQUIRED)
   set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
+  set(_S2A_CORE_SSL_INCLUDE_DIR ${OPENSSL_INCLUDE_DIR})
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
-  include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl)
+  message(STATUS "Using BoringSSL")
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
+  set(S2A_CORE_USE_BORINGSSL "s2a_core_using_boringssl")
   set(S2A_CORE_SSL_LIBRARIES crypto)
+  set(_S2A_CORE_SSL_INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl/src/include)
 endif()
 
 if(APPLE)
@@ -181,15 +193,29 @@ target_link_libraries(s2a_proxy
 add_library(hkdf
   src/crypto/hkdf.cc
   src/crypto/hkdf.h)
+target_include_directories(hkdf PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR}
+  ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(hkdf
   ${S2A_CORE_SSL_LIBRARIES}
   absl_status)
-add_library(s2a_aead_crypter
+
+set(_S2A_CORE_AEAD_CRYPTER_SOURCES)
+list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES
   src/crypto/aes_gcm_crypter.cc
-  src/crypto/chacha_poly_crypter_boringssl.cc
   src/crypto/s2a_aead_crypter.cc
   src/crypto/s2a_aead_constants.h
   src/crypto/s2a_aead_crypter.h)
+if(S2A_CORE_USE_BORINGSSL)
+  list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_boringssl.cc)
+else()
+  list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_openssl.cc)
+endif()
+add_library(s2a_aead_crypter
+  ${_S2A_CORE_AEAD_CRYPTER_SOURCES})
+target_include_directories(s2a_aead_crypter PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR}
+  ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES}
@@ -200,6 +226,9 @@ target_link_libraries(s2a_aead_crypter
 add_library(s2a_aead_crypter_util
   src/crypto/s2a_aead_crypter_util.cc
   src/crypto/s2a_aead_crypter_util.h)
+target_include_directories(s2a_aead_crypter_util PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR}
+  ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES})
 add_library(s2a_util
@@ -296,7 +325,7 @@ target_link_libraries(fake_access_token_manager
   absl_statusor)
 
 # Monolithic target for users that want simpler dependency management.
-add_library(s2a_core_monolith
+add_library(s2a_core
   include/access_token_manager.h
   include/access_token_manager_factory.h
   include/s2a_channel_factory_interface.h
@@ -310,6 +339,9 @@ add_library(s2a_core_monolith
   include/s2a_options.h
   src/handshaker/s2a_proxy.cc
   include/s2a_proxy.h)
+target_include_directories(s2a_core PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR}
+  ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(
   s2a_crypter
   s2a_ticket_sender

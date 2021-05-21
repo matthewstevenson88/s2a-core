@@ -12,8 +12,19 @@
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
 
+
+:: Needed because BoringSSL does not support yasm.
+choco uninstall yasm -y --limit-output
+choco install nasm -y --limit-output
+
 cd github/s2a-core
 git submodule update --init --recursive
+mkdir s2a-cmake-build && cd s2a-cmake-build
+
 echo "================================= Running cmake"
 cmake --version
-cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 || goto :error
+cmake .. -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON || goto :error
+
+echo "================================= Building"
+ls -l
+cmake --build . --target s2a_core || goto :error
