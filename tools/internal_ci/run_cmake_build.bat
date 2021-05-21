@@ -26,4 +26,5 @@ cmake --version
 cmake .. -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON || goto :error
 
 echo "================================= Building"
-cmake --build . --target ALL_BUILD || goto :error
+ls -l
+cmake --build . --target s2a_core || goto :error
