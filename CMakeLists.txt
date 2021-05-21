@@ -70,7 +70,8 @@ endif()
 include_directories(.)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
+add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
+set(_S2A_CORE_ABSL_INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
 
 if (S2A_CORE_UPB_LIBRARY)
   include_directories(S2A_CORE_UPB_LIBRARY)
@@ -129,6 +130,8 @@ target_link_libraries(s2a_constants INTERFACE
 add_library(s2a_options
   src/options/s2a_options.cc
   include/s2a_options.h)
+target_include_directories(s2a_options PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(s2a_options
   absl_flat_hash_set
   absl_hash
@@ -143,6 +146,8 @@ target_link_libraries(access_token_manager INTERFACE
 add_library(s2a_frame_protector
   src/frame_protector/s2a_frame_protector.cc
   include/s2a_frame_protector.h)
+target_include_directories(s2a_frame_protector PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(s2a_frame_protector
   s2a_channel
   s2a_constants
@@ -158,6 +163,8 @@ target_link_libraries(s2a_frame_protector
 add_library(s2a_context
   src/handshaker/s2a_context.cc
   include/s2a_context.h)
+target_include_directories(s2a_context PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(s2a_context
   s2a_options
   s2a_util
@@ -171,6 +178,8 @@ target_link_libraries(s2a_context
 add_library(s2a_proxy
   src/handshaker/s2a_proxy.cc
   include/s2a_proxy.h)
+target_include_directories(s2a_proxy PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(s2a_proxy
   access_token_manager
   s2a_channel
@@ -193,6 +202,7 @@ add_library(hkdf
   src/crypto/hkdf.cc
   src/crypto/hkdf.h)
 target_include_directories(hkdf PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(hkdf
   ${S2A_CORE_SSL_LIBRARIES}
@@ -214,6 +224,7 @@ endif()
 add_library(s2a_aead_crypter
   ${_S2A_CORE_AEAD_CRYPTER_SOURCES})
 target_include_directories(s2a_aead_crypter PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
@@ -226,6 +237,7 @@ add_library(s2a_aead_crypter_util
   src/crypto/s2a_aead_crypter_util.cc
   src/crypto/s2a_aead_crypter_util.h)
 target_include_directories(s2a_aead_crypter_util PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES})
@@ -241,6 +253,8 @@ target_link_libraries(s2a_util
 add_library(handshake_message_handler
   src/record_protocol/handshake_message_handler.cc
   src/record_protocol/handshake_message_handler.h)
+target_include_directories(handshake_message_handler PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(handshake_message_handler
   absl_core_headers
   absl_memory
@@ -253,6 +267,8 @@ add_library(s2a_crypter
   src/record_protocol/s2a_crypter.h
   src/record_protocol/s2a_crypter_util.h
   src/record_protocol/s2a_half_connection.h)
+target_include_directories(s2a_crypter PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(s2a_crypter
   handshake_message_handler
   s2a_upb_ticket_sender
@@ -275,6 +291,8 @@ target_link_libraries(s2a_ticket_sender INTERFACE
   absl_strings)
 add_library(s2a_upb_ticket_sender
   src/record_protocol/s2a_upb_ticket_sender.cc)
+target_include_directories(s2a_upb_ticket_sender PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(s2a_upb_ticket_sender
   s2a_options
   s2a_ticket_sender
@@ -285,6 +303,8 @@ target_link_libraries(s2a_upb_ticket_sender
 add_library(single_token_access_token_manager
   src/token_manager/single_token_access_token_manager.cc
   src/token_manager/single_token_access_token_manager.h)
+target_include_directories(single_token_access_token_manager PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(single_token_access_token_manager
   access_token_manager
   absl_flag
@@ -295,12 +315,16 @@ target_link_libraries(single_token_access_token_manager
 add_library(s2a_aead_crypter_test_util
   src/crypto/s2a_aead_crypter_test_util.cc
   src/crypto/s2a_aead_crypter_test_util.h)
+target_include_directories(s2a_aead_crypter_test_util PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter_test_util
   s2a_aead_crypter
   absl_core_headers)
 add_library(s2a_proxy_test_util
   src/handshaker/s2a_proxy_test_util.cc
   src/handshaker/s2a_proxy_test_util.h)
+target_include_directories(s2a_proxy_test_util PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR})
 target_link_libraries(s2a_proxy_test_util
   s2a_context
   s2a_proxy
@@ -338,6 +362,7 @@ add_library(s2a_core
   src/handshaker/s2a_proxy.cc
   include/s2a_proxy.h)
 target_include_directories(s2a_core PRIVATE
+  ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(
   s2a_crypter
