@@ -70,8 +70,8 @@ endif()
 include_directories(.)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
-set(_S2A_CORE_ABSL_INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/abseil-cpp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
+set(_S2A_CORE_ABSL_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
 
 if (S2A_CORE_UPB_LIBRARY)
   include_directories(S2A_CORE_UPB_LIBRARY)
@@ -215,10 +215,8 @@ list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES
   src/crypto/s2a_aead_constants.h
   src/crypto/s2a_aead_crypter.h)
 if(S2A_CORE_USE_BORINGSSL)
-  message("Appending CCP BoringSSL")
   list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_boringssl.cc)
 else()
-  message("Appending CCP OpenSSL")
   list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_openssl.cc)
 endif()
 add_library(s2a_aead_crypter
