@@ -21,6 +21,10 @@
 
 #include <vector>
 
+// TODO(matthewstevenson88) Find a header from the SSL library's crypto target
+// that will define the OPENSSL_IS_BORINGSSL macro when BoringSSL is used.
+#include <openssl/ssl.h>
+
 #include "absl/status/status.h"
 #include "absl/types/variant.h"
 #include "src/crypto/s2a_aead_constants.h"
