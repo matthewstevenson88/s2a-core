@@ -415,6 +415,7 @@ cc_test(
     deps = [
         ":s2a_aead_crypter_util",
         "@boringssl//:crypto",
+        "@boringssl//:ssl",
         "@com_google_googletest//:gtest_main",
     ],
 )
