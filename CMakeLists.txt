@@ -104,6 +104,10 @@ elseif (NOT S2A_CORE_SSL_LIBRARIES)
   set(_S2A_CORE_SSL_INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl/src/include)
 endif()
 
+if (S2A_CORE_INSTALL)
+  install(TARGETS ${S2A_CORE_SSL_LIBRARIES} DESTINATION bin)
+endif()
+
 if(APPLE)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup -flat_namespace")
 elseif(UNIX)
@@ -226,7 +230,7 @@ target_include_directories(s2a_aead_crypter PRIVATE
   ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
-  S2A_CORE_SSL_LIBRARIES
+  ${S2A_CORE_SSL_LIBRARIES}
   absl_memory
   absl_status
   absl_strings

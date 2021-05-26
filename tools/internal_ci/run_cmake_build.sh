@@ -29,7 +29,7 @@ case "${PLATFORM}" in
     echo "================================= Running cmake"
     cmake --version
     # The -Wno-unused-result flag is needed because of BoringSSL.
-    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_FLAGS="-Wno-unused-result"
+    cmake . -DS2A_CORE_INSTALL -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_FLAGS="-Wno-unused-result"
   ;;
   'darwin')
     brew install openssl
