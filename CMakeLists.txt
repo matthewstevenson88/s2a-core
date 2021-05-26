@@ -226,7 +226,7 @@ target_include_directories(s2a_aead_crypter PRIVATE
   ${_S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
-  ${S2A_CORE_SSL_LIBRARIES}
+  S2A_CORE_SSL_LIBRARIES
   absl_memory
   absl_status
   absl_strings
