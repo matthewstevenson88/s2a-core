@@ -221,7 +221,6 @@ cc_library(
     deps = [
         ":s2a_aead_crypter_util",
         "@boringssl//:crypto",
-        "@boringssl//:ssl",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",

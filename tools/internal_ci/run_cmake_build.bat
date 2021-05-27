@@ -23,7 +23,7 @@ mkdir s2a-cmake-build && cd s2a-cmake-build
 
 echo "================================= Running cmake"
 cmake --version
-cmake .. -DS2A_CORE_INSTALL=1 -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON || goto :error
+cmake .. -DS2A_CORE_FIND_OPENSSL="true" -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON || goto :error
 
 echo "================================= Building"
 ls -l

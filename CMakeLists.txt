@@ -104,10 +104,6 @@ elseif (NOT S2A_CORE_SSL_LIBRARIES)
   set(_S2A_CORE_SSL_INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl/src/include)
 endif()
 
-if (S2A_CORE_INSTALL)
-  install(TARGETS ${S2A_CORE_SSL_LIBRARIES} DESTINATION bin)
-endif()
-
 if(APPLE)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup -flat_namespace")
 elseif(UNIX)
@@ -337,7 +333,7 @@ target_link_libraries(fake_access_token_manager
   absl_statusor)
 
 # Monolithic target for users that want simpler dependency management.
-add_library(s2a_core
+add_library(s2a_core SHARED
   include/access_token_manager.h
   include/access_token_manager_factory.h
   include/s2a_channel_factory_interface.h
