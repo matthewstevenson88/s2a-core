@@ -32,7 +32,7 @@ case "${PLATFORM}" in
 
     openssl version
     openssl version -a
-    sudo apt-get update openssl
+    sudo apt-get update
     sudo apt-get upgrade openssl
 
     openssl version
