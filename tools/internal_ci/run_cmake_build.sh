@@ -31,8 +31,15 @@ case "${PLATFORM}" in
     # by default (which does have not the ChaChaPoly cipher).
 
     openssl version
-    sudo apt-get update
-    sudo apt-get install --only-upgrade libcurl4-openssl-dev
+    #sudo apt-get update
+    #sudo apt-get install --only-upgrade libcurl4-openssl-dev
+    sudo apt-get -y install build-essential checkinstall git zlib1g-dev
+    git clone --depth 1 --branch OpenSSL_1_1_1g https://github.com/openssl/openssl.git
+    cd openssl
+    ./config zlib '-Wl,-rpath,$(LIBRPATH)'
+    sudo make install
+    sudo ldconfig -v
+
     openssl version
 
     echo "================================= Running cmake"
