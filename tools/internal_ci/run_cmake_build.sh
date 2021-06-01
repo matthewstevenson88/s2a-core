@@ -31,8 +31,8 @@ case "${PLATFORM}" in
     # by default (which does have not the ChaChaPoly cipher).
 
     openssl version
-    apt-get update
-    apt-get install --only-upgrade libssl-dev
+    sudo apt-get update
+    sudo apt-get install --only-upgrade libssl-dev
     openssl version
 
     echo "================================= Running cmake"
