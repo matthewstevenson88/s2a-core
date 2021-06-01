@@ -33,12 +33,12 @@ case "${PLATFORM}" in
     openssl version
     #sudo apt-get update
     #sudo apt-get install --only-upgrade libcurl4-openssl-dev
-    sudo apt-get -y install build-essential checkinstall git zlib1g-dev
-    git clone --depth 1 --branch OpenSSL_1_1_1g https://github.com/openssl/openssl.git
-    cd openssl
-    ./config zlib '-Wl,-rpath,$(LIBRPATH)'
+    wget https://www.openssl.org/source/old/1.1.0/openssl-1.1.0g.tar.gz
+    tar xzvf openssl-1.1.0g.tar.gz
+    cd openssl-1.1.0g
+    ./config
+    make
     sudo make install
-    sudo ldconfig -v
 
     openssl version
 
