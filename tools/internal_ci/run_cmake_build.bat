@@ -17,6 +17,8 @@
 choco uninstall yasm -y --limit-output
 choco install nasm -y --limit-output
 
+vcpkg upgrade --no-dry-run
+
 cd github/s2a-core
 git submodule update --init --recursive
 mkdir s2a-cmake-build && cd s2a-cmake-build
