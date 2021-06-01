@@ -21,9 +21,11 @@ cd github/s2a-core
 git submodule update --init --recursive
 mkdir s2a-cmake-build && cd s2a-cmake-build
 
+openssl version
+
 echo "================================= Running cmake"
 cmake --version
-cmake .. -DOPENSSL_ROOT_DIR="D:/vcpkg/installed/x64-windows-static" -DS2A_CORE_FIND_OPENSSL="true" -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON || goto :error
+cmake .. -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON || goto :error
 
 echo "================================= Building"
 ls -l
