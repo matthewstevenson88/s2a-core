@@ -32,7 +32,7 @@ case "${PLATFORM}" in
 
     openssl version
     sudo apt-get update
-    sudo apt-get install --only-upgrade libssl-dev
+    sudo apt-get install --only-upgrade libcurl4-openssl-dev
     openssl version
 
     echo "================================= Running cmake"
