@@ -89,18 +89,18 @@ if (S2A_CORE_SSL_DIR)
   message(STATUS "S2A Core is using the SSL directory: ${S2A_CORE_SSL_DIR}")
   include_directories(${S2A_CORE_SSL_DIR})
   set(S2A_CORE_USE_BORINGSSL "s2a_core_using_boringssl")
-  set(S2A_CORE_SSL_LIBRARIES crypto ssl)
+  set(S2A_CORE_SSL_LIBRARIES crypto)
   set(_S2A_CORE_SSL_INCLUDE_DIR ${S2A_CORE_SSL_DIR}/src/include)
 elseif (S2A_CORE_FIND_OPENSSL STREQUAL "true")
   message(STATUS "Using OpenSSL")
   find_package(OpenSSL REQUIRED)
-  set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto OpenSSL::SSL)
+  set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
   set(_S2A_CORE_SSL_INCLUDE_DIR ${OPENSSL_INCLUDE_DIR})
 elseif (NOT S2A_CORE_SSL_LIBRARIES)
   message(STATUS "Using BoringSSL")
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl)
   set(S2A_CORE_USE_BORINGSSL "s2a_core_using_boringssl")
-  set(S2A_CORE_SSL_LIBRARIES crypto ssl)
+  set(S2A_CORE_SSL_LIBRARIES crypto)
   set(_S2A_CORE_SSL_INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/third_party/boringssl/src/include)
 endif()
 
@@ -333,7 +333,7 @@ target_link_libraries(fake_access_token_manager
   absl_statusor)
 
 # Monolithic target for users that want simpler dependency management.
-add_library(s2a_core SHARED
+add_library(s2a_core
   include/access_token_manager.h
   include/access_token_manager_factory.h
   include/s2a_channel_factory_interface.h
@@ -367,5 +367,6 @@ target_link_libraries(
   absl_str_format
   absl_synchronization
   absl_variant
+  ${S2A_CORE_SSL_LIBRARIES}
   upb
 )
