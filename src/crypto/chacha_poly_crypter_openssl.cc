@@ -16,12 +16,6 @@
  *
  */
 
-// We need to include any header that is common to OpenSSL and BoringSSL (and
-// which is also needed in this file). If BoringSSL is installed, then this
-// header will link-in the BoringSSL-specific openssl/base.h header. The base.h
-// header defines the OPENSSL_IS_BORINGSSL macro, which is needed below.
-#include <openssl/bio.h>
-
 #ifndef OPENSSL_IS_BORINGSSL
 
 #include <openssl/err.h>
@@ -419,7 +413,7 @@ CreateChachaPolyAeadCrypter(const std::vector<uint8_t>& key) {
     return absl::InvalidArgumentError("Key size is unsupported.");
   }
   const EVP_CIPHER* cipher = nullptr;
-#if !defined(OPENSSL_NO_CHACHA) && !defined(OPENSSL_NO_POLY1305)
+#if OPENSSL_VERSION_NUMBER >= 0x10100000 && !defined(OPENSSL_NO_CHACHA) && !defined(OPENSSL_NO_POLY1305)
   cipher = EVP_chacha20_poly1305();
 #else
   return absl::FailedPreconditionError(

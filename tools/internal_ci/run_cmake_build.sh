@@ -30,21 +30,6 @@ case "${PLATFORM}" in
     # then we need to upgrade the OpenSSL version, because they come with 1.0.2g
     # by default (which does have not the ChaChaPoly cipher).
 
-    openssl version
-    openssl version -a
-    #sudo apt-get update
-    #sudo apt-get upgrade openssl
-
-    wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz
-    tar -zxf openssl-1.1.1g.tar.gz && cd openssl-1.1.1g
-    ./config
-    make
-    sudo mv /usr/bin/openssl ~/tmp
-    sudo make install
-    sudo ln -s /usr/local/bin/openssl /usr/bin/openssl
-    sudo ldconfig
-
-    openssl version
     openssl version -a
 
     echo "================================= Running cmake"
