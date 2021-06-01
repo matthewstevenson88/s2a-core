@@ -31,16 +31,12 @@ case "${PLATFORM}" in
     # by default (which does have not the ChaChaPoly cipher).
 
     openssl version
-    #sudo apt-get update
-    #sudo apt-get install --only-upgrade libcurl4-openssl-dev
-    wget https://www.openssl.org/source/old/1.1.0/openssl-1.1.0g.tar.gz
-    tar xzvf openssl-1.1.0g.tar.gz
-    cd openssl-1.1.0g
-    ./config
-    make
-    sudo make install
+    openssl version -a
+    sudo apt-get update openssl
+    sudo apt-get upgrade openssl
 
     openssl version
+    openssl version -a
 
     echo "================================= Running cmake"
     cmake --version
