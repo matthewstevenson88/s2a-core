@@ -14,14 +14,12 @@
 
 
 :: Needed because BoringSSL does not support yasm.
-::choco uninstall yasm -y --limit-output
-::choco install nasm -y --limit-output
+choco uninstall yasm -y --limit-output
+choco install nasm -y --limit-output
 
 cd github/s2a-core
 git submodule update --init --recursive
 mkdir s2a-cmake-build && cd s2a-cmake-build
-
-openssl version
 
 echo "================================= Running cmake"
 cmake --version
