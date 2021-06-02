@@ -78,11 +78,15 @@ else()
   set(_S2A_CORE_ABSL_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
 endif()
 
-if (S2A_CORE_UPB_LIBRARY)
-  include_directories(S2A_CORE_UPB_LIBRARY)
+if (S2A_CORE_UPB_INCLUDE_DIR)
+  include_directories(S2A_CORE_UPB_INCLUDE_DIR)
 else()
   add_definitions(-DS2A_CORE_USE_NEW_UPB_APIS)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/upb)
+endif()
+
+if (NOT S2A_CORE_UPB_LIBRARY)
+  set(S2A_CORE_UPB_LIBRARY upb)
 endif()
 
 if (S2A_CORE_SSL_DIR)
@@ -116,19 +120,19 @@ add_library(common_upb
   src/proto/upb-generated/proto/common.upb.c
   src/proto/upb-generated/proto/common.upb.h)
 target_link_libraries(common_upb
-  upb)
+  ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_upb
   src/proto/upb-generated/proto/s2a.upb.c
   src/proto/upb-generated/proto/s2a.upb.h)
 target_link_libraries(s2a_upb
   common_upb
-  upb)
+  ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_context_upb
   src/proto/upb-generated/proto/s2a_context.upb.c
   src/proto/upb-generated/proto/s2a_context.upb.h)
 target_link_libraries(s2a_context_upb
   common_upb
-  upb)
+  ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_channel INTERFACE)
 target_link_libraries(s2a_channel INTERFACE
   absl_status
@@ -179,7 +183,7 @@ target_link_libraries(s2a_context
   absl_status
   absl_statusor
   absl_variant
-  upb)
+  ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_proxy
   src/handshaker/s2a_proxy.cc
   include/s2a_proxy.h)
@@ -200,7 +204,7 @@ target_link_libraries(s2a_proxy
   absl_str_format
   absl_synchronization
   absl_variant
-  upb)
+  ${S2A_CORE_UPB_LIBRARY})
 add_library(hkdf
   src/crypto/hkdf.cc
   src/crypto/hkdf.h)
@@ -245,7 +249,7 @@ target_link_libraries(s2a_util
   common_upb
   absl_status
   absl_variant
-  upb)
+  ${S2A_CORE_UPB_LIBRARY})
 add_library(handshake_message_handler
   src/record_protocol/handshake_message_handler.cc
   src/record_protocol/handshake_message_handler.h)
@@ -289,7 +293,7 @@ target_link_libraries(s2a_upb_ticket_sender
   common_upb
   s2a_upb
   absl_strings
-  upb)
+  ${S2A_CORE_UPB_LIBRARY})
 add_library(single_token_access_token_manager
   src/token_manager/single_token_access_token_manager.cc
   src/token_manager/single_token_access_token_manager.h)
@@ -318,7 +322,7 @@ target_link_libraries(s2a_proxy_test_util
   absl_memory
   absl_status
   absl_variant
-  upb)
+  ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_test_data INTERFACE)
 add_library(s2a_test_util INTERFACE)
 target_link_libraries(s2a_test_util INTERFACE
@@ -366,5 +370,5 @@ target_link_libraries(
   absl_synchronization
   absl_variant
   ${S2A_CORE_SSL_LIBRARIES}
-  upb
+  ${S2A_CORE_UPB_LIBRARY}
 )
