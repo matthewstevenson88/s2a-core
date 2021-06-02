@@ -26,10 +26,16 @@ git submodule update --init --recursive
 
 case "${PLATFORM}" in
   'linux')
+    # If we ever need to switch to use OpenSSL for the GCP Ubuntu Kokoro tests,
+    # then we need to upgrade the OpenSSL version, because they come with 1.0.2g
+    # by default (which does have not the ChaChaPoly cipher).
+
+    openssl version -a
+
     echo "================================= Running cmake"
     cmake --version
     # The -Wno-unused-result flag is needed because of BoringSSL.
-    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_FLAGS="-Wno-unused-result"
+    cmake . -DS2A_CORE_FIND_OPENSSL="true" -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_FLAGS="-Wno-unused-result"
   ;;
   'darwin')
     brew install openssl

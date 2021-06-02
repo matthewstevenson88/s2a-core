@@ -16,11 +16,7 @@
  *
  */
 
-// We need to include any header that is common to OpenSSL and BoringSSL (and
-// which is also needed in this file). If BoringSSL is installed, then this
-// header will link-in the BoringSSL-specific openssl/base.h header. The base.h
-// header defines the OPENSSL_IS_BORINGSSL macro, which is needed below.
-#include <openssl/bio.h>
+#include "src/crypto/s2a_aead_crypter.h"
 
 #ifdef OPENSSL_IS_BORINGSSL
 
@@ -31,7 +27,6 @@
 #include "absl/memory/memory.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/substitute.h"
-#include "src/crypto/s2a_aead_crypter.h"
 #include "src/crypto/s2a_aead_crypter_util.h"
 
 namespace s2a {

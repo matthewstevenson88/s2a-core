@@ -16,9 +16,10 @@
  *
  */
 
+#include "src/crypto/s2a_aead_crypter.h"
+
 #ifndef OPENSSL_IS_BORINGSSL
 
-#include <openssl/bio.h>
 #include <openssl/err.h>
 #include <openssl/evp.h>
 
@@ -28,7 +29,6 @@
 #include "absl/status/status.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/substitute.h"
-#include "src/crypto/s2a_aead_crypter.h"
 #include "src/crypto/s2a_aead_crypter_util.h"
 
 namespace s2a {
@@ -414,7 +414,7 @@ CreateChachaPolyAeadCrypter(const std::vector<uint8_t>& key) {
     return absl::InvalidArgumentError("Key size is unsupported.");
   }
   const EVP_CIPHER* cipher = nullptr;
-#if !defined(OPENSSL_NO_CHACHA) && !defined(OPENSSL_NO_POLY1305)
+#if OPENSSL_VERSION_NUMBER >= 0x10100000 && !defined(OPENSSL_NO_CHACHA) && !defined(OPENSSL_NO_POLY1305)
   cipher = EVP_chacha20_poly1305();
 #else
   return absl::FailedPreconditionError(

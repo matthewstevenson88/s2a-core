@@ -21,6 +21,12 @@
 
 #include <vector>
 
+// We need to include any header that is common to OpenSSL and BoringSSL (and
+// which is also needed in this file). If BoringSSL is installed, then this
+// header will link-in the BoringSSL-specific openssl/base.h header. The base.h
+// header defines the OPENSSL_IS_BORINGSSL macro, which is needed below.
+#include <openssl/bio.h>
+
 #include "absl/status/status.h"
 #include "absl/types/variant.h"
 #include "src/crypto/s2a_aead_constants.h"

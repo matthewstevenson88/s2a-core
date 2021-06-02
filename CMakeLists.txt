@@ -215,13 +215,8 @@ set(_S2A_CORE_AEAD_CRYPTER_SOURCES)
 list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES
   src/crypto/aes_gcm_crypter.cc
   src/crypto/s2a_aead_crypter.cc
-  src/crypto/s2a_aead_constants.h
-  src/crypto/s2a_aead_crypter.h)
-if(S2A_CORE_USE_BORINGSSL)
-  list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_boringssl.cc)
-else()
-  list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES src/crypto/chacha_poly_crypter_openssl.cc)
-endif()
+  src/crypto/chacha_poly_crypter_boringssl.cc
+  src/crypto/chacha_poly_crypter_openssl.cc)
 add_library(s2a_aead_crypter
   ${_S2A_CORE_AEAD_CRYPTER_SOURCES})
 target_include_directories(s2a_aead_crypter PRIVATE
@@ -370,5 +365,6 @@ target_link_libraries(
   absl_str_format
   absl_synchronization
   absl_variant
+  ${S2A_CORE_SSL_LIBRARIES}
   upb
 )
