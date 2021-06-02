@@ -210,8 +210,7 @@ cc_library(
     srcs = [
         "src/crypto/aes_gcm_crypter.cc",
         "src/crypto/chacha_poly_crypter_boringssl.cc",
-        # TODO(matthewstevenson88) Figure out OpenSSL build.
-        # "chacha_poly_crypter_openssl.cc",
+        "src/crypto/chacha_poly_crypter_openssl.cc",
         "src/crypto/s2a_aead_crypter.cc",
     ],
     hdrs = [

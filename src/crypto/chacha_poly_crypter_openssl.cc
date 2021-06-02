@@ -16,6 +16,8 @@
  *
  */
 
+#include "src/crypto/s2a_aead_crypter.h"
+
 #ifndef OPENSSL_IS_BORINGSSL
 
 #include <openssl/err.h>
@@ -27,7 +29,6 @@
 #include "absl/status/status.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/substitute.h"
-#include "src/crypto/s2a_aead_crypter.h"
 #include "src/crypto/s2a_aead_crypter_util.h"
 
 namespace s2a {
