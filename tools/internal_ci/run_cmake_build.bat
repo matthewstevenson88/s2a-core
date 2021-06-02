@@ -13,9 +13,6 @@
 :: limitations under the License.
 
 
-:: Needed because BoringSSL does not support yasm.
-::choco uninstall yasm -y --limit-output
-::choco install nasm -y --limit-output
 choco install -y openssl
 openssl version
 

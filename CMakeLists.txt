@@ -215,8 +215,6 @@ set(_S2A_CORE_AEAD_CRYPTER_SOURCES)
 list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES
   src/crypto/aes_gcm_crypter.cc
   src/crypto/s2a_aead_crypter.cc
-  # src/crypto/s2a_aead_constants.h
-  # src/crypto/s2a_aead_crypter.h
   src/crypto/chacha_poly_crypter_boringssl.cc
   src/crypto/chacha_poly_crypter_openssl.cc)
 add_library(s2a_aead_crypter
