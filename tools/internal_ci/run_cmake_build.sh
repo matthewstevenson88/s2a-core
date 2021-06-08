@@ -35,14 +35,14 @@ case "${PLATFORM}" in
     echo "================================= Running cmake"
     cmake --version
     # The -Wno-unused-result flag is needed because of BoringSSL.
-    cmake . -DS2A_CORE_FIND_OPENSSL="true" -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_FLAGS="-Wno-unused-result"
+    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_FLAGS="-Wno-unused-result"
   ;;
   'darwin')
     brew install openssl
     brew link openssl --force
     echo "================================= Running cmake"
     cmake --version
-    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DS2A_CORE_FIND_OPENSSL="true" -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
+    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
   ;;
   *)
     echo "Unsupported platform, unable to run cmake."
