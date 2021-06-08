@@ -79,7 +79,7 @@ else()
 endif()
 
 if (S2A_CORE_UPB_INCLUDE_DIR)
-  include_directories(S2A_CORE_UPB_INCLUDE_DIR)
+  include_directories(${S2A_CORE_UPB_INCLUDE_DIR})
 else()
   add_definitions(-DS2A_CORE_USE_NEW_UPB_APIS)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/upb)
