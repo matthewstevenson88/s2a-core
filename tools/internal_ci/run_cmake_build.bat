@@ -22,7 +22,7 @@ mkdir s2a-cmake-build && cd s2a-cmake-build
 
 echo "================================= Running cmake"
 cmake --version
-cmake .. -DS2A_CORE_FIND_OPENSSL="true" -DOPENSSL_ROOT_DIR="C:\ProgramData\chocolatey\lib\openssl" -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON || goto :error
+cmake .. -DOPENSSL_ROOT_DIR="C:\ProgramData\chocolatey\lib\openssl" -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON || goto :error
 
 echo "================================= Building"
 ls -l
