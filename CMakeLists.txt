@@ -366,3 +366,26 @@ target_link_libraries(
   ${S2A_CORE_SSL_LIBRARIES}
   ${S2A_CORE_UPB_LIBRARY}
 )
+
+set(S2A_CORE_HEADERS
+    include/access_token_manager.h
+    include/access_token_manager_factory.h
+    include/s2a_channel_factory_interface.h
+    include/s2a_channel_interface.h
+    include/s2a_constants.h
+    include/s2a_context.h
+    include/s2a_frame_protector.h
+    include/s2a_options.h
+    include/s2a_proxy.h
+)
+
+install(FILES ${S2A_CORE_HEADERS}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/s2a_core)
+install(TARGETS s2a_core EXPORT s2a_coreConfig
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(EXPORT s2a_coreConfig
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/s2a_core NAMESPACE s2a_core::)
+
