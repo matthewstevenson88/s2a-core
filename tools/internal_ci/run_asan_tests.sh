@@ -62,7 +62,7 @@ install_protoc() {
 
 main() {
   if [[ -n "${KOKORO_ROOT}" ]]; then
-    use_bazel.sh "4.0.0"
+    use_bazel.sh "4.1.0"
     install_protoc
   fi
 
