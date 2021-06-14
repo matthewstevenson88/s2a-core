@@ -367,6 +367,7 @@ target_link_libraries(
   ${S2A_CORE_UPB_LIBRARY}
 )
 
+add_library(s2a_core::s2a_core ALIAS s2a_core)
 set(S2A_CORE_HEADERS
     include/access_token_manager.h
     include/access_token_manager_factory.h
@@ -378,7 +379,6 @@ set(S2A_CORE_HEADERS
     include/s2a_options.h
     include/s2a_proxy.h
 )
-
 install(FILES ${S2A_CORE_HEADERS}
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/s2a_core)
 install(TARGETS s2a_core EXPORT s2a_coreConfig
