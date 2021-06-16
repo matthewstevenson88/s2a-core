@@ -89,17 +89,14 @@ if (NOT S2A_CORE_UPB_LIBRARY)
   set(S2A_CORE_UPB_LIBRARY upb)
 endif()
 
-if (S2A_CORE_SSL_DIR)
-  message(STATUS "S2A Core is using the SSL directory: ${S2A_CORE_SSL_DIR}")
-  include_directories(${S2A_CORE_SSL_DIR})
-  set(S2A_CORE_USE_BORINGSSL "s2a_core_using_boringssl")
-  set(S2A_CORE_SSL_LIBRARIES crypto)
-  set(_S2A_CORE_SSL_INCLUDE_DIR ${S2A_CORE_SSL_DIR}/src/include)
+if (SSL_CORE_SSL_LIBRARIES AND SSL_CORE_SSL_INCLUDE_DIR)
+  message(STATUS "S2A Core is using the SSL directory: ${S2A_CORE_SSL_INCLUDE_DIR}")
+  include_directories(${S2A_CORE_SSL_INCLUDE_DIR})
 else()
   message(STATUS "S2A Core is using system OpenSSL.")
   find_package(OpenSSL REQUIRED)
   set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
-  set(_S2A_CORE_SSL_INCLUDE_DIR ${OPENSSL_INCLUDE_DIR})
+  set(S2A_CORE_SSL_INCLUDE_DIR ${OPENSSL_INCLUDE_DIR})
 endif()
 
 if(APPLE)
@@ -204,7 +201,7 @@ add_library(hkdf
   src/crypto/hkdf.h)
 target_include_directories(hkdf PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
-  ${_S2A_CORE_SSL_INCLUDE_DIR})
+  ${S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(hkdf
   ${S2A_CORE_SSL_LIBRARIES}
   absl_status)
@@ -219,7 +216,7 @@ add_library(s2a_aead_crypter
   ${_S2A_CORE_AEAD_CRYPTER_SOURCES})
 target_include_directories(s2a_aead_crypter PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
-  ${_S2A_CORE_SSL_INCLUDE_DIR})
+  ${S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter
   s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES}
@@ -232,7 +229,7 @@ add_library(s2a_aead_crypter_util
   src/crypto/s2a_aead_crypter_util.h)
 target_include_directories(s2a_aead_crypter_util PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
-  ${_S2A_CORE_SSL_INCLUDE_DIR})
+  ${S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES})
 add_library(s2a_util
@@ -345,7 +342,7 @@ add_library(s2a_core
   include/s2a_proxy.h)
 target_include_directories(s2a_core PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
-  ${_S2A_CORE_SSL_INCLUDE_DIR})
+  ${S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(
   s2a_crypter
   s2a_ticket_sender
