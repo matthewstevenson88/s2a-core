@@ -89,7 +89,7 @@ if (NOT S2A_CORE_UPB_LIBRARY)
   set(S2A_CORE_UPB_LIBRARY upb)
 endif()
 
-if (SSL_CORE_SSL_INCLUDE_DIR)
+if (S2A_CORE_SSL_INCLUDE_DIR)
   message(STATUS "S2A Core is using the SSL directory: ${S2A_CORE_SSL_INCLUDE_DIR}")
   include_directories(${S2A_CORE_SSL_INCLUDE_DIR})
 else()
