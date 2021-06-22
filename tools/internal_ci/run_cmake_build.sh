@@ -42,7 +42,7 @@ case "${PLATFORM}" in
 
     echo "================================= Running cmake"
     cmake --version
-    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DS2A_CORE_SSL_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl  -DS2A_CORE_SSL_LIBRARIES=crypto -DCMAKE_CXX_STANDARD=11
+    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DS2A_CORE_SSL_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/third_party/boringssl/include  -DS2A_CORE_SSL_LIBRARIES=crypto -DCMAKE_CXX_STANDARD=11
   ;;
   *)
     echo "Unsupported platform, unable to run cmake."
