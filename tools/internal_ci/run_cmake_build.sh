@@ -37,15 +37,15 @@ case "${PLATFORM}" in
     cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11
   ;;
   'darwin')
-    brew install --force openssl
-    brew link --force openssl
+    #brew install --force openssl
+    #brew link --force openssl
 
     # The system-installed SSL library on MacOS should be LibreSSL.
     openssl version -a
 
     echo "================================= Running cmake"
     cmake --version
-    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DCMAKE_CXX_STANDARD=11
+    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DS2A_CORE_SSL_INCLUDE_DIR=/private/etc/ssl/include -DS2A_CORE_SSL_LIBRARIES=LibreSSL::Crypto -DCMAKE_CXX_STANDARD=11
   ;;
   *)
     echo "Unsupported platform, unable to run cmake."
