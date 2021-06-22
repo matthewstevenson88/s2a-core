@@ -37,8 +37,8 @@ case "${PLATFORM}" in
     cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11
   ;;
   'darwin')
-    brew install openssl --force
-    brew link openssl --force
+    brew install --force openssl
+    brew link --force openssl
 
     # The system-installed SSL library on MacOS should be LibreSSL.
     openssl version -a
