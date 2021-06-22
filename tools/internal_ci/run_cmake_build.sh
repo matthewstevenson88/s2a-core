@@ -39,7 +39,7 @@ case "${PLATFORM}" in
   ;;
   'darwin')
     brew install openssl
-    brew link openssl --force
+    brew link --overwrite openssl --force
     echo "================================= Running cmake"
     cmake --version
     cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
