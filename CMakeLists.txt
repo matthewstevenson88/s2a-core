@@ -156,6 +156,7 @@ add_library(s2a_frame_protector
   src/frame_protector/s2a_frame_protector.cc
   include/s2a_frame_protector.h)
 target_link_libraries(s2a_frame_protector
+  ${S2A_CORE_SSL_LIBRARIES}
   s2a_channel
   s2a_constants
   s2a_crypter
