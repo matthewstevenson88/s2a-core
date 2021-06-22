@@ -42,7 +42,7 @@ case "${PLATFORM}" in
 
     echo "================================= Running cmake"
     cmake --version
-    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DS2A_CORE_USE_LIBRESSL=1 -DCMAKE_CXX_STANDARD=11
+    cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DS2A_CORE_USE_LIBRESSL=1 -DLIBRESSL_ROOT_DIR=/private/etc/ssl -DCMAKE_CXX_STANDARD=11
   ;;
   *)
     echo "Unsupported platform, unable to run cmake."
