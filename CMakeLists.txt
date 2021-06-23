@@ -325,45 +325,6 @@ target_link_libraries(fake_access_token_manager
   access_token_manager
   absl_statusor)
 
-# Monolithic target for users that want simpler dependency management.
-#add_library(s2a_core
-#  include/access_token_manager.h
-#  include/access_token_manager_factory.h
-#  include/s2a_channel_factory_interface.h
-#  include/s2a_channel_interface.h
-#  include/s2a_constants.h
-#  src/handshaker/s2a_context.cc
-#  include/s2a_context.h
-#  src/frame_protector/s2a_frame_protector.cc
-#  include/s2a_frame_protector.h
-#  src/options/s2a_options.cc
-#  include/s2a_options.h
-#  src/handshaker/s2a_proxy.cc
-#  include/s2a_proxy.h)
-#target_include_directories(s2a_core PRIVATE
-#  ${_S2A_CORE_ABSL_INCLUDE_DIR}
-#  ${S2A_CORE_SSL_INCLUDE_DIR})
-#target_link_libraries(
-#  s2a_crypter
-#  s2a_ticket_sender
-#  s2a_util
-#  common_upb
-#  s2a_upb
-#  s2a_context_upb
-#  absl_flat_hash_set
-#  absl_flat_hash_map
-#  absl_hash
-#  absl_memory
-#  absl_status
-#  absl_statusor
-#  absl_strings
-#  absl_str_format
-#  absl_synchronization
-#  absl_variant
-#  ${S2A_CORE_SSL_LIBRARIES}
-#  ${S2A_CORE_UPB_LIBRARY}
-#)
-
 set(S2A_CORE_SOURCES
     src/crypto/aes_gcm_crypter.cc
     src/crypto/chacha_poly_crypter_boringssl.cc
