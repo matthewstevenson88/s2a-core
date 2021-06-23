@@ -326,30 +326,72 @@ target_link_libraries(fake_access_token_manager
   absl_statusor)
 
 # Monolithic target for users that want simpler dependency management.
-add_library(s2a_core
-  include/access_token_manager.h
-  include/access_token_manager_factory.h
-  include/s2a_channel_factory_interface.h
-  include/s2a_channel_interface.h
-  include/s2a_constants.h
-  src/handshaker/s2a_context.cc
-  include/s2a_context.h
-  src/frame_protector/s2a_frame_protector.cc
-  include/s2a_frame_protector.h
-  src/options/s2a_options.cc
-  include/s2a_options.h
-  src/handshaker/s2a_proxy.cc
-  include/s2a_proxy.h)
+#add_library(s2a_core
+#  include/access_token_manager.h
+#  include/access_token_manager_factory.h
+#  include/s2a_channel_factory_interface.h
+#  include/s2a_channel_interface.h
+#  include/s2a_constants.h
+#  src/handshaker/s2a_context.cc
+#  include/s2a_context.h
+#  src/frame_protector/s2a_frame_protector.cc
+#  include/s2a_frame_protector.h
+#  src/options/s2a_options.cc
+#  include/s2a_options.h
+#  src/handshaker/s2a_proxy.cc
+#  include/s2a_proxy.h)
+#target_include_directories(s2a_core PRIVATE
+#  ${_S2A_CORE_ABSL_INCLUDE_DIR}
+#  ${S2A_CORE_SSL_INCLUDE_DIR})
+#target_link_libraries(
+#  s2a_crypter
+#  s2a_ticket_sender
+#  s2a_util
+#  common_upb
+#  s2a_upb
+#  s2a_context_upb
+#  absl_flat_hash_set
+#  absl_flat_hash_map
+#  absl_hash
+#  absl_memory
+#  absl_status
+#  absl_statusor
+#  absl_strings
+#  absl_str_format
+#  absl_synchronization
+#  absl_variant
+#  ${S2A_CORE_SSL_LIBRARIES}
+#  ${S2A_CORE_UPB_LIBRARY}
+#)
+
+set(S2A_CORE_SOURCES
+    src/crypto/aes_gcm_crypter.cc
+    src/crypto/chacha_poly_crypter_boringssl.cc
+    src/crypto/chacha_poly_crypter_openssl.cc
+    src/crypto/hkdf.cc
+    src/crypto/s2a_aead_crypter.cc
+    src/crypto/s2a_aead_crypter_util.cc
+    src/frame_protector/s2a_frame_protector.cc
+    src/handshaker/s2a_context.cc
+    src/handshaker/s2a_proxy.cc
+    src/handshaker/s2a_util.cc
+    src/options/s2a_options.cc
+    src/proto/upb-generated/proto/common.upb.c
+    src/proto/upb-generated/proto/s2a.upb.c
+    src/proto/upb-generated/proto/s2a_context.upb.c
+    src/record_protocol/handshake_message_handler.cc
+    src/record_protocol/s2a_crypter.cc
+    src/record_protocol/s2a_crypter_util.cc
+    src/record_protocol/s2a_half_connection.cc
+    src/record_protocol/s2a_upb_ticket_sender.cc
+    src/token_manager/single_token_access_token_manager.cc
+)
+
+add_library(s2a_core ${S2A_CORE_SOURCES})
 target_include_directories(s2a_core PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(
-  s2a_crypter
-  s2a_ticket_sender
-  s2a_util
-  common_upb
-  s2a_upb
-  s2a_context_upb
   absl_flat_hash_set
   absl_flat_hash_map
   absl_hash
@@ -364,3 +406,39 @@ target_link_libraries(
   ${S2A_CORE_UPB_LIBRARY}
 )
 
+add_library(s2a_core::s2a_core ALIAS s2a_core)
+
+set(S2A_CORE_HEADERS
+    include/access_token_manager.h
+    include/access_token_manager_factory.h
+    include/s2a_channel_factory_interface.h
+    include/s2a_constants.h
+    include/s2a_context.h
+    include/s2a_frame_protector.h
+    include/s2a_options.h
+    include/s2a_proxy.h
+    src/crypto/hkdf.h
+    src/crypto/s2a_aead_constants.h
+    src/crypto/s2a_aead_crypter.h
+    src/crypto/s2a_aead_crypter_util.h
+    src/handshaker/s2a_util.h
+    src/proto/upb-generated/proto/common.upb.h
+    src/proto/upb-generated/proto/s2a.upb.h
+    src/proto/upb-generated/proto/s2a_context.upb.h
+    src/record_protocol/handshake_message_handler.h
+    src/record_protocol/s2a_crypter.h
+    src/record_protocol/s2a_crypter_util.h
+    src/record_protocol/s2a_half_connection.h
+    src/record_protocol/s2a_ticket_sender.h
+    src/token_manager/single_token_access_token_manager.h
+)
+
+install(FILES ${S2A_CORE_HEADERS}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/s2a_core)
+install(TARGETS s2a_core EXPORT s2a_coreConfig
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(EXPORT s2a_coreConfig
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/s2a_core NAMESPACE s2a_core::)
