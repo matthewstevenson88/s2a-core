@@ -349,7 +349,7 @@ set(S2A_CORE_SOURCES
 )
 
 add_library(s2a_core ${S2A_CORE_SOURCES})
-target_include_directories(s2a_core PRIVATE
+target_include_directories(s2a_core INTERFACE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(
