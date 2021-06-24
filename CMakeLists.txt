@@ -71,7 +71,7 @@ include_directories(.)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 if (S2A_CORE_ABSL_DIR)
-  add_subdirectory(${S2A_CORE_ABSL_DIR})
+  include_directories(${S2A_CORE_ABSL_DIR})
   set(_S2A_CORE_ABSL_INCLUDE_DIR ${S2A_CORE_ABSL_DIR})
 else()
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
