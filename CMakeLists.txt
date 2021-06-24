@@ -352,10 +352,6 @@ add_library(s2a_core ${S2A_CORE_SOURCES})
 target_include_directories(s2a_core PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${S2A_CORE_SSL_INCLUDE_DIR})
-target_link_libraries(s2a_core INTERFACE
-  ${S2A_CORE_SSL_LIBRARIES}
-  ${S2A_CORE_UPB_LIBRARY}
-)
 
 add_library(s2a_core::s2a_core ALIAS s2a_core)
 
