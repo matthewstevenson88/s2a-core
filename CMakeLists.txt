@@ -348,80 +348,11 @@ set(S2A_CORE_SOURCES
     src/token_manager/single_token_access_token_manager.cc
 )
 
-#set(_S2A_CORE_ABSL_TARGETS
-#  absl_algorithm
-#  absl_algorithm_container
-#  absl_atomic_hook
-#  absl_bad_optional_access
-#  absl_bad_variant_access
-#  absl_base
-#  absl_base_internal
-#  absl_bits
-#  absl_city
-#  absl_civil_time
-#  absl_compressed_tuple
-#  absl_config
-#  absl_container_common
-#  absl_container_memory
-#  absl_cord
-#  absl_core_headers
-#  absl_debugging_internal
-#  absl_demangle_internal
-#  absl_dynamic_annotations
-#  absl_endian
-#  absl_errno_saver
-#  absl_exponential_biased
-#  absl_fixed_array
-#  absl_flat_hash_set
-#  absl_flat_hash_map
-#  absl_function_ref
-#  absl_graphcycles_internal
-#  absl_hash
-#  absl_hash_policy_traits
-#  absl_hash_function_defaults
-#  absl_hashtable_debug_hooks
-#  absl_hashtablez_sampler
-#  absl_have_sse
-#  absl_inlined_vector
-#  absl_inlined_vector_internal
-#  absl_int128
-#  absl_kernel_timeout_internal
-#  absl_layout
-#  absl_log_severity
-#  absl_malloc_internal
-#  absl_memory
-#  absl_meta
-#  absl_numeric_representation
-#  absl_optional
-#  absl_raw_hash_map
-#  absl_raw_hash_set
-#  absl_raw_logging_internal
-#  absl_span
-#  absl_spinlock_wait
-#  absl_stacktrace
-#  absl_status
-#  absl_statusor
-#  absl_strings
-#  absl_strings_internal
-#  absl_str_format
-#  absl_str_format_internal
-#  absl_symbolize
-#  absl_synchronization
-#  absl_throw_delegate
-#  absl_time
-#  absl_time_zone
-#  absl_type_traits
-#  absl_utility
-#  absl_variant
-#  absl_wyhash
-#)
-
 add_library(s2a_core ${S2A_CORE_SOURCES})
 target_include_directories(s2a_core PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_core INTERFACE
-	#${S2A_CORE_ABSL_TARGETS}
   ${S2A_CORE_SSL_LIBRARIES}
   ${S2A_CORE_UPB_LIBRARY}
 )
@@ -455,10 +386,6 @@ set(S2A_CORE_HEADERS
 
 install(FILES ${S2A_CORE_HEADERS}
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/s2a_core)
-#install(TARGETS ${_S2A_CORE_ABSL_TARGETS} EXPORT s2a_coreConfig
-#        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(TARGETS s2a_core EXPORT s2a_coreConfig
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
