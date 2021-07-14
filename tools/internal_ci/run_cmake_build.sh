@@ -42,7 +42,9 @@ case "${PLATFORM}" in
     rm '/usr/local/bin/2to3'
     brew unlink ilmbase
     rm '/usr/local/bin/protoc'
+    rm '/usr/local/bin/idle3'
     #sudo chmod -R g+w /usr/local
+    sudo chown -R `whoami` /usr/local/*
     brew install openssl
     brew link openssl --force
     echo "================================= Running cmake"
