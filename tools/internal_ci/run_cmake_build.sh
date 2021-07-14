@@ -49,6 +49,7 @@ case "${PLATFORM}" in
     rm '/usr/local/include/google/protobuf/any.proto'
     rm '/usr/local/include/google/protobuf/api.proto'
     rm '/usr/local/include/google/protobuf/compiler/plugin.proto'
+    rm '/usr/local/include/google/protobuf/descriptor.proto'
 
     brew update
     brew unlink ilmbase
