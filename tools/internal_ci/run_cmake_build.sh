@@ -46,11 +46,13 @@ case "${PLATFORM}" in
     rm '/usr/local/bin/pydoc3'
     rm '/usr/local/bin/python3'
     rm '/usr/local/bin/python3-config'
-    rm '/usr/local/include/google/protobuf/any.proto'
-    rm '/usr/local/include/google/protobuf/api.proto'
-    rm '/usr/local/include/google/protobuf/compiler/plugin.proto'
-    rm '/usr/local/include/google/protobuf/descriptor.proto'
-    rm '/usr/local/include/google/protobuf/duration.proto'
+    rmdir '/usr/local/include/google/protobuf'
+    #rm '/usr/local/include/google/protobuf/any.proto'
+    #rm '/usr/local/include/google/protobuf/api.proto'
+    #rm '/usr/local/include/google/protobuf/compiler/plugin.proto'
+    #rm '/usr/local/include/google/protobuf/descriptor.proto'
+    #rm '/usr/local/include/google/protobuf/duration.proto'
+    #rm '/usr/local/include/google/protobuf/empty.proto'
 
     brew update
     brew unlink ilmbase
