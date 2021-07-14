@@ -38,8 +38,10 @@ case "${PLATFORM}" in
     cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_FLAGS="-Wno-unused-result"
   ;;
   'darwin')
+    # Make /usr/local writeable for Homebrew.
     sudo chown -R `whoami` /usr/local/*
 
+    # Remove files and directories that Homebrew will try to overwrite.
     rm '/usr/local/bin/2to3'
     rm '/usr/local/bin/idle3'
     rm '/usr/local/bin/protoc'
@@ -47,17 +49,17 @@ case "${PLATFORM}" in
     rm '/usr/local/bin/python3'
     rm '/usr/local/bin/python3-config'
     rm -Rf '/usr/local/include/google/protobuf'
-    #rm '/usr/local/include/google/protobuf/any.proto'
-    #rm '/usr/local/include/google/protobuf/api.proto'
-    #rm '/usr/local/include/google/protobuf/compiler/plugin.proto'
-    #rm '/usr/local/include/google/protobuf/descriptor.proto'
-    #rm '/usr/local/include/google/protobuf/duration.proto'
-    #rm '/usr/local/include/google/protobuf/empty.proto'
 
+    # Update Homebrew and unlink ilmbase, which will be re-linked when openssl
+    # is installed.
     brew update
     brew unlink ilmbase
+
+    # Install OpenSSL. (LibreSSL is the default SSL library for newer MacOS
+    # versions.)
     brew install openssl
     brew link openssl --force
+
     echo "================================= Running cmake"
     cmake --version
     cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib -DCMAKE_CXX_STANDARD=11
