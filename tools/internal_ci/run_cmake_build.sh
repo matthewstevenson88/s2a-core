@@ -38,13 +38,15 @@ case "${PLATFORM}" in
     cmake . -DDEFINE_S2A_CORE_USE_NEW_UPB_APIS=1 -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_FLAGS="-Wno-unused-result"
   ;;
   'darwin')
-    brew update
+    sudo chown -R `whoami` /usr/local/*
     rm '/usr/local/bin/2to3'
-    brew unlink ilmbase
     rm '/usr/local/bin/protoc'
     rm '/usr/local/bin/idle3'
-    #sudo chmod -R g+w /usr/local
-    sudo chown -R `whoami` /usr/local/*
+    rm '/usr/local/bin/pydoc3'
+    rm '/usr/local/include/google/protobuf/any.proto'
+
+    brew update
+    brew unlink ilmbase
     brew install openssl
     brew link openssl --force
     echo "================================= Running cmake"
