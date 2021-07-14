@@ -39,11 +39,15 @@ case "${PLATFORM}" in
   ;;
   'darwin')
     sudo chown -R `whoami` /usr/local/*
+
     rm '/usr/local/bin/2to3'
-    rm '/usr/local/bin/protoc'
     rm '/usr/local/bin/idle3'
+    rm '/usr/local/bin/protoc'
     rm '/usr/local/bin/pydoc3'
+    rm '/usr/local/bin/python3'
     rm '/usr/local/include/google/protobuf/any.proto'
+    rm '/usr/local/include/google/protobuf/api.proto'
+    rm '/usr/local/bin/python3'
 
     brew update
     brew unlink ilmbase
