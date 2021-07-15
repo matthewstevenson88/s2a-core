@@ -1,4 +1,5 @@
 # CMake-related files
+bazel-*
 CMakeCache.txt
 CMakeFiles/
 CTestTestfile.cmake
