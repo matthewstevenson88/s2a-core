@@ -1,9 +1,4 @@
-workspace(name = "s2a_core")
-
-local_repository(
-    name = "s2a_core",
-    path = "..",
-)
+workspace(name = "com_google_s2a_core")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
