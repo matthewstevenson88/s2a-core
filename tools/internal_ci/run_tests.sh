@@ -32,7 +32,7 @@ run_tests_on_macos() {
 
   # The OpenSSL library used in OpenSSL-specific tests is only configured to run
   # on Linux, so omit targets with the "openssl" tag.
-  local -a TEST_FLAGS=( --strategy=TestRunner=standalone --test_output=all --test_tag_filters=-openssl --build_tag_filters=-openssl)
+  local -a TEST_FLAGS=( --cpu=darwin --strategy=TestRunner=standalone --test_output=all)
   readonly TEST_FLAGS
   (
     echo "Building..."
