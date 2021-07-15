@@ -18,6 +18,8 @@
 
 #include "src/token_manager/single_token_access_token_manager.h"
 
+#include <stdlib.h>
+
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "include/access_token_manager_factory.h"
@@ -28,9 +30,9 @@ namespace token_manager {
 namespace {
 
 TEST(SingleTokenAccessTokenManagerTest, GetDefaultToken) {
-  // The |S2A_ACCESS_TOKEN| environment variable should be set to
-  // "s2a_access_token_from_env_variable" in `env` attribute of this `cc_test`
-  // rule.
+  char kS2AAccessTokenEnvironmentVariable[] =
+      "S2A_ACCESS_TOKEN=s2a_access_token_from_env_variable";
+  EXPECT_EQ(putenv(kS2AAccessTokenEnvironmentVariable), 0);
   SingleTokenAccessTokenManager manager;
   absl::StatusOr<std::string> token = manager.GetDefaultToken();
   EXPECT_TRUE(token.ok());
@@ -38,9 +40,9 @@ TEST(SingleTokenAccessTokenManagerTest, GetDefaultToken) {
 }
 
 TEST(SingleTokenAccessTokenManagerTest, GetToken) {
-  // The |S2A_ACCESS_TOKEN| environment variable should be set to
-  // "s2a_access_token_from_env_variable" in `env` attribute of this `cc_test`
-  // rule.
+  char kS2AAccessTokenEnvironmentVariable[] =
+      "S2A_ACCESS_TOKEN=s2a_access_token_from_env_variable";
+  EXPECT_EQ(putenv(kS2AAccessTokenEnvironmentVariable), 0);
   s2a_options::S2AOptions::Identity identity =
       s2a_options::S2AOptions::Identity::GetEmptyIdentity();
   SingleTokenAccessTokenManager manager;

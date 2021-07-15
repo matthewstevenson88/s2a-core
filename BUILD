@@ -795,9 +795,6 @@ cc_test(
 cc_test(
     name = "single_token_access_token_manager_test",
     srcs = ["src/token_manager/single_token_access_token_manager_test.cc"],
-    env = {
-        "S2A_ACCESS_TOKEN": "s2a_access_token_from_env_variable",
-    },
     deps = [
         ":single_token_access_token_manager",
         ":access_token_manager",
