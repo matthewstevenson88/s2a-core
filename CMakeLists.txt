@@ -108,19 +108,19 @@ endif()
 enable_testing()
 
 add_library(common_upb
-  src/proto/upb-generated/proto/common.upb.c
-  src/proto/upb-generated/proto/common.upb.h)
+  s2a/src/proto/upb-generated/proto/common.upb.c
+  s2a/src/proto/upb-generated/proto/common.upb.h)
 target_link_libraries(common_upb
   ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_upb
-  src/proto/upb-generated/proto/s2a.upb.c
-  src/proto/upb-generated/proto/s2a.upb.h)
+  s2a/src/proto/upb-generated/proto/s2a.upb.c
+  s2a/src/proto/upb-generated/proto/s2a.upb.h)
 target_link_libraries(s2a_upb
   common_upb
   ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_context_upb
-  src/proto/upb-generated/proto/s2a_context.upb.c
-  src/proto/upb-generated/proto/s2a_context.upb.h)
+  s2a/src/proto/upb-generated/proto/s2a_context.upb.c
+  s2a/src/proto/upb-generated/proto/s2a_context.upb.h)
 target_link_libraries(s2a_context_upb
   common_upb
   ${S2A_CORE_UPB_LIBRARY})
@@ -134,8 +134,8 @@ target_link_libraries(s2a_constants INTERFACE
   s2a_context_upb
   s2a_upb)
 add_library(s2a_options
-  src/options/s2a_options.cc
-  include/s2a_options.h)
+  s2a/src/options/s2a_options.cc
+  s2a/include/s2a_options.h)
 target_link_libraries(s2a_options
   absl_flat_hash_set
   absl_hash
@@ -148,8 +148,8 @@ target_link_libraries(access_token_manager INTERFACE
   absl_statusor
   absl_strings)
 add_library(s2a_frame_protector
-  src/frame_protector/s2a_frame_protector.cc
-  include/s2a_frame_protector.h)
+  s2a/src/frame_protector/s2a_frame_protector.cc
+  s2a/include/s2a_frame_protector.h)
 target_link_libraries(s2a_frame_protector
   s2a_channel
   s2a_constants
@@ -163,8 +163,8 @@ target_link_libraries(s2a_frame_protector
   absl_synchronization
   absl_variant)
 add_library(s2a_context
-  src/handshaker/s2a_context.cc
-  include/s2a_context.h)
+  s2a/src/handshaker/s2a_context.cc
+  s2a/include/s2a_context.h)
 target_link_libraries(s2a_context
   s2a_options
   s2a_util
@@ -176,8 +176,8 @@ target_link_libraries(s2a_context
   absl_variant
   ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_proxy
-  src/handshaker/s2a_proxy.cc
-  include/s2a_proxy.h)
+  s2a/src/handshaker/s2a_proxy.cc
+  s2a/include/s2a_proxy.h)
 target_link_libraries(s2a_proxy
   access_token_manager
   s2a_channel
@@ -197,8 +197,8 @@ target_link_libraries(s2a_proxy
   absl_variant
   ${S2A_CORE_UPB_LIBRARY})
 add_library(hkdf
-  src/crypto/hkdf.cc
-  src/crypto/hkdf.h)
+  s2a/src/crypto/hkdf.cc
+  s2a/src/crypto/hkdf.h)
 target_include_directories(hkdf PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${S2A_CORE_SSL_INCLUDE_DIR})
@@ -208,10 +208,10 @@ target_link_libraries(hkdf
 
 set(_S2A_CORE_AEAD_CRYPTER_SOURCES)
 list(APPEND _S2A_CORE_AEAD_CRYPTER_SOURCES
-  src/crypto/aes_gcm_crypter.cc
-  src/crypto/s2a_aead_crypter.cc
-  src/crypto/chacha_poly_crypter_boringssl.cc
-  src/crypto/chacha_poly_crypter_openssl.cc)
+  s2a/src/crypto/aes_gcm_crypter.cc
+  s2a/src/crypto/s2a_aead_crypter.cc
+  s2a/src/crypto/chacha_poly_crypter_boringssl.cc
+  s2a/src/crypto/chacha_poly_crypter_openssl.cc)
 add_library(s2a_aead_crypter
   ${_S2A_CORE_AEAD_CRYPTER_SOURCES})
 target_include_directories(s2a_aead_crypter PRIVATE
@@ -225,16 +225,16 @@ target_link_libraries(s2a_aead_crypter
   absl_strings
   absl_variant)
 add_library(s2a_aead_crypter_util
-  src/crypto/s2a_aead_crypter_util.cc
-  src/crypto/s2a_aead_crypter_util.h)
+  s2a/src/crypto/s2a_aead_crypter_util.cc
+  s2a/src/crypto/s2a_aead_crypter_util.h)
 target_include_directories(s2a_aead_crypter_util PRIVATE
   ${_S2A_CORE_ABSL_INCLUDE_DIR}
   ${S2A_CORE_SSL_INCLUDE_DIR})
 target_link_libraries(s2a_aead_crypter_util
   ${S2A_CORE_SSL_LIBRARIES})
 add_library(s2a_util
-  src/handshaker/s2a_util.cc
-  src/handshaker/s2a_util.h)
+  s2a/src/handshaker/s2a_util.cc
+  s2a/src/handshaker/s2a_util.h)
 target_link_libraries(s2a_util
   s2a_options
   common_upb
@@ -242,20 +242,20 @@ target_link_libraries(s2a_util
   absl_variant
   ${S2A_CORE_UPB_LIBRARY})
 add_library(handshake_message_handler
-  src/record_protocol/handshake_message_handler.cc
-  src/record_protocol/handshake_message_handler.h)
+  s2a/src/record_protocol/handshake_message_handler.cc
+  s2a/src/record_protocol/handshake_message_handler.h)
 target_link_libraries(handshake_message_handler
   absl_core_headers
   absl_memory
   absl_status
   absl_variant)
 add_library(s2a_crypter
-  src/record_protocol/s2a_crypter.cc
-  src/record_protocol/s2a_crypter_util.cc
-  src/record_protocol/s2a_half_connection.cc
-  src/record_protocol/s2a_crypter.h
-  src/record_protocol/s2a_crypter_util.h
-  src/record_protocol/s2a_half_connection.h)
+  s2a/src/record_protocol/s2a_crypter.cc
+  s2a/src/record_protocol/s2a_crypter_util.cc
+  s2a/src/record_protocol/s2a_half_connection.cc
+  s2a/src/record_protocol/s2a_crypter.h
+  s2a/src/record_protocol/s2a_crypter_util.h
+  s2a/src/record_protocol/s2a_half_connection.h)
 target_link_libraries(s2a_crypter
   handshake_message_handler
   s2a_upb_ticket_sender
@@ -277,7 +277,7 @@ target_link_libraries(s2a_ticket_sender INTERFACE
   s2a_options
   absl_strings)
 add_library(s2a_upb_ticket_sender
-  src/record_protocol/s2a_upb_ticket_sender.cc)
+  s2a/src/record_protocol/s2a_upb_ticket_sender.cc)
 target_link_libraries(s2a_upb_ticket_sender
   s2a_options
   s2a_ticket_sender
@@ -286,8 +286,8 @@ target_link_libraries(s2a_upb_ticket_sender
   absl_strings
   ${S2A_CORE_UPB_LIBRARY})
 add_library(single_token_access_token_manager
-  src/token_manager/single_token_access_token_manager.cc
-  src/token_manager/single_token_access_token_manager.h)
+  s2a/src/token_manager/single_token_access_token_manager.cc
+  s2a/src/token_manager/single_token_access_token_manager.h)
 target_link_libraries(single_token_access_token_manager
   access_token_manager
   absl_flag
@@ -296,14 +296,14 @@ target_link_libraries(single_token_access_token_manager
   absl_strings
   absl_str_format)
 add_library(s2a_aead_crypter_test_util
-  src/crypto/s2a_aead_crypter_test_util.cc
-  src/crypto/s2a_aead_crypter_test_util.h)
+  s2a/src/crypto/s2a_aead_crypter_test_util.cc
+  s2a/src/crypto/s2a_aead_crypter_test_util.h)
 target_link_libraries(s2a_aead_crypter_test_util
   s2a_aead_crypter
   absl_core_headers)
 add_library(s2a_proxy_test_util
-  src/handshaker/s2a_proxy_test_util.cc
-  src/handshaker/s2a_proxy_test_util.h)
+  s2a/src/handshaker/s2a_proxy_test_util.cc
+  s2a/src/handshaker/s2a_proxy_test_util.h)
 target_link_libraries(s2a_proxy_test_util
   s2a_context
   s2a_proxy
@@ -319,33 +319,33 @@ add_library(s2a_test_util INTERFACE)
 target_link_libraries(s2a_test_util INTERFACE
   com_google_googletest//:gtest)
 add_library(fake_access_token_manager
-  src/token_manager/fake_access_token_manager.cc
-  src/token_manager/fake_access_token_manager.h)
+  s2a/src/token_manager/fake_access_token_manager.cc
+  s2a/src/token_manager/fake_access_token_manager.h)
 target_link_libraries(fake_access_token_manager
   access_token_manager
   absl_statusor)
 
 set(S2A_CORE_SOURCES
-    src/crypto/aes_gcm_crypter.cc
-    src/crypto/chacha_poly_crypter_boringssl.cc
-    src/crypto/chacha_poly_crypter_openssl.cc
-    src/crypto/hkdf.cc
-    src/crypto/s2a_aead_crypter.cc
-    src/crypto/s2a_aead_crypter_util.cc
-    src/frame_protector/s2a_frame_protector.cc
-    src/handshaker/s2a_context.cc
-    src/handshaker/s2a_proxy.cc
-    src/handshaker/s2a_util.cc
-    src/options/s2a_options.cc
-    src/proto/upb-generated/proto/common.upb.c
-    src/proto/upb-generated/proto/s2a.upb.c
-    src/proto/upb-generated/proto/s2a_context.upb.c
-    src/record_protocol/handshake_message_handler.cc
-    src/record_protocol/s2a_crypter.cc
-    src/record_protocol/s2a_crypter_util.cc
-    src/record_protocol/s2a_half_connection.cc
-    src/record_protocol/s2a_upb_ticket_sender.cc
-    src/token_manager/single_token_access_token_manager.cc
+    s2a/src/crypto/aes_gcm_crypter.cc
+    s2a/src/crypto/chacha_poly_crypter_boringssl.cc
+    s2a/src/crypto/chacha_poly_crypter_openssl.cc
+    s2a/src/crypto/hkdf.cc
+    s2a/src/crypto/s2a_aead_crypter.cc
+    s2a/src/crypto/s2a_aead_crypter_util.cc
+    s2a/src/frame_protector/s2a_frame_protector.cc
+    s2a/src/handshaker/s2a_context.cc
+    s2a/src/handshaker/s2a_proxy.cc
+    s2a/src/handshaker/s2a_util.cc
+    s2a/src/options/s2a_options.cc
+    s2a/src/proto/upb-generated/proto/common.upb.c
+    s2a/src/proto/upb-generated/proto/s2a.upb.c
+    s2a/src/proto/upb-generated/proto/s2a_context.upb.c
+    s2a/src/record_protocol/handshake_message_handler.cc
+    s2a/src/record_protocol/s2a_crypter.cc
+    s2a/src/record_protocol/s2a_crypter_util.cc
+    s2a/src/record_protocol/s2a_half_connection.cc
+    s2a/src/record_protocol/s2a_upb_ticket_sender.cc
+    s2a/src/token_manager/single_token_access_token_manager.cc
 )
 
 add_library(s2a_core ${S2A_CORE_SOURCES})
@@ -356,28 +356,28 @@ target_include_directories(s2a_core PRIVATE
 add_library(s2a_core::s2a_core ALIAS s2a_core)
 
 set(S2A_CORE_HEADERS
-    include/access_token_manager.h
-    include/access_token_manager_factory.h
-    include/s2a_channel_factory_interface.h
-    include/s2a_constants.h
-    include/s2a_context.h
-    include/s2a_frame_protector.h
-    include/s2a_options.h
-    include/s2a_proxy.h
-    src/crypto/hkdf.h
-    src/crypto/s2a_aead_constants.h
-    src/crypto/s2a_aead_crypter.h
-    src/crypto/s2a_aead_crypter_util.h
-    src/handshaker/s2a_util.h
-    src/proto/upb-generated/proto/common.upb.h
-    src/proto/upb-generated/proto/s2a.upb.h
-    src/proto/upb-generated/proto/s2a_context.upb.h
-    src/record_protocol/handshake_message_handler.h
-    src/record_protocol/s2a_crypter.h
-    src/record_protocol/s2a_crypter_util.h
-    src/record_protocol/s2a_half_connection.h
-    src/record_protocol/s2a_ticket_sender.h
-    src/token_manager/single_token_access_token_manager.h
+    s2a/include/access_token_manager.h
+    s2a/include/access_token_manager_factory.h
+    s2a/include/s2a_channel_factory_interface.h
+    s2a/include/s2a_constants.h
+    s2a/include/s2a_context.h
+    s2a/include/s2a_frame_protector.h
+    s2a/include/s2a_options.h
+    s2a/include/s2a_proxy.h
+    s2a/src/crypto/hkdf.h
+    s2a/src/crypto/s2a_aead_constants.h
+    s2a/src/crypto/s2a_aead_crypter.h
+    s2a/src/crypto/s2a_aead_crypter_util.h
+    s2a/src/handshaker/s2a_util.h
+    s2a/src/proto/upb-generated/proto/common.upb.h
+    s2a/src/proto/upb-generated/proto/s2a.upb.h
+    s2a/src/proto/upb-generated/proto/s2a_context.upb.h
+    s2a/src/record_protocol/handshake_message_handler.h
+    s2a/src/record_protocol/s2a_crypter.h
+    s2a/src/record_protocol/s2a_crypter_util.h
+    s2a/src/record_protocol/s2a_half_connection.h
+    s2a/src/record_protocol/s2a_ticket_sender.h
+    s2a/src/token_manager/single_token_access_token_manager.h
 )
 
 install(FILES ${S2A_CORE_HEADERS}

@@ -29,30 +29,30 @@ exports_files(["LICENSE"])
 cc_library(
     name = "s2a_core",
     srcs = [
-        "src/frame_protector/s2a_frame_protector.cc",
-        "src/handshaker/s2a_context.cc",
-        "src/handshaker/s2a_proxy.cc",
-        "src/options/s2a_options.cc",
+        "s2a/src/frame_protector/s2a_frame_protector.cc",
+        "s2a/src/handshaker/s2a_context.cc",
+        "s2a/src/handshaker/s2a_proxy.cc",
+        "s2a/src/options/s2a_options.cc",
     ],
     hdrs = [
-        "include/access_token_manager.h",
-        "include/access_token_manager_factory.h",
-        "include/s2a_channel_factory_interface.h",
-        "include/s2a_channel_interface.h",
-        "include/s2a_constants.h",
-        "include/s2a_context.h",
-        "include/s2a_frame_protector.h",
-        "include/s2a_options.h",
-        "include/s2a_proxy.h",
+        "s2a/include/access_token_manager.h",
+        "s2a/include/access_token_manager_factory.h",
+        "s2a/include/s2a_channel_factory_interface.h",
+        "s2a/include/s2a_channel_interface.h",
+        "s2a/include/s2a_constants.h",
+        "s2a/include/s2a_context.h",
+        "s2a/include/s2a_frame_protector.h",
+        "s2a/include/s2a_options.h",
+        "s2a/include/s2a_proxy.h",
     ],
     visibility = ["//visibility:public"],
     deps = [
         ":s2a_crypter",
         ":s2a_ticket_sender",
         ":s2a_util",
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_context_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_context_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_upb_proto",
         "@com_google_absl//absl/container:flat_hash_set",
         "@com_google_absl//absl/container:flat_hash_map",
         "@com_google_absl//absl/hash",
@@ -70,8 +70,8 @@ cc_library(
 cc_library(
     name = "s2a_channel",
     hdrs = [
-        "include/s2a_channel_factory_interface.h",
-        "include/s2a_channel_interface.h",
+        "s2a/include/s2a_channel_factory_interface.h",
+        "s2a/include/s2a_channel_interface.h",
     ],
     visibility = approved_s2a_core_users,
     deps = [
@@ -82,19 +82,19 @@ cc_library(
 
 cc_library(
     name = "s2a_constants",
-    hdrs = ["include/s2a_constants.h"],
+    hdrs = ["s2a/include/s2a_constants.h"],
     visibility = approved_s2a_core_users,
     deps = [
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_context_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_context_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_upb_proto",
     ],
 )
 
 cc_library(
     name = "s2a_options",
-    srcs = ["src/options/s2a_options.cc"],
-    hdrs = ["include/s2a_options.h"],
+    srcs = ["s2a/src/options/s2a_options.cc"],
+    hdrs = ["s2a/include/s2a_options.h"],
     visibility = approved_s2a_core_users,
     deps = [
         "@com_google_absl//absl/container:flat_hash_set",
@@ -107,8 +107,8 @@ cc_library(
 cc_library(
     name = "access_token_manager",
     hdrs = [
-        "include/access_token_manager.h",
-        "include/access_token_manager_factory.h",
+        "s2a/include/access_token_manager.h",
+        "s2a/include/access_token_manager_factory.h",
     ],
     visibility = approved_s2a_core_users,
     deps = [
@@ -122,10 +122,10 @@ cc_library(
 cc_library(
     name = "s2a_frame_protector",
     srcs = [
-        "src/frame_protector/s2a_frame_protector.cc",
+        "s2a/src/frame_protector/s2a_frame_protector.cc",
     ],
     hdrs = [
-        "include/s2a_frame_protector.h",
+        "s2a/include/s2a_frame_protector.h",
     ],
     visibility = approved_s2a_core_users,
     deps = [
@@ -145,14 +145,14 @@ cc_library(
 
 cc_library(
     name = "s2a_context",
-    srcs = ["src/handshaker/s2a_context.cc"],
-    hdrs = ["include/s2a_context.h"],
+    srcs = ["s2a/src/handshaker/s2a_context.cc"],
+    hdrs = ["s2a/include/s2a_context.h"],
     visibility = approved_s2a_core_users,
     deps = [
         ":s2a_options",
         ":s2a_util",
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_context_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_context_upb_proto",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/status:statusor",
@@ -164,10 +164,10 @@ cc_library(
 cc_library(
     name = "s2a_proxy",
     srcs = [
-        "src/handshaker/s2a_proxy.cc",
+        "s2a/src/handshaker/s2a_proxy.cc",
     ],
     hdrs = [
-        "include/s2a_proxy.h",
+        "s2a/include/s2a_proxy.h",
     ],
     visibility = approved_s2a_core_users,
     deps = [
@@ -178,8 +178,8 @@ cc_library(
         ":s2a_frame_protector",
         ":s2a_options",
         ":s2a_util",
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_upb_proto",
         "@com_google_absl//absl/container:flat_hash_map",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
@@ -196,9 +196,9 @@ cc_library(
 cc_library(
     name = "hkdf",
     srcs = [
-        "src/crypto/hkdf.cc",
+        "s2a/src/crypto/hkdf.cc",
     ],
-    hdrs = ["src/crypto/hkdf.h"],
+    hdrs = ["s2a/src/crypto/hkdf.h"],
     deps = [
         "@boringssl//:crypto",
         "@com_google_absl//absl/status",
@@ -208,14 +208,14 @@ cc_library(
 cc_library(
     name = "s2a_aead_crypter",
     srcs = [
-        "src/crypto/aes_gcm_crypter.cc",
-        "src/crypto/chacha_poly_crypter_boringssl.cc",
-        "src/crypto/chacha_poly_crypter_openssl.cc",
-        "src/crypto/s2a_aead_crypter.cc",
+        "s2a/src/crypto/aes_gcm_crypter.cc",
+        "s2a/src/crypto/chacha_poly_crypter_boringssl.cc",
+        "s2a/src/crypto/chacha_poly_crypter_openssl.cc",
+        "s2a/src/crypto/s2a_aead_crypter.cc",
     ],
     hdrs = [
-        "src/crypto/s2a_aead_constants.h",
-        "src/crypto/s2a_aead_crypter.h",
+        "s2a/src/crypto/s2a_aead_constants.h",
+        "s2a/src/crypto/s2a_aead_crypter.h",
     ],
     deps = [
         ":s2a_aead_crypter_util",
@@ -230,9 +230,9 @@ cc_library(
 cc_library(
     name = "s2a_aead_crypter_util",
     srcs = [
-        "src/crypto/s2a_aead_crypter_util.cc",
+        "s2a/src/crypto/s2a_aead_crypter_util.cc",
     ],
-    hdrs = ["src/crypto/s2a_aead_crypter_util.h"],
+    hdrs = ["s2a/src/crypto/s2a_aead_crypter_util.h"],
     deps = [
         "@boringssl//:crypto",
     ],
@@ -241,14 +241,14 @@ cc_library(
 cc_library(
     name = "s2a_util",
     srcs = [
-        "src/handshaker/s2a_util.cc",
+        "s2a/src/handshaker/s2a_util.cc",
     ],
     hdrs = [
-        "src/handshaker/s2a_util.h",
+        "s2a/src/handshaker/s2a_util.h",
     ],
     deps = [
         ":s2a_options",
-        "//src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/types:variant",
         "@upb",
@@ -258,10 +258,10 @@ cc_library(
 cc_library(
     name = "handshake_message_handler",
     srcs = [
-        "src/record_protocol/handshake_message_handler.cc",
+        "s2a/src/record_protocol/handshake_message_handler.cc",
     ],
     hdrs = [
-        "src/record_protocol/handshake_message_handler.h",
+        "s2a/src/record_protocol/handshake_message_handler.h",
     ],
     deps = [
         "@com_google_absl//absl/base:core_headers",
@@ -274,14 +274,14 @@ cc_library(
 cc_library(
     name = "s2a_crypter",
     srcs = [
-        "src/record_protocol/s2a_crypter.cc",
-        "src/record_protocol/s2a_crypter_util.cc",
-        "src/record_protocol/s2a_half_connection.cc",
+        "s2a/src/record_protocol/s2a_crypter.cc",
+        "s2a/src/record_protocol/s2a_crypter_util.cc",
+        "s2a/src/record_protocol/s2a_half_connection.cc",
     ],
     hdrs = [
-        "src/record_protocol/s2a_crypter.h",
-        "src/record_protocol/s2a_crypter_util.h",
-        "src/record_protocol/s2a_half_connection.h",
+        "s2a/src/record_protocol/s2a_crypter.h",
+        "s2a/src/record_protocol/s2a_crypter_util.h",
+        "s2a/src/record_protocol/s2a_half_connection.h",
     ],
     visibility = approved_s2a_core_users,
     deps = [
@@ -306,7 +306,7 @@ cc_library(
 cc_library(
     name = "s2a_ticket_sender",
     hdrs = [
-        "src/record_protocol/s2a_ticket_sender.h",
+        "s2a/src/record_protocol/s2a_ticket_sender.h",
     ],
     visibility = approved_s2a_core_users,
     deps = [
@@ -319,13 +319,13 @@ cc_library(
 cc_library(
     name = "s2a_upb_ticket_sender",
     srcs = [
-        "src/record_protocol/s2a_upb_ticket_sender.cc",
+        "s2a/src/record_protocol/s2a_upb_ticket_sender.cc",
     ],
     deps = [
         ":s2a_options",
         ":s2a_ticket_sender",
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_upb_proto",
         "@com_google_absl//absl/strings",
         "@upb",
     ],
@@ -334,8 +334,8 @@ cc_library(
 # TODO(matthewstevenson88) Use a registry to build access token managers.
 cc_library(
     name = "single_token_access_token_manager",
-    srcs = ["src/token_manager/single_token_access_token_manager.cc"],
-    hdrs = ["src/token_manager/single_token_access_token_manager.h"],
+    srcs = ["s2a/src/token_manager/single_token_access_token_manager.cc"],
+    hdrs = ["s2a/src/token_manager/single_token_access_token_manager.h"],
     visibility = approved_s2a_core_users,
     deps = [
         ":access_token_manager",
@@ -353,8 +353,8 @@ cc_library(
 
 cc_library(
     name = "s2a_aead_crypter_test_util",
-    srcs = ["src/crypto/s2a_aead_crypter_test_util.cc"],
-    hdrs = ["src/crypto/s2a_aead_crypter_test_util.h"],
+    srcs = ["s2a/src/crypto/s2a_aead_crypter_test_util.cc"],
+    hdrs = ["s2a/src/crypto/s2a_aead_crypter_test_util.h"],
     deps = [
         ":s2a_aead_crypter",
         "@com_google_absl//absl/base:core_headers",
@@ -363,7 +363,7 @@ cc_library(
 
 cc_test(
     name = "hkdf_test",
-    srcs = ["src/crypto/hkdf_test.cc"],
+    srcs = ["s2a/src/crypto/hkdf_test.cc"],
     deps = [
         ":hkdf",
         ":s2a_test_util",
@@ -373,7 +373,7 @@ cc_test(
 
 cc_test(
     name = "s2a_aead_crypter_test",
-    srcs = ["src/crypto/s2a_aead_crypter_test.cc"],
+    srcs = ["s2a/src/crypto/s2a_aead_crypter_test.cc"],
     deps = [
         ":s2a_aead_crypter",
         "@com_google_absl//absl/status",
@@ -383,7 +383,7 @@ cc_test(
 
 cc_test(
     name = "aes_gcm_crypter_test",
-    srcs = ["src/crypto/aes_gcm_crypter_test.cc"],
+    srcs = ["s2a/src/crypto/aes_gcm_crypter_test.cc"],
     deps = [
         ":s2a_aead_crypter",
         ":s2a_aead_crypter_test_util",
@@ -395,7 +395,7 @@ cc_test(
 
 cc_test(
     name = "chacha_poly_crypter_test",
-    srcs = ["src/crypto/chacha_poly_crypter_test.cc"],
+    srcs = ["s2a/src/crypto/chacha_poly_crypter_test.cc"],
     deps = [
         ":s2a_aead_crypter",
         ":s2a_aead_crypter_test_util",
@@ -408,7 +408,7 @@ cc_test(
 cc_test(
     name = "s2a_aead_crypter_util_test",
     srcs = [
-        "src/crypto/s2a_aead_crypter_util_test.cc",
+        "s2a/src/crypto/s2a_aead_crypter_util_test.cc",
     ],
     deps = [
         ":s2a_aead_crypter_util",
@@ -461,12 +461,12 @@ cc_library(
     name = "aes_gcm_crypter_openssl",
     testonly = 1,
     srcs = [
-        "src/crypto/aes_gcm_crypter.cc",
-        "src/crypto/s2a_aead_crypter.cc",
+        "s2a/src/crypto/aes_gcm_crypter.cc",
+        "s2a/src/crypto/s2a_aead_crypter.cc",
     ],
     hdrs = [
-        "src/crypto/s2a_aead_constants.h",
-        "src/crypto/s2a_aead_crypter.h",
+        "s2a/src/crypto/s2a_aead_constants.h",
+        "s2a/src/crypto/s2a_aead_crypter.h",
     ],
     tags = ["openssl"],
     deps = [
@@ -483,14 +483,14 @@ cc_library(
     name = "chacha_poly_crypter_openssl",
     testonly = 1,
     srcs = [
-        "src/crypto/chacha_poly_crypter_openssl.cc",
-        "src/crypto/s2a_aead_crypter.cc",
-        "src/crypto/s2a_aead_crypter_util.cc",
+        "s2a/src/crypto/chacha_poly_crypter_openssl.cc",
+        "s2a/src/crypto/s2a_aead_crypter.cc",
+        "s2a/src/crypto/s2a_aead_crypter_util.cc",
     ],
     hdrs = [
-        "src/crypto/s2a_aead_constants.h",
-        "src/crypto/s2a_aead_crypter.h",
-        "src/crypto/s2a_aead_crypter_util.h",
+        "s2a/src/crypto/s2a_aead_constants.h",
+        "s2a/src/crypto/s2a_aead_crypter.h",
+        "s2a/src/crypto/s2a_aead_crypter_util.h",
     ],
     tags = ["openssl"],
     deps = [
@@ -506,9 +506,9 @@ cc_library(
     name = "hkdf_openssl",
     testonly = 1,
     srcs = [
-        "src/crypto/hkdf.cc",
+        "s2a/src/crypto/hkdf.cc",
     ],
-    hdrs = ["src/crypto/hkdf.h"],
+    hdrs = ["s2a/src/crypto/hkdf.h"],
     tags = ["openssl"],
     deps = [
         ":openssl",
@@ -520,9 +520,9 @@ cc_library(
     name = "s2a_aead_crypter_util_openssl",
     testonly = 1,
     srcs = [
-        "src/crypto/s2a_aead_crypter_util.cc",
+        "s2a/src/crypto/s2a_aead_crypter_util.cc",
     ],
-    hdrs = ["src/crypto/s2a_aead_crypter_util.h"],
+    hdrs = ["s2a/src/crypto/s2a_aead_crypter_util.h"],
     tags = ["openssl"],
     deps = [
         ":openssl",
@@ -531,7 +531,7 @@ cc_library(
 
 cc_test(
     name = "aes_gcm_crypter_openssl_test",
-    srcs = ["src/crypto/aes_gcm_crypter_test.cc"],
+    srcs = ["s2a/src/crypto/aes_gcm_crypter_test.cc"],
     tags = ["openssl"],
     deps = [
         ":aes_gcm_crypter_openssl",
@@ -543,7 +543,7 @@ cc_test(
 
 cc_test(
     name = "chacha_poly_crypter_openssl_test",
-    srcs = ["src/crypto/chacha_poly_crypter_test.cc"],
+    srcs = ["s2a/src/crypto/chacha_poly_crypter_test.cc"],
     tags = ["openssl"],
     deps = [
         ":chacha_poly_crypter_openssl",
@@ -555,7 +555,7 @@ cc_test(
 
 cc_test(
     name = "hkdf_openssl_test",
-    srcs = ["src/crypto/hkdf_test.cc"],
+    srcs = ["s2a/src/crypto/hkdf_test.cc"],
     tags = ["openssl"],
     deps = [
         ":hkdf_openssl",
@@ -567,7 +567,7 @@ cc_test(
 cc_test(
     name = "s2a_aead_crypter_util_openssl_test",
     srcs = [
-        "src/crypto/s2a_aead_crypter_util_test.cc",
+        "s2a/src/crypto/s2a_aead_crypter_util_test.cc",
     ],
     tags = ["openssl"],
     deps = [
@@ -581,7 +581,7 @@ cc_test(
 
 cc_test(
     name = "s2a_frame_protector_test",
-    srcs = ["src/frame_protector/s2a_frame_protector_test.cc"],
+    srcs = ["s2a/src/frame_protector/s2a_frame_protector_test.cc"],
     deps = [
         ":s2a_constants",
         ":s2a_frame_protector",
@@ -598,18 +598,18 @@ cc_library(
     name = "s2a_proxy_test_util",
     testonly = 1,
     srcs = [
-        "src/handshaker/s2a_proxy_test_util.cc",
+        "s2a/src/handshaker/s2a_proxy_test_util.cc",
     ],
     hdrs = [
-        "src/handshaker/s2a_proxy_test_util.h",
+        "s2a/src/handshaker/s2a_proxy_test_util.h",
     ],
     visibility = approved_s2a_core_users,
     deps = [
         ":s2a_context",
         ":s2a_proxy",
         ":s2a_options",
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_upb_proto",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/types:variant",
@@ -619,13 +619,13 @@ cc_library(
 
 cc_test(
     name = "s2a_context_test",
-    srcs = ["src/handshaker/s2a_context_test.cc"],
+    srcs = ["s2a/src/handshaker/s2a_context_test.cc"],
     deps = [
         ":s2a_context",
         ":s2a_util",
         ":s2a_options",
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_context_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_context_upb_proto",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/types:variant",
@@ -636,14 +636,14 @@ cc_test(
 
 cc_test(
     name = "s2a_proxy_test",
-    srcs = ["src/handshaker/s2a_proxy_test.cc"],
+    srcs = ["s2a/src/handshaker/s2a_proxy_test.cc"],
     deps = [
         ":s2a_context",
         ":s2a_proxy",
         ":s2a_constants",
         ":s2a_frame_protector",
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_upb_proto",
         ":fake_access_token_manager",
         "@com_google_absl//absl/status",
         "@com_google_googletest//:gtest_main",
@@ -653,11 +653,11 @@ cc_test(
 
 cc_test(
     name = "s2a_util_test",
-    srcs = ["src/handshaker/s2a_util_test.cc"],
+    srcs = ["s2a/src/handshaker/s2a_util_test.cc"],
     deps = [
         ":s2a_util",
         ":s2a_options",
-        "//src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/types:variant",
         "@com_google_googletest//:gtest_main",
@@ -669,7 +669,7 @@ cc_test(
 
 cc_test(
     name = "s2a_options_test",
-    srcs = ["src/options/s2a_options_test.cc"],
+    srcs = ["s2a/src/options/s2a_options_test.cc"],
     deps = [
         ":s2a_options",
         "@com_google_googletest//:gtest_main",
@@ -680,7 +680,7 @@ cc_test(
 
 cc_test(
     name = "s2a_crypter_test",
-    srcs = ["src/record_protocol/s2a_crypter_test.cc"],
+    srcs = ["s2a/src/record_protocol/s2a_crypter_test.cc"],
     deps = [
         ":handshake_message_handler",
         ":s2a_crypter",
@@ -697,7 +697,7 @@ cc_test(
 
 cc_test(
     name = "s2a_crypter_roundtrip_test",
-    srcs = ["src/record_protocol/s2a_crypter_roundtrip_test.cc"],
+    srcs = ["s2a/src/record_protocol/s2a_crypter_roundtrip_test.cc"],
     deps = [
         ":s2a_crypter",
         ":s2a_constants",
@@ -709,7 +709,7 @@ cc_test(
 
 cc_test(
     name = "s2a_crypter_util_test",
-    srcs = ["src/record_protocol/s2a_crypter_util_test.cc"],
+    srcs = ["s2a/src/record_protocol/s2a_crypter_util_test.cc"],
     deps = [
         ":s2a_crypter",
         ":s2a_test_util",
@@ -719,7 +719,7 @@ cc_test(
 
 cc_test(
     name = "s2a_half_connection_test",
-    srcs = ["src/record_protocol/s2a_half_connection_test.cc"],
+    srcs = ["s2a/src/record_protocol/s2a_half_connection_test.cc"],
     deps = [
         ":s2a_crypter",
         ":s2a_constants",
@@ -732,13 +732,13 @@ cc_test(
 cc_test(
     name = "s2a_upb_ticket_sender_test",
     srcs = [
-        "src/record_protocol/s2a_upb_ticket_sender_test.cc",
+        "s2a/src/record_protocol/s2a_upb_ticket_sender_test.cc",
     ],
     deps = [
         ":s2a_ticket_sender",
         ":s2a_upb_ticket_sender",
-        "//src/proto/upb-generated/proto:common_upb_proto",
-        "//src/proto/upb-generated/proto:s2a_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:common_upb_proto",
+        "//s2a/src/proto/upb-generated/proto:s2a_upb_proto",
         "@com_google_googletest//:gtest_main",
         "@upb",
     ],
@@ -749,7 +749,7 @@ cc_test(
 cc_library(
     name = "s2a_test_data",
     hdrs = [
-        "src/test_util/s2a_test_data.h",
+        "s2a/src/test_util/s2a_test_data.h",
     ],
     visibility = approved_s2a_core_users,
 )
@@ -758,7 +758,7 @@ cc_library(
     name = "s2a_test_util",
     testonly = 1,
     hdrs = [
-        "src/test_util/s2a_test_util.h",
+        "s2a/src/test_util/s2a_test_util.h",
     ],
     deps = [
         "@com_google_googletest//:gtest",
@@ -770,8 +770,8 @@ cc_library(
 cc_library(
     name = "fake_access_token_manager",
     testonly = 1,
-    srcs = ["src/token_manager/fake_access_token_manager.cc"],
-    hdrs = ["src/token_manager/fake_access_token_manager.h"],
+    srcs = ["s2a/src/token_manager/fake_access_token_manager.cc"],
+    hdrs = ["s2a/src/token_manager/fake_access_token_manager.h"],
     visibility = approved_s2a_core_users,
     deps = [
         ":access_token_manager",
@@ -781,7 +781,7 @@ cc_library(
 
 cc_test(
     name = "fake_access_token_manager_test",
-    srcs = ["src/token_manager/fake_access_token_manager_test.cc"],
+    srcs = ["s2a/src/token_manager/fake_access_token_manager_test.cc"],
     deps = [
         ":fake_access_token_manager",
         ":access_token_manager",
@@ -794,7 +794,7 @@ cc_test(
 
 cc_test(
     name = "single_token_access_token_manager_test",
-    srcs = ["src/token_manager/single_token_access_token_manager_test.cc"],
+    srcs = ["s2a/src/token_manager/single_token_access_token_manager_test.cc"],
     deps = [
         ":single_token_access_token_manager",
         ":access_token_manager",
