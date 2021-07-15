@@ -771,7 +771,7 @@ cc_library(
     name = "fake_access_token_manager",
     testonly = 1,
     srcs = ["s2a/src/token_manager/fake_access_token_manager.cc"],
-    hdrs = ["src/token_manager/fake_access_token_manager.h"],
+    hdrs = ["s2a/src/token_manager/fake_access_token_manager.h"],
     visibility = approved_s2a_core_users,
     deps = [
         ":access_token_manager",

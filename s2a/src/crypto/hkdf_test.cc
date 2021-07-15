@@ -16,11 +16,11 @@
  *
  */
 
-#include "src/crypto/hkdf.h"
+#include "s2a/src/crypto/hkdf.h"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-#include "src/test_util/s2a_test_util.h"
+#include "s2a/src/test_util/s2a_test_util.h"
 
 namespace s2a {
 namespace hkdf {
