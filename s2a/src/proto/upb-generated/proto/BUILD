@@ -15,13 +15,15 @@
 # Description:
 #  This BUILD file contains targets for pre-generated UPB files.
 
+# WARNING: WE DO NOT GUARANTEE API STABILITY FOR ANY OF THE TARGETS IN THIS FILE.
+
 licenses(["notice"])
 
 cc_library(
     name = "common_upb_proto",
     srcs = ["common.upb.c"],
     hdrs = ["common.upb.h"],
-    visibility = ["//:__subpackages__"],
+    visibility = ["//visibility:public"],
     deps = [
         "@upb",
         "@upb//:generated_code_support__only_for_generated_code_do_not_use__i_give_permission_to_break_me",
@@ -32,7 +34,7 @@ cc_library(
     name = "s2a_upb_proto",
     srcs = ["s2a.upb.c"],
     hdrs = ["s2a.upb.h"],
-    visibility = ["//:__subpackages__"],
+    visibility = ["//visibility:public"],
     deps = [
         ":common_upb_proto",
         "@upb",
@@ -44,7 +46,7 @@ cc_library(
     name = "s2a_context_upb_proto",
     srcs = ["s2a_context.upb.c"],
     hdrs = ["s2a_context.upb.h"],
-    visibility = ["//:__subpackages__"],
+    visibility = ["//visibility:public"],
     deps = [
         ":common_upb_proto",
         "@upb",
