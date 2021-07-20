@@ -52,6 +52,9 @@ TEST(SingleTokenAccessTokenManagerTest, GetToken) {
 }
 
 TEST(SingleTokenAccessTokenManagerTest, BuilderSuccess) {
+  char kS2AAccessTokenEnvironmentVariable[] =
+      "S2A_ACCESS_TOKEN=s2a_access_token_from_env_variable";
+  EXPECT_EQ(putenv(kS2AAccessTokenEnvironmentVariable), 0);
   absl::StatusOr<std::unique_ptr<AccessTokenManagerInterface>> manager =
       BuildAccessTokenManager();
   EXPECT_TRUE(manager.ok());
