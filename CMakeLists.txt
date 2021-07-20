@@ -380,6 +380,9 @@ set(S2A_CORE_HEADERS
     s2a/src/token_manager/single_token_access_token_manager.h
 )
 
+message(STATUS "S2A Core CMake includes destination is CMAKE_INSTALL_INCLUDEDIR=${CMAKE_INSTALL_INCLUDEDIR}")
+message(STATUS "S2A Core CMake library destination is CMAKE_INSTALL_LIBDIR=${CMAKE_INSTALL_LIBDIR}")
+message(STATUS "S2A Core CMake runtime destination is CMAKE_INSTALL_BINDIR=${CMAKE_INSTALL_BINDIR}")
 install(FILES ${S2A_CORE_HEADERS}
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/s2a_core)
 install(TARGETS s2a_core EXPORT s2a_coreConfig
