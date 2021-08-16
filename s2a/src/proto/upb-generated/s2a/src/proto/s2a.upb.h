@@ -10,7 +10,6 @@
 #define S2A_SRC_PROTO_S2A_PROTO_UPB_H_
 
 #include "upb/msg_internal.h"
-
 #include "upb/decode.h"
 #include "upb/decode_fast.h"
 #include "upb/encode.h"
@@ -63,13 +62,19 @@ UPB_INLINE s2a_proto_AuthenticationMechanism *s2a_proto_AuthenticationMechanism_
 UPB_INLINE s2a_proto_AuthenticationMechanism *s2a_proto_AuthenticationMechanism_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_AuthenticationMechanism *ret = s2a_proto_AuthenticationMechanism_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_AuthenticationMechanism_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_AuthenticationMechanism_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_AuthenticationMechanism *s2a_proto_AuthenticationMechanism_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_AuthenticationMechanism *ret = s2a_proto_AuthenticationMechanism_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_AuthenticationMechanism_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_AuthenticationMechanism_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_AuthenticationMechanism_serialize(const s2a_proto_AuthenticationMechanism *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_AuthenticationMechanism_msginit, arena, len);
@@ -111,13 +116,19 @@ UPB_INLINE s2a_proto_ClientSessionStartReq *s2a_proto_ClientSessionStartReq_new(
 UPB_INLINE s2a_proto_ClientSessionStartReq *s2a_proto_ClientSessionStartReq_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_ClientSessionStartReq *ret = s2a_proto_ClientSessionStartReq_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_ClientSessionStartReq_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_ClientSessionStartReq_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_ClientSessionStartReq *s2a_proto_ClientSessionStartReq_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_ClientSessionStartReq *ret = s2a_proto_ClientSessionStartReq_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_ClientSessionStartReq_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_ClientSessionStartReq_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_ClientSessionStartReq_serialize(const s2a_proto_ClientSessionStartReq *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_ClientSessionStartReq_msginit, arena, len);
@@ -197,13 +208,19 @@ UPB_INLINE s2a_proto_ServerSessionStartReq *s2a_proto_ServerSessionStartReq_new(
 UPB_INLINE s2a_proto_ServerSessionStartReq *s2a_proto_ServerSessionStartReq_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_ServerSessionStartReq *ret = s2a_proto_ServerSessionStartReq_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_ServerSessionStartReq_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_ServerSessionStartReq_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_ServerSessionStartReq *s2a_proto_ServerSessionStartReq_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_ServerSessionStartReq *ret = s2a_proto_ServerSessionStartReq_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_ServerSessionStartReq_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_ServerSessionStartReq_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_ServerSessionStartReq_serialize(const s2a_proto_ServerSessionStartReq *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_ServerSessionStartReq_msginit, arena, len);
@@ -268,13 +285,19 @@ UPB_INLINE s2a_proto_SessionNextReq *s2a_proto_SessionNextReq_new(upb_arena *are
 UPB_INLINE s2a_proto_SessionNextReq *s2a_proto_SessionNextReq_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_SessionNextReq *ret = s2a_proto_SessionNextReq_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_SessionNextReq_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_SessionNextReq_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_SessionNextReq *s2a_proto_SessionNextReq_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_SessionNextReq *ret = s2a_proto_SessionNextReq_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_SessionNextReq_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_SessionNextReq_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_SessionNextReq_serialize(const s2a_proto_SessionNextReq *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_SessionNextReq_msginit, arena, len);
@@ -294,13 +317,19 @@ UPB_INLINE s2a_proto_ResumptionTicketReq *s2a_proto_ResumptionTicketReq_new(upb_
 UPB_INLINE s2a_proto_ResumptionTicketReq *s2a_proto_ResumptionTicketReq_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_ResumptionTicketReq *ret = s2a_proto_ResumptionTicketReq_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_ResumptionTicketReq_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_ResumptionTicketReq_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_ResumptionTicketReq *s2a_proto_ResumptionTicketReq_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_ResumptionTicketReq *ret = s2a_proto_ResumptionTicketReq_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_ResumptionTicketReq_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_ResumptionTicketReq_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_ResumptionTicketReq_serialize(const s2a_proto_ResumptionTicketReq *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_ResumptionTicketReq_msginit, arena, len);
@@ -346,13 +375,19 @@ UPB_INLINE s2a_proto_SessionReq *s2a_proto_SessionReq_new(upb_arena *arena) {
 UPB_INLINE s2a_proto_SessionReq *s2a_proto_SessionReq_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_SessionReq *ret = s2a_proto_SessionReq_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_SessionReq_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_SessionReq_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_SessionReq *s2a_proto_SessionReq_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_SessionReq *ret = s2a_proto_SessionReq_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_SessionReq_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_SessionReq_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_SessionReq_serialize(const s2a_proto_SessionReq *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_SessionReq_msginit, arena, len);
@@ -448,13 +483,19 @@ UPB_INLINE s2a_proto_SessionState *s2a_proto_SessionState_new(upb_arena *arena) 
 UPB_INLINE s2a_proto_SessionState *s2a_proto_SessionState_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_SessionState *ret = s2a_proto_SessionState_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_SessionState_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_SessionState_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_SessionState *s2a_proto_SessionState_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_SessionState *ret = s2a_proto_SessionState_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_SessionState_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_SessionState_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_SessionState_serialize(const s2a_proto_SessionState *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_SessionState_msginit, arena, len);
@@ -510,13 +551,19 @@ UPB_INLINE s2a_proto_SessionResult *s2a_proto_SessionResult_new(upb_arena *arena
 UPB_INLINE s2a_proto_SessionResult *s2a_proto_SessionResult_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_SessionResult *ret = s2a_proto_SessionResult_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_SessionResult_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_SessionResult_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_SessionResult *s2a_proto_SessionResult_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_SessionResult *ret = s2a_proto_SessionResult_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_SessionResult_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_SessionResult_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_SessionResult_serialize(const s2a_proto_SessionResult *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_SessionResult_msginit, arena, len);
@@ -589,13 +636,19 @@ UPB_INLINE s2a_proto_SessionStatus *s2a_proto_SessionStatus_new(upb_arena *arena
 UPB_INLINE s2a_proto_SessionStatus *s2a_proto_SessionStatus_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_SessionStatus *ret = s2a_proto_SessionStatus_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_SessionStatus_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_SessionStatus_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_SessionStatus *s2a_proto_SessionStatus_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_SessionStatus *ret = s2a_proto_SessionStatus_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_SessionStatus_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_SessionStatus_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_SessionStatus_serialize(const s2a_proto_SessionStatus *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_SessionStatus_msginit, arena, len);
@@ -619,13 +672,19 @@ UPB_INLINE s2a_proto_SessionResp *s2a_proto_SessionResp_new(upb_arena *arena) {
 UPB_INLINE s2a_proto_SessionResp *s2a_proto_SessionResp_parse(const char *buf, size_t size,
                         upb_arena *arena) {
   s2a_proto_SessionResp *ret = s2a_proto_SessionResp_new(arena);
-  return (ret && upb_decode(buf, size, ret, &s2a_proto_SessionResp_msginit, arena)) ? ret : NULL;
+  if (!ret) return NULL;
+  if (!upb_decode(buf, size, ret, &s2a_proto_SessionResp_msginit, arena)) return NULL;
+  return ret;
 }
 UPB_INLINE s2a_proto_SessionResp *s2a_proto_SessionResp_parse_ex(const char *buf, size_t size,
-                           upb_arena *arena, int options) {
+                           const upb_extreg *extreg, int options,
+                           upb_arena *arena) {
   s2a_proto_SessionResp *ret = s2a_proto_SessionResp_new(arena);
-  return (ret && _upb_decode(buf, size, ret, &s2a_proto_SessionResp_msginit, arena, options))
-      ? ret : NULL;
+  if (!ret) return NULL;
+  if (!_upb_decode(buf, size, ret, &s2a_proto_SessionResp_msginit, extreg, options, arena)) {
+    return NULL;
+  }
+  return ret;
 }
 UPB_INLINE char *s2a_proto_SessionResp_serialize(const s2a_proto_SessionResp *msg, upb_arena *arena, size_t *len) {
   return upb_encode(msg, &s2a_proto_SessionResp_msginit, arena, len);

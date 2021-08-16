@@ -20,7 +20,7 @@
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-#include "s2a/src/proto/upb-generated/proto/common.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h"
 #include "upb/upb.hpp"
 
 namespace s2a {
