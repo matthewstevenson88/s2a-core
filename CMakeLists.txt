@@ -366,9 +366,9 @@ set(S2A_CORE_HEADERS
     s2a/src/crypto/s2a_aead_crypter.h
     s2a/src/crypto/s2a_aead_crypter_util.h
     s2a/src/handshaker/s2a_util.h
-    s2a/src/proto/upb-generated/proto/common.upb.h
-    s2a/src/proto/upb-generated/proto/s2a.upb.h
-    s2a/src/proto/upb-generated/proto/s2a_context.upb.h
+    s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h
+    s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.h
+    s2a/src/proto/upb-generated/s2a/src/proto/s2a_context.upb.h
     s2a/src/record_protocol/handshake_message_handler.h
     s2a/src/record_protocol/s2a_crypter.h
     s2a/src/record_protocol/s2a_crypter_util.h
