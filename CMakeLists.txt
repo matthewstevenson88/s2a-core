@@ -105,19 +105,19 @@ endif()
 enable_testing()
 
 add_library(common_upb
-  s2a/src/proto/upb-generated/proto/common.upb.c
-  s2a/src/proto/upb-generated/proto/common.upb.h)
+  s2a/src/proto/upb-generated/s2a/src/proto/common.upb.c
+  s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h)
 target_link_libraries(common_upb
   ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_upb
-  s2a/src/proto/upb-generated/proto/s2a.upb.c
-  s2a/src/proto/upb-generated/proto/s2a.upb.h)
+  s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.c
+  s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.h)
 target_link_libraries(s2a_upb
   common_upb
   ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_context_upb
-  s2a/src/proto/upb-generated/proto/s2a_context.upb.c
-  s2a/src/proto/upb-generated/proto/s2a_context.upb.h)
+  s2a/src/proto/upb-generated/s2a/src/proto/s2a_context.upb.c
+  s2a/src/proto/upb-generated/s2a/src/proto/s2a_context.upb.h)
 target_link_libraries(s2a_context_upb
   common_upb
   ${S2A_CORE_UPB_LIBRARY})
