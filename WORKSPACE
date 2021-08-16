@@ -19,11 +19,13 @@ http_archive(
 )
 
 # UPB
+#
+# Latest update: August 2, 2021 (UPB PR #401).
 http_archive(
     name = "upb",
-    sha256 = "0d240a335f61e8acc22849280668b9203d25e6616df18bcc96d13bee65bbfebc",
-    strip_prefix = "upb-0723bfa700a044b1062d3db688b810455b19322e",
-    urls = ["https://github.com/protocolbuffers/upb/archive/0723bfa700a044b1062d3db688b810455b19322e.tar.gz"],
+    sha256 = "6a5f67874af66b239b709c572ac1a5a00fdb1b29beaf13c3e6f79b1ba10dc7c4",
+    strip_prefix = "upb-2de300726a1ba2de9a468468dc5ff9ed17a3215f",
+    urls = ["https://github.com/protocolbuffers/upb/archive/2de300726a1ba2de9a468468dc5ff9ed17a3215f.tar.gz"],
 )
 
 load("@upb//bazel:workspace_deps.bzl", "upb_deps")
