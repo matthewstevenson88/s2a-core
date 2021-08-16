@@ -81,7 +81,6 @@ endif()
 if (S2A_CORE_UPB_INCLUDE_DIR)
   include_directories(${S2A_CORE_UPB_INCLUDE_DIR})
 else()
-  add_definitions(-DS2A_CORE_USE_NEW_UPB_APIS)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/upb)
 endif()
 
@@ -90,10 +89,8 @@ if (NOT S2A_CORE_UPB_LIBRARY)
 endif()
 
 if (S2A_CORE_SSL_INCLUDE_DIR)
-  message(STATUS "S2A Core is using the SSL directory: ${S2A_CORE_SSL_INCLUDE_DIR}")
   include_directories(${S2A_CORE_SSL_INCLUDE_DIR})
 else()
-  message(STATUS "S2A Core is using system OpenSSL.")
   find_package(OpenSSL REQUIRED)
   set(S2A_CORE_SSL_LIBRARIES OpenSSL::Crypto)
   set(S2A_CORE_SSL_INCLUDE_DIR ${OPENSSL_INCLUDE_DIR})
@@ -108,19 +105,19 @@ endif()
 enable_testing()
 
 add_library(common_upb
-  s2a/src/proto/upb-generated/proto/common.upb.c
-  s2a/src/proto/upb-generated/proto/common.upb.h)
+  s2a/src/proto/upb-generated/s2a/src/proto/common.upb.c
+  s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h)
 target_link_libraries(common_upb
   ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_upb
-  s2a/src/proto/upb-generated/proto/s2a.upb.c
-  s2a/src/proto/upb-generated/proto/s2a.upb.h)
+  s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.c
+  s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.h)
 target_link_libraries(s2a_upb
   common_upb
   ${S2A_CORE_UPB_LIBRARY})
 add_library(s2a_context_upb
-  s2a/src/proto/upb-generated/proto/s2a_context.upb.c
-  s2a/src/proto/upb-generated/proto/s2a_context.upb.h)
+  s2a/src/proto/upb-generated/s2a/src/proto/s2a_context.upb.c
+  s2a/src/proto/upb-generated/s2a/src/proto/s2a_context.upb.h)
 target_link_libraries(s2a_context_upb
   common_upb
   ${S2A_CORE_UPB_LIBRARY})
@@ -337,9 +334,9 @@ set(S2A_CORE_SOURCES
     s2a/src/handshaker/s2a_proxy.cc
     s2a/src/handshaker/s2a_util.cc
     s2a/src/options/s2a_options.cc
-    s2a/src/proto/upb-generated/proto/common.upb.c
-    s2a/src/proto/upb-generated/proto/s2a.upb.c
-    s2a/src/proto/upb-generated/proto/s2a_context.upb.c
+    s2a/src/proto/upb-generated/s2a/src/proto/common.upb.c
+    s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.c
+    s2a/src/proto/upb-generated/s2a/src/proto/s2a_context.upb.c
     s2a/src/record_protocol/handshake_message_handler.cc
     s2a/src/record_protocol/s2a_crypter.cc
     s2a/src/record_protocol/s2a_crypter_util.cc
@@ -369,9 +366,9 @@ set(S2A_CORE_HEADERS
     s2a/src/crypto/s2a_aead_crypter.h
     s2a/src/crypto/s2a_aead_crypter_util.h
     s2a/src/handshaker/s2a_util.h
-    s2a/src/proto/upb-generated/proto/common.upb.h
-    s2a/src/proto/upb-generated/proto/s2a.upb.h
-    s2a/src/proto/upb-generated/proto/s2a_context.upb.h
+    s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h
+    s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.h
+    s2a/src/proto/upb-generated/s2a/src/proto/s2a_context.upb.h
     s2a/src/record_protocol/handshake_message_handler.h
     s2a/src/record_protocol/s2a_crypter.h
     s2a/src/record_protocol/s2a_crypter_util.h

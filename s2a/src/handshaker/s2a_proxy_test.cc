@@ -25,8 +25,8 @@
 #include "gtest/gtest.h"
 #include "s2a/include/s2a_constants.h"
 #include "s2a/include/s2a_context.h"
-#include "s2a/src/proto/upb-generated/proto/common.upb.h"
-#include "s2a/src/proto/upb-generated/proto/s2a.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.h"
 #include "s2a/src/token_manager/fake_access_token_manager.h"
 #include "upb/upb.hpp"
 

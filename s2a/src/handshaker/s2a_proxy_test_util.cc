@@ -19,8 +19,8 @@
 #include "s2a/src/handshaker/s2a_proxy_test_util.h"
 
 #include "absl/memory/memory.h"
-#include "s2a/src/proto/upb-generated/proto/common.upb.h"
-#include "s2a/src/proto/upb-generated/proto/s2a.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.h"
 #include "upb/upb.hpp"
 
 namespace s2a {

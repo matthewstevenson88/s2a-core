@@ -25,7 +25,7 @@
 #include "absl/status/status.h"
 #include "absl/status/statusor.h"
 #include "absl/synchronization/mutex.h"
-#include "s2a/include//access_token_manager.h"
+#include "s2a/include/access_token_manager.h"
 #include "s2a/include/s2a_channel_factory_interface.h"
 #include "s2a/include/s2a_context.h"
 #include "s2a/include/s2a_frame_protector.h"

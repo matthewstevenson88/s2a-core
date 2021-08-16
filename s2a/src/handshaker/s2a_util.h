@@ -22,7 +22,7 @@
 #include "absl/status/status.h"
 #include "absl/types/variant.h"
 #include "s2a/include/s2a_options.h"
-#include "s2a/src/proto/upb-generated/proto/common.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h"
 #include "upb/upb.hpp"
 
 namespace s2a {

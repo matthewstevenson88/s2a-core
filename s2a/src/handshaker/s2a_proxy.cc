@@ -25,8 +25,8 @@
 #include "absl/strings/str_format.h"
 #include "s2a/include/s2a_constants.h"
 #include "s2a/src/handshaker/s2a_util.h"
-#include "s2a/src/proto/upb-generated/proto/common.upb.h"
-#include "s2a/src/proto/upb-generated/proto/s2a.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.h"
 #include "upb/upb.hpp"
 
 namespace s2a {

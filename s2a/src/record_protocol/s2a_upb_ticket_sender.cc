@@ -16,8 +16,8 @@
  *
  */
 
-#include "s2a/src/proto/upb-generated/proto/common.upb.h"
-#include "s2a/src/proto/upb-generated/proto/s2a.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h"
+#include "s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.h"
 #include "s2a/src/record_protocol/s2a_ticket_sender.h"
 #include "upb/upb.hpp"
 

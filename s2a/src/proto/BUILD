@@ -53,3 +53,40 @@ upb_proto_library(
     visibility = ["//:__subpackages__"],
     deps = [":common_proto"],
 )
+
+# The targets below are pregenerated and should only be used with permission.
+# Otherwise, we will break you.
+cc_library(
+    name = "common_upb_pregen_proto",
+    srcs = ["upb-generated/s2a/src/proto/common.upb.c"],
+    hdrs = ["upb-generated/s2a/src/proto/common.upb.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@upb",
+        "@upb//:generated_code_support__only_for_generated_code_do_not_use__i_give_permission_to_break_me",
+    ],
+)
+
+cc_library(
+    name = "s2a_upb_pregen_proto",
+    srcs = ["upb-generated/s2a/src/proto/s2a.upb.c"],
+    hdrs = ["upb-generated/s2a/src/proto/s2a.upb.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":common_upb_pregen_proto",
+        "@upb",
+        "@upb//:generated_code_support__only_for_generated_code_do_not_use__i_give_permission_to_break_me",
+    ],
+)
+
+cc_library(
+    name = "s2a_context_upb_pregen_proto",
+    srcs = ["upb-generated/s2a/src/proto/s2a_context.upb.c"],
+    hdrs = ["upb-generated/s2a/src/proto/s2a_context.upb.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":common_upb_pregen_proto",
+        "@upb",
+        "@upb//:generated_code_support__only_for_generated_code_do_not_use__i_give_permission_to_break_me",
+    ],
+)

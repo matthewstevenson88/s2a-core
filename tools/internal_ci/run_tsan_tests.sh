@@ -19,7 +19,7 @@ run_tests_on_linux() {
   readonly TEST_FLAGS
   (
     echo "Running TSAN tests..."
-    time bazel test --copt="-DS2A_CORE_USE_NEW_UPB_APIS=true" --config=tsan --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
+    time bazel test --config=tsan --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
   )
 }
 
@@ -30,7 +30,7 @@ run_tests_on_macos() {
   readonly TEST_FLAGS
   (
     echo "Running TSAN tests..."
-    time bazel test --copt="-DS2A_CORE_USE_NEW_UPB_APIS=true" --config=tsan --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
+    time bazel test --config=tsan --features=-debug_prefix_map_pwd_is_dot "${TEST_FLAGS[@]}" -- ... || fail_with_debug_output
   )
 }
 

@@ -22,7 +22,7 @@
 set -ex
 
 if [ $# -eq 0 ]; then
-  UPB_OUTPUT_DIR=$PWD/proto/upb-generated
+  UPB_OUTPUT_DIR=$PWD/s2a/src/proto/upb-generated
   rm -rf $UPB_OUTPUT_DIR
   mkdir -p $UPB_OUTPUT_DIR
 else
@@ -31,16 +31,16 @@ else
   mkdir $UPBDEFS_OUTPUT_DIR
 fi
 
-bazel build @com_google_protobuf//:protoc
+bazel-4.0.0 build @com_google_protobuf//:protoc
 PROTOC=$PWD/bazel-bin/external/com_google_protobuf/protoc
 
-bazel build @upb//upbc:protoc-gen-upb
+bazel-4.0.0 build @upb//upbc:protoc-gen-upb
 UPB_PLUGIN=$PWD/bazel-bin/external/upb/upbc/protoc-gen-upb
 
 proto_files=( \
-  "proto/common.proto" \
-  "proto/s2a.proto" \
-  "proto/s2a_context.proto")
+  "s2a/src/proto/common.proto" \
+  "s2a/src/proto/s2a.proto" \
+  "s2a/src/proto/s2a_context.proto")
 
 for i in "${proto_files[@]}"
 do
