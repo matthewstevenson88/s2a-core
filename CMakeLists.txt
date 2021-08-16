@@ -334,9 +334,9 @@ set(S2A_CORE_SOURCES
     s2a/src/handshaker/s2a_proxy.cc
     s2a/src/handshaker/s2a_util.cc
     s2a/src/options/s2a_options.cc
-    s2a/src/proto/upb-generated/proto/common.upb.c
-    s2a/src/proto/upb-generated/proto/s2a.upb.c
-    s2a/src/proto/upb-generated/proto/s2a_context.upb.c
+    s2a/src/proto/upb-generated/s2a/src/proto/common.upb.c
+    s2a/src/proto/upb-generated/s2a/src/proto/s2a.upb.c
+    s2a/src/proto/upb-generated/s2a/src/proto/s2a_context.upb.c
     s2a/src/record_protocol/handshake_message_handler.cc
     s2a/src/record_protocol/s2a_crypter.cc
     s2a/src/record_protocol/s2a_crypter_util.cc
