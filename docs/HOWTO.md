@@ -3,7 +3,7 @@ This doc outlines how to do various maintenance tasks around the repository.
 ## How to update the UPB dependency ?
 
 To update the UPB dependency to a specific commit hash X, you need to update
-the WORKSPACE file and the git submodule.To do the latter, run the following :
+the WORKSPACE file and the git submodule. To do the latter, run the following:
 
 ```
 cd third_party/upb
