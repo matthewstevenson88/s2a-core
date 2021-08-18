@@ -26,6 +26,7 @@
 #include "absl/synchronization/mutex.h"
 #include "absl/types/variant.h"
 #include "s2a/include/s2a_channel_factory_interface.h"
+#include "s2a/include/s2a_constants.h"
 #include "s2a/include/s2a_options.h"
 #include "s2a/src/record_protocol/s2a_crypter.h"
 
@@ -34,8 +35,6 @@ namespace frame_protector {
 
 class S2AFrameProtector {
  public:
-  // TODO(matthewstevenson88) Move |Iovec| definition to here.
-
   struct S2AFrameProtectorOptions {
     s2a_options::S2AOptions::TlsVersion tls_version;
     s2a_options::S2AOptions::Ciphersuite tls_ciphersuite;
@@ -50,14 +49,14 @@ class S2AFrameProtector {
     std::unique_ptr<
         s2a_channel::S2AChannelFactoryInterface::S2AChannelOptionsInterface>
         channel_options;
-    std::function<aead_crypter::Iovec(size_t)> allocator;
-    std::function<void(aead_crypter::Iovec)> destroy;
+    std::function<Iovec(size_t)> allocator;
+    std::function<void(Iovec)> destroy;
     std::function<void(const std::string&)> logger;
   };
 
   struct Result {
     absl::Status status;
-    std::vector<aead_crypter::Iovec> bytes;
+    std::vector<Iovec> bytes;
   };
 
   static absl::StatusOr<std::unique_ptr<S2AFrameProtector>> Create(
@@ -71,7 +70,7 @@ class S2AFrameProtector {
   //
   // |Protect| should not be called multiple times concurrently; however,
   // |Protect| and |Unprotect| may be called concurrently.
-  Result Protect(const std::vector<aead_crypter::Iovec>& unprotected_bytes);
+  Result Protect(const std::vector<Iovec>& unprotected_bytes);
 
   // |Protect| divides the plaintext in |unprotected_bytes| into blocks,
   // encrypts each block, and wraps the block into a TLS record. The TLS records
@@ -81,9 +80,8 @@ class S2AFrameProtector {
   //
   // |Protect| should not be called multiple times concurrently; however,
   // |Protect| and |Unprotect| may be called concurrently.
-  absl::Status Protect(
-      const std::vector<aead_crypter::Iovec>& unprotected_bytes,
-      aead_crypter::Iovec& protected_bytes);
+  absl::Status Protect(const std::vector<Iovec>& unprotected_bytes,
+                       Iovec& protected_bytes);
 
   // |Unprotect| divides the bytes in |protected_bytes| into TLS records,
   // unwraps each TLS record, and decrypts the ciphertext. The resulting
@@ -98,7 +96,7 @@ class S2AFrameProtector {
   //
   // |Unprotect| should not be called multiple times concurrently; however,
   // |Protect| and |Unprotect| may be called concurrently.
-  Result Unprotect(const std::vector<aead_crypter::Iovec>& protected_bytes);
+  Result Unprotect(const std::vector<Iovec>& protected_bytes);
 
   // |Unprotect| unwraps the TLS stored in |protected_bytes|, and decrypts the
   // ciphertext. The resulting plaintext is written to |unprotected_bytes|. The
@@ -112,9 +110,8 @@ class S2AFrameProtector {
   //
   // |Unprotect| should not be called multiple times concurrently; however,
   // |Protect| and |Unprotect| may be called concurrently.
-  absl::Status Unprotect(
-      const std::vector<aead_crypter::Iovec>& protected_bytes,
-      aead_crypter::Iovec& unprotected_bytes);
+  absl::Status Unprotect(const std::vector<Iovec>& protected_bytes,
+                         Iovec& unprotected_bytes);
 
   // |MaxRecordSize| returns the max size (in bytes) of a single TLS record that
   // this frame protector may construct.
@@ -123,7 +120,7 @@ class S2AFrameProtector {
   // |NumberBytesToProtect| returns the number of bytes required to hold the TLS
   // records resulting from protecting the bytes in |unprotected_bytes|.
   size_t NumberBytesToProtect(
-      const std::vector<aead_crypter::Iovec>& unprotected_bytes) const;
+      const std::vector<Iovec>& unprotected_bytes) const;
 
   // |NumberBytesToProtect| returns the number of bytes required to hold the TLS
   // records resulting from protecting |unprotected_bytes_length| bytes.
@@ -133,7 +130,7 @@ class S2AFrameProtector {
   // contiguous buffer in order to unprotect the TLS records stored in
   // |protected_bytes|.
   size_t NumberBytesToUnprotect(
-      const std::vector<aead_crypter::Iovec>& protected_bytes) const;
+      const std::vector<Iovec>& protected_bytes) const;
 
   // |NumberBytesToUnprotect| returns the number of bytes required in a
   // contiguous buffer in order to unprotect a TLS record consisting of
@@ -141,13 +138,13 @@ class S2AFrameProtector {
   size_t NumberBytesToUnprotect(size_t record_length) const;
 
  private:
-  S2AFrameProtector(std::function<aead_crypter::Iovec(size_t)> allocator,
-                    std::function<void(aead_crypter::Iovec)> destroy,
+  S2AFrameProtector(std::function<Iovec(size_t)> allocator,
+                    std::function<void(Iovec)> destroy,
                     std::function<void(const std::string&)> logger,
                     std::unique_ptr<record_protocol::S2ACrypter> crypter);
 
-  const std::function<aead_crypter::Iovec(size_t)> allocator_;
-  const std::function<void(aead_crypter::Iovec)> destroy_;
+  const std::function<Iovec(size_t)> allocator_;
+  const std::function<void(Iovec)> destroy_;
   const std::function<void(const std::string&)> logger_;
   const size_t max_record_size_;
 

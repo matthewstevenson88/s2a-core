@@ -25,12 +25,6 @@
 namespace s2a {
 namespace aead_crypter {
 
-// |Iovec| stores a buffer to be involved in encryption or decryption.
-struct Iovec {
-  void* iov_base;
-  size_t iov_len;
-};
-
 // AES-GCM constants.
 constexpr size_t kAes128GcmSha256KeySize = 16;
 constexpr size_t kAes256GcmSha384KeySize = 32;
