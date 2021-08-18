@@ -287,7 +287,6 @@ add_library(single_token_access_token_manager
   s2a/src/token_manager/single_token_access_token_manager.h)
 target_link_libraries(single_token_access_token_manager
   access_token_manager
-  absl_flag
   absl_status
   absl_statusor
   absl_strings
