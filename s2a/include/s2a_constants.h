@@ -24,6 +24,14 @@
 
 #include "s2a/src/proto/upb-generated/s2a/src/proto/common.upb.h"
 
+namespace s2a {
+
+// |Iovec| stores a buffer to be involved in encryption or decryption.
+struct Iovec {
+  void* iov_base;
+  size_t iov_len;
+};
+
 /** The supported TLS 1.3 ciphersuites, with values from the TLS 1.3 RFC:
  *  https://tools.ietf.org/html/rfc8446#appendix-B.4. **/
 constexpr int kTlsAes128GcmSha256 = 0x1301;
@@ -70,5 +78,7 @@ constexpr char kS2AServiceMethod[] = "/s2a.proto.S2AService/SetUpSession";
 
 /** The application protocol used by S2A. **/
 constexpr char kS2AApplicationProtocol[] = "grpc";
+
+}  // namespace s2a
 
 #endif  // S2A_INCLUDE_S2A_CONSTANTS_H_

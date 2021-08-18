@@ -29,7 +29,6 @@ namespace record_protocol {
 namespace {
 using ::absl::Status;
 using ::absl::StatusCode;
-using ::s2a::aead_crypter::Iovec;
 using ::s2a::aead_crypter::S2AAeadCrypter;
 using Ciphersuite = ::s2a::s2a_options::S2AOptions::Ciphersuite;
 using CrypterStatus = ::s2a::aead_crypter::S2AAeadCrypter::CrypterStatus;

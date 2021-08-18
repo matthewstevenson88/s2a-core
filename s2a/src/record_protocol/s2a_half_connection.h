@@ -22,6 +22,7 @@
 #include "absl/status/status.h"
 #include "absl/synchronization/mutex.h"
 #include "absl/types/variant.h"
+#include "s2a/include/s2a_constants.h"
 #include "s2a/include/s2a_options.h"
 #include "s2a/src/crypto/s2a_aead_crypter.h"
 
@@ -43,16 +44,16 @@ class S2AHalfConnection {
   // |Encrypt| encrypts |plaintext| with authentication data |aad|, and writes
   // the resulting ciphertext and tag to |ciphertext_ang_tag|.
   aead_crypter::S2AAeadCrypter::CrypterStatus Encrypt(
-      const std::vector<aead_crypter::Iovec>& aad,
-      const std::vector<aead_crypter::Iovec>& plaintext,
-      aead_crypter::Iovec ciphertext_and_tag);
+      const std::vector<Iovec>& aad,
+      const std::vector<Iovec>& plaintext,
+      Iovec ciphertext_and_tag);
 
   // |Decrypt| decrypts |ciphertext_and_tag| using the authentication data
   // |aad|, and writes the resulting plaintext to |plaintext|.
   aead_crypter::S2AAeadCrypter::CrypterStatus Decrypt(
-      const std::vector<aead_crypter::Iovec>& aad,
-      const std::vector<aead_crypter::Iovec>& ciphertext_and_tag,
-      aead_crypter::Iovec plaintext);
+      const std::vector<Iovec>& aad,
+      const std::vector<Iovec>& ciphertext_and_tag,
+      Iovec plaintext);
 
   // Advances the traffic secret, and updates |nonce_| and |aead_crypter_|
   // accordingly. On success, returns a |kOk| status. Otherwise, the half

@@ -219,6 +219,7 @@ cc_library(
     ],
     deps = [
         ":s2a_aead_crypter_util",
+        ":s2a_constants",
         "@boringssl//:crypto",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
@@ -471,6 +472,7 @@ cc_library(
     deps = [
         ":openssl",
         ":s2a_aead_crypter_util",
+        ":s2a_constants",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
@@ -494,6 +496,7 @@ cc_library(
     tags = ["openssl"],
     deps = [
         ":openssl",
+        ":s2a_constants",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",

@@ -34,7 +34,6 @@ namespace {
 using ::absl::Status;
 using ::absl::StatusCode;
 using ::absl::StatusOr;
-using ::s2a::aead_crypter::Iovec;
 using Ciphersuite = ::s2a::s2a_options::S2AOptions::Ciphersuite;
 using TlsVersion = ::s2a::s2a_options::S2AOptions::TlsVersion;
 using ::s2a::frame_protector::S2AFrameProtector;

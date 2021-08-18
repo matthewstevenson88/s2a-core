@@ -101,15 +101,15 @@ class S2ACrypter {
   // |record| must be at least the total length of |plaintext| plus
   // |RecordOverhead()|.
   S2ACrypterStatus Protect(RecordType record_type,
-                           const std::vector<aead_crypter::Iovec>& plaintext,
-                           const aead_crypter::Iovec& record);
+                           const std::vector<Iovec>& plaintext,
+                           const Iovec& record);
 
   // |Unprotect| parses a TLS 1.3 record that is broken up into |header| and
   // |payload|, decrypts the ciphertext, and writes any application data that
   // results to |plaintext|.
-  S2ACrypterStatus Unprotect(const aead_crypter::Iovec& header,
-                             const std::vector<aead_crypter::Iovec>& payload,
-                             const aead_crypter::Iovec& plaintext);
+  S2ACrypterStatus Unprotect(const Iovec& header,
+                             const std::vector<Iovec>& payload,
+                             const Iovec& plaintext);
 
   // |RecordOverhead| returns the number of overhead bytes of a TLS 1.3 record,
   // i.e. bytes other than ciphertext.

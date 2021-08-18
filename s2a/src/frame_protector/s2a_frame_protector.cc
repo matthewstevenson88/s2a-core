@@ -32,7 +32,6 @@ namespace s2a {
 using ::absl::Status;
 using ::absl::StatusCode;
 using ::absl::StatusOr;
-using ::s2a::aead_crypter::Iovec;
 using ::s2a::record_protocol::S2ACrypter;
 using RecordType = ::s2a::record_protocol::S2ACrypter::RecordType;
 using Result = ::s2a::frame_protector::S2AFrameProtector::Result;
@@ -316,9 +315,8 @@ Status S2AFrameProtector::Protect(const std::vector<Iovec>& unprotected_bytes,
   return Status();
 }
 
-Status S2AFrameProtector::Unprotect(
-    const std::vector<aead_crypter::Iovec>& protected_bytes,
-    aead_crypter::Iovec& unprotected_bytes) {
+Status S2AFrameProtector::Unprotect(const std::vector<Iovec>& protected_bytes,
+                                    Iovec& unprotected_bytes) {
   if (NumberBytesToUnprotect(protected_bytes) == 0) {
     return Status(StatusCode::kFailedPrecondition,
                   "|protected_bytes| is too small to contain a TLS record.");
@@ -489,7 +487,7 @@ size_t S2AFrameProtector::NumberBytesToProtect(
 }
 
 size_t S2AFrameProtector::NumberBytesToUnprotect(
-    const std::vector<aead_crypter::Iovec>& protected_bytes) const {
+    const std::vector<Iovec>& protected_bytes) const {
   return NumberBytesToUnprotect(GetTotalIovecLength(protected_bytes));
 }
 

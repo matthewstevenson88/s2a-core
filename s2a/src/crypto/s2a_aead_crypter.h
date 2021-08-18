@@ -29,6 +29,7 @@
 
 #include "absl/status/status.h"
 #include "absl/types/variant.h"
+#include "s2a/include/s2a_constants.h"
 #include "s2a/src/crypto/s2a_aead_constants.h"
 
 namespace s2a {

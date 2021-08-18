@@ -771,11 +771,11 @@ bool S2AProxy::IsHandshakeFinished() {
 
 namespace {
 
-aead_crypter::Iovec Allocator(size_t length) {
+Iovec Allocator(size_t length) {
   return {new uint8_t[length], length};
 }
 
-void Destroy(aead_crypter::Iovec iovec) {
+void Destroy(Iovec iovec) {
   delete[] static_cast<uint8_t*>(iovec.iov_base);
 }
 
