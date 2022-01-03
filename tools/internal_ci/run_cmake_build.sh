@@ -50,6 +50,7 @@ case "${PLATFORM}" in
     rm '/usr/local/bin/python3-config'
     rm -Rf '/usr/local/include/google/protobuf'
 
+    # Clean re-install of XCode's command line tools.
     sudo rm -Rf '/Library/Developer/CommandLineTools'
     sudo xcode-select --install
 
