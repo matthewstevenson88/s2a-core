@@ -60,8 +60,8 @@ case "${PLATFORM}" in
 
     # Install OpenSSL. (LibreSSL is the default SSL library for newer MacOS
     # versions.)
-    brew install openssl
-    brew link openssl --force
+    brew install openssl@1.1
+    brew link openssl@1.1 --force
 
     echo "================================= Running cmake"
     cmake --version
