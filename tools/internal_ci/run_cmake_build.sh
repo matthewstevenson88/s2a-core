@@ -53,6 +53,8 @@ case "${PLATFORM}" in
 
     # Update Homebrew and unlink ilmbase, which will be re-linked when openssl
     # is installed.
+    git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core fetch --unshallow
+    git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask fetch --unshallow
     brew update
     brew unlink ilmbase
 
