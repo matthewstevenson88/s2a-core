@@ -49,7 +49,7 @@ case "${PLATFORM}" in
     rm '/usr/local/bin/python3'
     rm '/usr/local/bin/python3-config'
     rm -Rf '/usr/local/include/google/protobuf'
-    sudo rm -Rf '/Library/Developer/CommandLineTools'
+    #sudo rm -Rf '/Library/Developer/CommandLineTools'
 
     # Update Homebrew and unlink ilmbase, which will be re-linked when openssl
     # is installed.
